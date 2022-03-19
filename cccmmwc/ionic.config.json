@@ -1,0 +1,7 @@
+{
+  "name": "cccmmwc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
