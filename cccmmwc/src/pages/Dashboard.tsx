@@ -15,7 +15,7 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                 <IonContent>
                     <IonAccordionGroup>
                         <IonAccordion>
-                            <IonItem slot="header">
+                            <IonItem slot="header" >
                                 <IonAvatar slot="start">
                                     <img src="https://source.unsplash.com/category/select/100x100" />
                                 </IonAvatar>
