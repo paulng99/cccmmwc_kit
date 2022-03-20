@@ -22,13 +22,13 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                                 <IonLabel>Select</IonLabel>
                             </IonItem>
                             <IonList slot="content">
-                                <IonItem>
+                                <IonItem routerLink="/dashboard/home">
                                     <IonAvatar slot="start">
                                         <img src="https://source.unsplash.com/category/nature/100x100" />
                                     </IonAvatar>
                                     <IonLabel>Nature</IonLabel>
                                 </IonItem>
-                                <IonItem>
+                                <IonItem routerLink="/dashboard">
                                     <IonAvatar slot="start">
                                         <img src="https://source.unsplash.com/category/people/100x100" />
                                     </IonAvatar>
@@ -71,9 +71,9 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                             return (<>1212</>)
                         }}
                         />
-                        <Route path="/dashboard" render={(p) => {
-                            console.log('home');
-                            return (<>/</>)
+                        <Route exact path="/dashboard" render={(p) => {
+                            console.log('/');
+                            return (<>///</>)
                         }}
                         />
                     </IonRouterOutlet>
