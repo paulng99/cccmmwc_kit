@@ -3,7 +3,7 @@ import { Route } from "react-router";
 
 export const DashboardRoute = () => (
     <IonRouterOutlet>
-        <Route path="/dashboard/home" render={(p) => {
+        <Route exact path="/dashboard/home" render={(p) => {
             console.log('home');
             return (<>1212</>)
         }}
