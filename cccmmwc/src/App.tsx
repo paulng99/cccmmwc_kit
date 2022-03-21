@@ -1,4 +1,4 @@
-import { IonApp, IonRoute, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
+import { IonApp, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
@@ -19,17 +19,14 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { Route } from 'react-router';
-import { Dashboard } from './pages/Dashboard'
+import { AppRoute } from './features/App/AppRoute';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path='/dashboard' component={Dashboard}/>
-      </IonRouterOutlet>
+      <AppRoute />
     </IonReactRouter>
   </IonApp>
 );
