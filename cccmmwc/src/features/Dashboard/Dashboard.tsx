@@ -2,6 +2,7 @@ import React from "react";
 import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
 import { menu, personCircleOutline } from 'ionicons/icons'
 import { Route, RouteComponentProps } from "react-router";
+import { DashboardRoute } from "./DashboardRoute";
 
 const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
     return (
@@ -65,18 +66,7 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                     </IonToolbar>
                 </IonHeader>
                 <IonContent className="ion-padding">
-                    <IonRouterOutlet>
-                        <Route path="/dashboard/home" render={(p) => {
-                            console.log('home');
-                            return (<>1212</>)
-                        }}
-                        />
-                        <Route exact path="/dashboard" render={(p) => {
-                            console.log('/');
-                            return (<>///</>)
-                        }}
-                        />
-                    </IonRouterOutlet>
+                    <DashboardRoute />
                 </IonContent>
             </IonPage>
         </IonSplitPane>
