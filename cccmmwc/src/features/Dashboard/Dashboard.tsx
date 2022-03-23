@@ -3,11 +3,50 @@ import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonC
 import { menu, personCircleOutline } from 'ionicons/icons'
 import { Route, RouteComponentProps } from "react-router";
 import { DashboardRoute } from "./DashboardRoute";
-import {menuConfig} from "../../configs/menuConfig"
+import { menuConfig } from "../../configs/menuConfig"
+
+
+
+
+
+const List = (prop:any) => {
+    return(
+        <>
+        </>
+    );
+
+}
+
+
+const Item = (prop:any) => {
+    return(
+        <>
+        </>
+    );
+}
+
+const SubItem = (prop:any) => {
+    return(
+        <>
+        </>
+    );
+}
+
+
+
+
+
+
+
+
+
+
+
 
 const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
     return (
         <IonSplitPane when="sm" contentId="dashboard-content">
+
             <IonMenu contentId="dashboard-content" side="start">
                 <IonHeader>
                     <IonToolbar>
@@ -110,8 +149,105 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                             </IonAccordion>
                         </IonAccordionGroup>
                     </IonList>
+                    <IonList>
+                        <IonListHeader color="secondary">
+                            <IonLabel>New This Week</IonLabel>
+                            <IonButton fill="outline">See All</IonButton>
+                        </IonListHeader>
+                        <IonAccordionGroup>
+                            <IonAccordion>
+                                <IonItem slot="header" >
+                                    <IonAvatar slot="start">
+                                        <img src="https://source.unsplash.com/category/select/100x100" />
+                                    </IonAvatar>
+                                    <IonLabel>Administrator</IonLabel>
+                                </IonItem>
+                                <IonList slot="content">
+                                    <IonItem routerLink="/dashboard/home">
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/nature/100x100" />
+                                        </IonAvatar>
+                                        <IonLabel>Users</IonLabel>
+                                    </IonItem>
+                                    <IonItem routerLink="/dashboard">
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/people/100x100" />
+                                        </IonAvatar>
+                                        <IonLabel>Grouping</IonLabel>
+                                    </IonItem>
+                                    <IonItem>
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/food/200x200" />
+                                        </IonAvatar>
+                                        <IonLabel>Access</IonLabel>
+                                    </IonItem>
+                                </IonList>
+                            </IonAccordion>
+                            <IonAccordion>
+                                <IonItem slot="header" >
+                                    <IonAvatar slot="start">
+                                        <img src="https://source.unsplash.com/category/select/100x100" />
+                                    </IonAvatar>
+                                    <IonLabel>Administrator</IonLabel>
+                                </IonItem>
+                                <IonList slot="content">
+                                    <IonItem routerLink="/dashboard/home">
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/nature/100x100" />
+                                        </IonAvatar>
+                                        <IonLabel>Users</IonLabel>
+                                    </IonItem>
+                                    <IonItem routerLink="/dashboard">
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/people/100x100" />
+                                        </IonAvatar>
+                                        <IonLabel>Grouping</IonLabel>
+                                    </IonItem>
+                                    <IonItem>
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/food/200x200" />
+                                        </IonAvatar>
+                                        <IonLabel>Access</IonLabel>
+                                    </IonItem>
+                                </IonList>
+                            </IonAccordion>
+                        </IonAccordionGroup>
+                        <IonListHeader color="primary">Office</IonListHeader>
+                        <IonAccordionGroup>
+                            <IonAccordion>
+                                <IonItem slot="header" >
+                                    <IonAvatar slot="start">
+                                        <img src="https://source.unsplash.com/category/select/100x100" />
+                                    </IonAvatar>
+                                    <IonLabel>Administrator</IonLabel>
+                                </IonItem>
+                                <IonList slot="content">
+                                    <IonItem routerLink="/dashboard/home">
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/nature/100x100" />
+                                        </IonAvatar>
+                                        <IonLabel>Users</IonLabel>
+                                    </IonItem>
+                                    <IonItem routerLink="/dashboard">
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/people/100x100" />
+                                        </IonAvatar>
+                                        <IonLabel>Grouping</IonLabel>
+                                    </IonItem>
+                                    <IonItem>
+                                        <IonAvatar slot="start">
+                                            <img src="https://source.unsplash.com/category/food/200x200" />
+                                        </IonAvatar>
+                                        <IonLabel>Access</IonLabel>
+                                    </IonItem>
+                                </IonList>
+                            </IonAccordion>
+                        </IonAccordionGroup>
+                    </IonList>
                 </IonContent>
             </IonMenu>
+
+
 
             <IonPage id="dashboard-content">
                 <IonHeader>
@@ -135,6 +271,7 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                     <DashboardRoute />
                 </IonContent>
             </IonPage>
+
         </IonSplitPane>
     );
 }
