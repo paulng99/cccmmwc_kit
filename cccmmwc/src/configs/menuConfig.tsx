@@ -1,63 +1,71 @@
-export const menuConfig:any = [
+import { menu, personCircleOutline, home } from 'ionicons/icons'
+
+export const menuConfig: any = [
     {
-        "listHeaderName": "Header3",
-        "listHeaderColor": "primary",
+        "listHeaderName": "Office",
+        "listHeaderColor": "secondary",
+        "listHeaderIcon": {personCircleOutline},
         "listMenu": [{
-            "menuName": "menu1",
+            "menuName": "menu11",
             "menuColor": "",
-            "menuIcon": "",
-            "menuLink": "",
+            "menuIcon": {personCircleOutline},
+            "menuLink": "/dashboard/home",
             "menuChildren": [
                 {
-                    "subMenuName": "submenu1",
-                    "subMenuColor": "",
-                    "subMenuIcon": "",
-                    "subMenuLink": "",
+                    "menuName": "submenu111",
+                    "menuColor": "",
+                    "menuIcon": {personCircleOutline},
+                    "menuLink": "dashboard/",
                 }, {
-                    "subMenuName": "submenu2",
-                    "subMenuColor": "",
-                    "subMenuIcon": "",
-                    "subMenuLink": "",
+                    "menuName": "submenu112",
+                    "menuColor": "",
+                    "menuIcon": undefined,
+                    "menuLink": undefined,
+                }, {
+                    "menuName": "submenu113",
+                    "menuColor": "",
+                    "menuIcon": "",
+                    "menuLink": undefined,
                 }
             ]
-        },{
-            "menuName": "menu2",
+        }, {
+            "menuName": "menu12",
             "menuColor": "",
             "menuIcon": "",
-            "menuLink": "",
+            "menuLink": undefined,
             "menuChildren": [
                 {
-                    "subMenuName": "submenu1",
-                    "subMenuColor": "",
-                    "subMenuIcon": "",
-                    "subMenuLink": "",
+                    "menuName": "submenu121",
+                    "menuColor": "primary",
+                    "menuIcon": "",
+                    "menuLink": undefined,
                 }, {
-                    "subMenuName": "submenu2",
-                    "subMenuColor": "",
-                    "subMenuIcon": "",
-                    "subMenuLink": "",
+                    "menuName": "submenu122",
+                    "menuColor": "",
+                    "menuIcon": "",
+                    "menuLink": undefined,
                 }
             ]
         }]
     }, {
-        "listHeaderName": "Header",
-        "listHeaderColor": "primary",
+        "listHeaderName": "Header2",
+        "listHeaderColor": "danger",
         "listMenu": [{
-            "menuName": "menu1",
+            "menuName": "menu21",
             "menuColor": "",
             "menuIcon": "",
-            "menuLink": "",
+            "menuLink": undefined,
             "menuChildren": [
                 {
-                    "subMenuName": "submenu1",
-                    "subMenuColor": "",
-                    "subMenuIcon": "",
-                    "subMenuLink": "",
+                    "menuName": "submenu211",
+                    "menuColor": "",
+                    "menuIcon": "",
+                    "menuLink": undefined,
                 }, {
-                    "subMenuName": "submenu2",
-                    "subMenuColor": "",
-                    "subMenuIcon": "",
-                    "subMenuLink": "",
+                    "menuName": "submenu212",
+                    "menuColor": "",
+                    "menuIcon": "",
+                    "menuLink": undefined,
                 }
             ]
         }]
