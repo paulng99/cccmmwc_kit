@@ -14,13 +14,13 @@ export const Setup = (prop: any) => {
         {
             "id": "menu_1",
             "menuName": "menu_app_1",
-            "menuColor": "primary",
+            "menuColor": null,
             "menuIcon": "home",
             "menuLink":null
         }, {
             "id": "menu_2",
             "menuName": "menu_app_2",
-            "menuColor": "primary",
+            "menuColor": null,
             "menuIcon": "home",
             "menuLink":null
         }, {
