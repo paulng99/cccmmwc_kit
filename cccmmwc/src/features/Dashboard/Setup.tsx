@@ -7,26 +7,29 @@ export const Setup = (prop: any) => {
 
     const configData = {
         "name": "App",
-        "Test": "test",
         "setupTimestamp": Timestamp.now(),
     }
 
-    const configMenu = [{
-        "id": "menu_1",
-        "menuName": "menu_app_1",
-        "menuColor": "primary",
-        "menuIcon": "home"
-    }, {
-        "id": "menu_2",
-        "menuName": "menu_app_2",
-        "menuColor": "primary",
-        "menuIcon": "home"
-    }, {
-        "id": "menu_3",
-        "menuName": "menu_app_3",
-        "menuColor": "primary",
-        "menuIcon": "home"
-    }
+    const configMenu = [
+        {
+            "id": "menu_1",
+            "menuName": "menu_app_1",
+            "menuColor": "primary",
+            "menuIcon": "home",
+            "menuLink":null
+        }, {
+            "id": "menu_2",
+            "menuName": "menu_app_2",
+            "menuColor": "primary",
+            "menuIcon": "home",
+            "menuLink":null
+        }, {
+            "id": "menu_3",
+            "menuName": "menu_app_3",
+            "menuColor": "primary",
+            "menuIcon": "home",
+            "menuLink":null
+        }
     ]
 
     const configAccess = {
