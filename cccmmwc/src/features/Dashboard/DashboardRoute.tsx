@@ -1,6 +1,7 @@
 import { IonRouterOutlet } from "@ionic/react";
 import { Route } from "react-router";
 import { Test } from "../Test";
+import { Setup } from "./Setup"
 
 export const DashboardRoute = () => (
     <IonRouterOutlet>
@@ -12,8 +13,10 @@ export const DashboardRoute = () => (
         }} />
         <Route exact path="/dashboard/test" render={(p) => {
             return (<>
-            <Test />
+                <Test />
             </>)
         }} />
+
+        <Route exact path="/dashboard/setup" component={Setup} />
     </IonRouterOutlet>
 );
