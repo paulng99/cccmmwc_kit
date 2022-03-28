@@ -8,6 +8,13 @@ export const Setup = (prop: any) => {
     const configData = {
         "name": "App",
         "setupTimestamp": Timestamp.now(),
+        "mainMenu":{
+            "id": "menu",
+            "menuName": "menu_app",
+            "menuColor": null,
+            "menuIcon": "home",
+            "menuLink":null
+        }
     }
 
     const configMenu = [
