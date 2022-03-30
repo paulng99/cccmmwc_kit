@@ -18,7 +18,6 @@ export const Setup = (prop: any) => {
             "updateGroups": arrayUnion(),
             "deleteGroups": arrayUnion(),
         }
-
     }
 
     const configMenu = [
@@ -70,6 +69,7 @@ export const Setup = (prop: any) => {
                 console.log(e)
             })
         })
+        
     }
 
 
