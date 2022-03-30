@@ -1,23 +1,16 @@
 import { IonButton } from "@ionic/react";
-import { addDoc, arrayUnion, doc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../../services/firebase";
 
 
 export const Setup = (prop: any) => {
 
-    const [report, setReport]=useState<Array<string>>([])
+    const [report, setReport] = useState<Array<string>>([])
 
     const configData = {
         "name": "App",
         "setupTimestamp": Timestamp.now(),
-        "access": {
-            "getGroups": arrayUnion(),
-            "listGroups": arrayUnion(),
-            "createGroups": arrayUnion(),
-            "updateGroups": arrayUnion(),
-            "deleteGroups": arrayUnion(),
-        }
     }
 
     const configMenu = [
@@ -52,12 +45,26 @@ export const Setup = (prop: any) => {
         }
     ]
 
+    const configAccess = {
+        "getGroups": arrayUnion(),
+        "listGroups": arrayUnion(),
+        "createGroups": arrayUnion(),
+        "updateGroups": arrayUnion(),
+        "deleteGroups": arrayUnion(),
+    }
+
 
     const setup = (e: any) => {
         const modulesRef = doc(db, "modules", configData.name);
         setDoc(modulesRef, configData).then(() => {
             console.log("Setup is already!");
             setReport([...report, "Setup is already!"])
+        })
+
+        const accessRef = doc(db, "modules/App/access/accessGroups");
+        setDoc(accessRef, configAccess).then(() => {
+            console.log("Setup access is already!");
+            setReport([...report, "Setup access is already!"])
         })
 
         configMenu.forEach((c) => {
@@ -69,7 +76,7 @@ export const Setup = (prop: any) => {
                 console.log(e)
             })
         })
-        
+
     }
 
 
@@ -77,7 +84,7 @@ export const Setup = (prop: any) => {
         <>
             <IonButton onClick={setup} fill="outline" >Setup</IonButton><br></br>
             {console.log(JSON.stringify(report))}
-            {report.map((r)=>(r))}
+            {report.map((r) => (r))}
         </>
     );
 }
