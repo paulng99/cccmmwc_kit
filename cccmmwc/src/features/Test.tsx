@@ -7,12 +7,12 @@ const Test = (prop: any) => {
     const [dataSnap, setDataSnap] = useState<any[]>([]);
 
     useEffect(() => {
-        const accessRef = query(collectionGroup(db, "menus") , where("accessGroups","array-contains","RnM78h1Mdt4OzgB1DsbX"))
+        const accessRef = query(collectionGroup(db, "menus"), where("accessGroups", "array-contains-any", ["RnM78h1Mdt4OzgB1DsbX", "mfUE8YkW2CQUy12emKgP"]))
         getDocs(accessRef).then((d: any) => {
             d.forEach((d1: any) => {
                 console.log(d1.id)
+                setDataSnap([...dataSnap, d1.data()]);
             });
-            setDataSnap(d);
         }, (error) => {
             console.log(error)
         });
@@ -20,7 +20,7 @@ const Test = (prop: any) => {
 
     return (
         <>
-            {JSON.stringify(dataSnap)}
+        {JSON.stringify(dataSnap)}
         </>
     );
 }
