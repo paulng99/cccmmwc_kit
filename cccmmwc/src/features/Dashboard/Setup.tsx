@@ -36,6 +36,12 @@ export const Setup = (prop: any) => {
             "menuColor": "primary",
             "menuIcon": "home",
             "menuLink":null
+        }, {
+            "id": "mainMenu",
+            "menuName": "menu_app",
+            "menuColor": null,
+            "menuIcon": "home",
+            "menuLink":null
         }
     ]
 
