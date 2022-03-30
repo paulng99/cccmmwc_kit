@@ -1,20 +1,30 @@
 import { IonButton } from "@ionic/react";
-import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
+import { arrayUnion, doc, Timestamp, updateDoc } from "firebase/firestore";
 import { db } from "../../services/firebase";
 
 
 export const Setup = (prop: any) => {
 
+
     const configData = {
         "name": "App",
         "setupTimestamp": Timestamp.now(),
-        "mainMenu":{
+        "mainMenu": {
             "id": "menu",
             "menuName": "menu_app",
             "menuColor": null,
             "menuIcon": "home",
-            "menuLink":null
+            "menuLink": null,
+            "accessGroups": arrayUnion(),
+        },
+        "access": {
+            "getGroups": arrayUnion(),
+            "listGroups": arrayUnion(),
+            "createGroups": arrayUnion(),
+            "updateGroups": arrayUnion(),
+            "deleteGroups": arrayUnion(),
         }
+
     }
 
     const configMenu = [
@@ -23,42 +33,43 @@ export const Setup = (prop: any) => {
             "menuName": "menu_app_1",
             "menuColor": null,
             "menuIcon": "home",
-            "menuLink":null
+            "menuLink": null,
+            "accessGroups": arrayUnion(),
         }, {
             "id": "menu_2",
             "menuName": "menu_app_2",
             "menuColor": null,
             "menuIcon": "home",
-            "menuLink":null
+            "menuLink": null,
+            "accessGroups": arrayUnion(),
         }, {
             "id": "menu_3",
             "menuName": "menu_app_3",
             "menuColor": "primary",
             "menuIcon": "home",
-            "menuLink":null
+            "menuLink": null,
+            "accessGroups": arrayUnion(),
         }, {
             "id": "mainMenu",
             "menuName": "menu_app",
             "menuColor": null,
             "menuIcon": "home",
-            "menuLink":null
+            "menuLink": null,
+            "accessGroups": arrayUnion(),
         }
     ]
 
-    const configAccess = {
-
-    }
 
     const setup = (e: any) => {
         const modulesRef = doc(db, "modules", configData.name);
-        setDoc(modulesRef, configData).then(() => {
-            alert("Setup is already!");
+        updateDoc(modulesRef, configData).then(() => {
+            console.log("Setup is already!");
         })
 
         configMenu.forEach((c) => {
             const menuRef = doc(db, "modules/App/menus", c.id);
-            setDoc(menuRef, c).then(() => {
-                alert("Setup menu is already!");
+            updateDoc(menuRef, c).then(() => {
+                console.log("Setup menu is already!");
             }, (e) => {
                 console.log(e)
             })
@@ -71,5 +82,4 @@ export const Setup = (prop: any) => {
             <IonButton onClick={setup} fill="outline" >Setup</IonButton>
         </>
     );
-
 }
