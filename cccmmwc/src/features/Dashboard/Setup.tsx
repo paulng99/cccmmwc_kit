@@ -1,22 +1,16 @@
 import { IonButton } from "@ionic/react";
-import { arrayUnion, doc, Timestamp, updateDoc } from "firebase/firestore";
+import { addDoc, arrayUnion, doc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
+import { useState } from "react";
 import { db } from "../../services/firebase";
 
 
 export const Setup = (prop: any) => {
 
+    const [report, setReport]=useState<Array<string>>([])
 
     const configData = {
         "name": "App",
         "setupTimestamp": Timestamp.now(),
-        "mainMenu": {
-            "id": "menu",
-            "menuName": "menu_app",
-            "menuColor": null,
-            "menuIcon": "home",
-            "menuLink": null,
-            "accessGroups": arrayUnion(),
-        },
         "access": {
             "getGroups": arrayUnion(),
             "listGroups": arrayUnion(),
@@ -50,7 +44,7 @@ export const Setup = (prop: any) => {
             "menuLink": null,
             "accessGroups": arrayUnion(),
         }, {
-            "id": "mainMenu",
+            "id": "main_4",
             "menuName": "menu_app",
             "menuColor": null,
             "menuIcon": "home",
@@ -62,14 +56,16 @@ export const Setup = (prop: any) => {
 
     const setup = (e: any) => {
         const modulesRef = doc(db, "modules", configData.name);
-        updateDoc(modulesRef, configData).then(() => {
+        setDoc(modulesRef, configData).then(() => {
             console.log("Setup is already!");
+            setReport([...report, "Setup is already!"])
         })
 
         configMenu.forEach((c) => {
             const menuRef = doc(db, "modules/App/menus", c.id);
-            updateDoc(menuRef, c).then(() => {
+            setDoc(menuRef, c).then(() => {
                 console.log("Setup menu is already!");
+                setReport([...report, "Setup menu is already!"])
             }, (e) => {
                 console.log(e)
             })
@@ -79,7 +75,9 @@ export const Setup = (prop: any) => {
 
     return (
         <>
-            <IonButton onClick={setup} fill="outline" >Setup</IonButton>
+            <IonButton onClick={setup} fill="outline" >Setup</IonButton><br></br>
+            {console.log(JSON.stringify(report))}
+            {report.map((r)=>(r))}
         </>
     );
 }
