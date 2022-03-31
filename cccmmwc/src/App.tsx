@@ -21,17 +21,21 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { AppRoute } from './features/App/AppRoute';
 import { AppContext } from './features/App/AppContext';
+import { useContext } from 'react';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <AppContext.Provider value={{}}>
-      <IonReactRouter>
-        <AppRoute />
-      </IonReactRouter>
-    </AppContext.Provider>
-  </IonApp>
-);
+const App: React.FC = () => {
+  const {} = useContext (AppContext);
+  return (
+    <IonApp>
+      <AppContext.Provider value={{}}>
+        <IonReactRouter>
+          <AppRoute />
+        </IonReactRouter>
+      </AppContext.Provider>
+    </IonApp>
+  );
+}
 
 export default App;

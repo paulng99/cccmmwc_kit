@@ -11,7 +11,7 @@ const Test = (prop: any) => {
         getDocs(accessRef).then((d: QuerySnapshot) => {
             console.log(d.size)
             d.forEach((d1: QueryDocumentSnapshot) => {
-                console.log(d1.ref.parent.parent?.id);
+                console.log(d1.ref.path);
                 
             });
         }, (error) => {
