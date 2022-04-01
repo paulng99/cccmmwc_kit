@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
 import { menu, personCircleOutline, home } from 'ionicons/icons'
 import { Route, RouteComponentProps } from "react-router";
 import { DashboardRoute } from "./DashboardRoute";
 import { menuConfig } from "../../configs/menuConfig"
+import { AppContext } from "../App/AppContext";
 
 type accordProp = {
     menuName: string,
@@ -67,7 +68,7 @@ const List = (prop: listProp) => {
     return (
         <IonList key={prop.key}>
             <IonListHeader color={prop.listHeaderColor}>
-                <IonIcon  icon={prop.listHeaderIcon}></IonIcon>
+                <IonIcon icon={prop.listHeaderIcon}></IonIcon>
                 <IonIcon slot="start" icon={home}></IonIcon>
                 <IonLabel>{prop.listHeaderName}</IonLabel>
             </IonListHeader>
@@ -100,6 +101,9 @@ const List = (prop: listProp) => {
 
 
 const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
+
+    const { appState } = useContext(AppContext)
+
     return (
         <IonSplitPane when="sm" contentId="dashboard-content">
 
@@ -144,7 +148,6 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                     <DashboardRoute />
                 </IonContent>
             </IonPage>
-
         </IonSplitPane>
     );
 }

@@ -20,20 +20,20 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { AppRoute } from './features/App/AppRoute';
-import { AppContext } from './features/App/AppContext';
-import { useContext } from 'react';
+import { AppContext, AppProvider } from './features/App/AppContext';
+import { useContext, useReducer } from 'react';
+import { appReducer } from './features/App/AppReducer';
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const {} = useContext (AppContext);
   return (
     <IonApp>
-      <AppContext.Provider value={{}}>
+      <AppProvider>
         <IonReactRouter>
           <AppRoute />
         </IonReactRouter>
-      </AppContext.Provider>
+      </AppProvider>
     </IonApp>
   );
 }
