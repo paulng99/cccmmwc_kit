@@ -5,6 +5,7 @@ import { AppContext } from "./App/AppContext";
 
 const Test = (prop: any) => {
 
+    const {appState}= useContext(AppContext);
     const [dataSnap, setDataSnap] = useState<DocumentData>([]);
     useEffect(() => {
         const accessRef = query(collectionGroup(db, "menus"), where("accessGroups", "array-contains-any", ["RnM78h1Mdt4OzgB1DsbX", "mfUE8YkW2CQUy12emKgP"]))
@@ -21,6 +22,7 @@ const Test = (prop: any) => {
 
     return (
         <>
+        {JSON.stringify(appState)}
         </>
     );
 }
