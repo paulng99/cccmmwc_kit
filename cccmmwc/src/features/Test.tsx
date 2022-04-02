@@ -31,7 +31,7 @@ const Test = (prop: any) => {
     return (
         <>
             {JSON.stringify(appState)}<br></br>
-            <IonButton onClick={handleClick} >Change Loading</IonButton>
+            <IonButton onClick={handleClick}>Change Loading</IonButton>
         </>
     );
 }

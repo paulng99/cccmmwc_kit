@@ -21,7 +21,10 @@ export const appReducer: any = (state: IAppState, action: IAppAction) => {
             };
 
         case AppActionType.USERINFO:
-            return { state }
+            return {
+                 ...state,
+                "userInfo":action.payload
+             }
 
         default:
             return { state };
