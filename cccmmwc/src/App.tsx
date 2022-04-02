@@ -20,9 +20,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { AppRoute } from './features/App/AppRoute';
-import { AppContext, AppProvider } from './features/App/AppContext';
-import { useContext, useReducer } from 'react';
-import { appReducer } from './features/App/AppReducer';
+import { AppProvider } from './features/App/AppContext';
 
 setupIonicReact();
 
