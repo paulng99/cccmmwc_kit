@@ -9,8 +9,8 @@ export interface IAppState {
 
 //Initital State
 const initialState = {
-    "isLoading": true,
-    "userInfo": {},
+    "isLoading": false,
+    "userInfo": JSON.parse(localStorage.getItem("userInfo")||"{}"),
 }
 
 //AppContext
