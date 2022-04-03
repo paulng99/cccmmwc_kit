@@ -1,5 +1,4 @@
 import { IonButton, IonPage } from "@ionic/react"
-import { getAuth, signOut } from "firebase/auth"
 import { MouseEvent, useContext } from "react"
 import { AppContext } from "../App/AppContext"
 import { AppActionType } from "../App/AppReducer"

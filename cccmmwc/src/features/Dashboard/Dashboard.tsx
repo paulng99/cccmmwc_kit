@@ -87,23 +87,8 @@ const List = (prop: listProp) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
-
     const { appState } = useContext(AppContext)
-
     return (
         <IonSplitPane when="sm" contentId="dashboard-content">
 
