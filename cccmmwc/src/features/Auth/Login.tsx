@@ -1,11 +1,13 @@
 import { IonButton, IonPage } from "@ionic/react"
 import { MouseEvent, useContext } from "react"
+import { Redirect, useHistory } from "react-router"
 import { AppContext } from "../App/AppContext"
 import { AppActionType } from "../App/AppReducer"
 import "./Login.css"
 import { googleSigin, googleSignout } from "./services/googleSigin"
 
 const Login = () => {
+    const history=useHistory();
     const { appState, appDispatch } = useContext(AppContext);
     const handleLogin = (event: MouseEvent<HTMLElement>) => {
         googleSigin().then((r) => {
@@ -13,6 +15,7 @@ const Login = () => {
                 "type": AppActionType.USERINFO,
                 "payload": r,
             });
+            history.push("/dashboard")
         });
     }
     const handleLogout = () => {

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonPage, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
+import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonPage, IonPopover, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
 import { menu, personCircleOutline, home } from 'ionicons/icons'
 import { Route, RouteComponentProps } from "react-router";
 import { DashboardRoute } from "./DashboardRoute";
@@ -123,7 +123,7 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                         </IonButtons>
                         <IonTitle className="ion-text-center">Dashboard</IonTitle>
                         <IonButtons slot="end">
-                            <IonButton>
+                            <IonButton id="user-icon">
                                 <IonIcon icon={personCircleOutline} size="large"></IonIcon>
                             </IonButton>
                         </IonButtons>
@@ -132,6 +132,11 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                 <IonContent className="ion-padding">
                     <DashboardRoute />
                 </IonContent>
+                <IonPopover trigger="user-icon" triggerAction="hover">
+                    <IonContent>
+                        <IonButton>Logout</IonButton>
+                    </IonContent>
+                </IonPopover>
             </IonPage>
         </IonSplitPane>
     );
