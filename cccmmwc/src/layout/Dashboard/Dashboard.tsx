@@ -86,7 +86,7 @@ const List = (prop: listProp) => {
     );
 }
 
-const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
+const Dashboard: React.FC<RouteComponentProps> = (prop,{ match }) => {
     const { appState, appDispatch } = useContext(AppContext);
     const history = useHistory();
     const handleLogout = () => {
@@ -136,6 +136,7 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                 </IonHeader>
                 <IonContent className="ion-padding">
                     <DashboardRoute />
+                    {prop.children}
                 </IonContent>
                 <IonPopover trigger="user-icon" triggerAction="hover">
                     <IonContent>
