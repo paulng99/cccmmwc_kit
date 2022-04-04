@@ -86,7 +86,7 @@ const List = (prop: listProp) => {
     );
 }
 
-const Dashboard: React.FC<RouteComponentProps> = (prop,{ match }) => {
+const Dashboard: React.FC = (prop) => {
     const { appState, appDispatch } = useContext(AppContext);
     const history = useHistory();
     const handleLogout = () => {
