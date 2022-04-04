@@ -3,11 +3,14 @@ import { collectionGroup, DocumentData, getDocs, query, QueryDocumentSnapshot, Q
 import { useContext, useEffect, useState } from "react";
 import { db } from "../services/firebase";
 import { AppContext } from "./App/AppContext";
+import { register } from "./Auth/services/register";
 
 const Test = (prop: any) => {
 
     const { appState, appDispatch } = useContext(AppContext);
     const [dataSnap, setDataSnap] = useState<DocumentData>([]);
+    const [vars, setVars]= useState(null);
+
     useEffect(() => {
         const accessRef = query(collectionGroup(db, "menus"), where("accessGroups", "array-contains-any", ["RnM78h1Mdt4OzgB1DsbX", "mfUE8YkW2CQUy12emKgP"]))
         getDocs(accessRef).then((d: QuerySnapshot) => {
@@ -19,6 +22,9 @@ const Test = (prop: any) => {
         }, (error) => {
             console.log(error)
         });
+        register(appState.userInfo).then((r)=>{
+            setVars(r)
+        })
     }, []);
 
     const handleClick = () => {
@@ -30,7 +36,7 @@ const Test = (prop: any) => {
 
     return (
         <>
-            {JSON.stringify(appState)}<br></br>
+            {vars}<br></br>
             <IonButton onClick={handleClick}>Change Loading</IonButton>
         </>
     );

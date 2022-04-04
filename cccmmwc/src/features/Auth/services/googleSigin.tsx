@@ -1,7 +1,11 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../services/firebase";
 
-export const googleSigin = () => {
+const googleSigin = () => {
     const domains = ["cccmmwc.edu.hk", "365.cccmmwc.edu.hk"];
+    const googleProvider = new GoogleAuthProvider();
+    const auth = getAuth();
 
     const checkDomain = (email: string) => {
         let checked = false;
@@ -10,13 +14,9 @@ export const googleSigin = () => {
         });
         return checked;
     }
-
-    const googleProvider = new GoogleAuthProvider();
-    const auth = getAuth();
     let sp = signInWithPopup(auth, googleProvider).then((result) => {
         if (checkDomain(result.user.email || "")) {
-            localStorage.setItem("userInfo", JSON.stringify(result.user))
-            console.log(GoogleAuthProvider.credentialFromResult(result))
+            localStorage.setItem("userInfo", JSON.stringify(result.user));
             return result.user;
         } else {
             console.log("domain is incorrect.")
@@ -26,9 +26,11 @@ export const googleSigin = () => {
     return sp;
 }
 
-export const googleSignout = () => {
+const googleSignout = () => {
     let sp = signOut(getAuth()).then(() => {
         localStorage.clear();
     })
     return sp;
 }
+
+export { googleSigin, googleSignout }

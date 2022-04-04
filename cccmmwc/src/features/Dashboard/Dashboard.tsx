@@ -53,7 +53,6 @@ const Accordion = (prop: accordProp) => {
             </IonList>
         </IonAccordion>
     );
-
 }
 
 const SubItem = (prop: itemProp) => {
@@ -131,7 +130,7 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                         <IonButtons slot="end">
                             {console.log(appState.userInfo.photoURL)}
                             <IonAvatar slot="end" id="user-icon">
-                                <img style={{"padding":"10px"}} src={`${appState.userInfo.photoURL}`} />
+                                <img style={{ "padding": "10px" }} src={`${appState.userInfo.photoURL}`} />
                             </IonAvatar>
                         </IonButtons>
                     </IonToolbar>
