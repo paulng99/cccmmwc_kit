@@ -31,8 +31,7 @@ const Login = () => {
             <div className="loginPage"></div>
             <div className="content">
                 <IonButton expand="block"  size="large" onClick={handleLogin} >Google Login</IonButton>
-                <IonButton expand="block"  size="large" onClick={handleLogout} >Google Logout</IonButton>
-            </div>
+           </div>
 
         </IonPage>
     )

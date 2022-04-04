@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonPage, IonPopover, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
 import { menu, personCircleOutline, home } from 'ionicons/icons'
-import { Route, RouteComponentProps } from "react-router";
+import { Route, RouteComponentProps, useHistory } from "react-router";
 import { DashboardRoute } from "./DashboardRoute";
 import { menuConfig } from "../../configs/menuConfig"
 import { AppContext } from "../App/AppContext";
+import { googleSignout } from "../Auth/services/googleSigin";
 
 type accordProp = {
     menuName: string,
@@ -87,8 +88,18 @@ const List = (prop: listProp) => {
 
 
 
+
 const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
+
     const { appState } = useContext(AppContext)
+    const history=useHistory();
+
+    const handleLogout=()=>{
+        googleSignout().then(()=>{
+            history.push("/login")
+        });
+    }
+
     return (
         <IonSplitPane when="sm" contentId="dashboard-content">
 
@@ -134,7 +145,7 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                 </IonContent>
                 <IonPopover trigger="user-icon" triggerAction="hover">
                     <IonContent>
-                        <IonButton>Logout</IonButton>
+                        <IonButton onClick={handleLogout}>Logout</IonButton>
                     </IonContent>
                 </IonPopover>
             </IonPage>
