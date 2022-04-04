@@ -1,16 +1,25 @@
-import { UserInfo } from "firebase/auth"
-import { collection, onSnapshot, query, where } from "firebase/firestore"
-import { db } from "../../../services/firebase"
+import { UserInfo } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../services/firebase";
 
-const useRegister = async (userInfo: UserInfo) => {
-    if (userInfo.email) {
-        const docRef = collection(db, "users");
-        const groupsRef = query(docRef,where("groups","array-contains","teacher"))
-        const unsub = onSnapshot(groupsRef, (doc) => {
-
-        });
+const checkUserExist =async (email:string)=>{
+    const docRef=doc(db, "users",email);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()){
+        return true;
+    }else{
+        return false;
     }
 }
 
 
-export { useRegister }
+const register = async (userInfo:UserInfo)=>{
+    if (await checkUserExist(userInfo.email||"")){
+        return true;    
+    }else{
+        return false;    
+    }
+    return;
+}
+
+export { register }

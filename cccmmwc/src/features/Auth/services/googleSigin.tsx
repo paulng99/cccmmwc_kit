@@ -1,6 +1,4 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../services/firebase";
 
 const googleSigin = () => {
     const domains = ["cccmmwc.edu.hk", "365.cccmmwc.edu.hk"];
