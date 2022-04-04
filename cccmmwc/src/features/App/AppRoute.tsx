@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router";
-import { Dashboard } from "../Dashboard/Dashboard";
+import { Dashboard } from "../../layout/Dashboard/Dashboard";
 import { IonRouterOutlet } from "@ionic/react";
 import { Login } from "../Auth/Login";
 

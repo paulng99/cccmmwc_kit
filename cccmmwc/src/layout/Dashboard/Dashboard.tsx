@@ -4,9 +4,9 @@ import { menu, home } from 'ionicons/icons'
 import { RouteComponentProps, useHistory } from "react-router";
 import { DashboardRoute } from "./DashboardRoute";
 import { menuConfig } from "../../configs/menuConfig"
-import { googleSignout } from "../Auth/services/googleSigin";
-import { Logout } from "../Auth/Login";
-import { AppContext } from "../App/AppContext";
+import { googleSignout } from "../../features/Auth/services/googleSigin";
+import { Logout } from "../../features/Auth/Login";
+import { AppContext } from "../../features/App/AppContext";
 
 type accordProp = {
     menuName: string,
@@ -128,7 +128,6 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                         </IonButtons>
                         <IonTitle className="ion-text-center">Dashboard</IonTitle>
                         <IonButtons slot="end">
-                            {console.log(appState.userInfo.photoURL)}
                             <IonAvatar slot="end" id="user-icon">
                                 <img style={{ "padding": "10px" }} src={`${appState.userInfo.photoURL}`} />
                             </IonAvatar>
