@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonPage, IonPopover, IonRouterOutlet, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
-import { menu, personCircleOutline, home } from 'ionicons/icons'
-import { Route, RouteComponentProps, useHistory } from "react-router";
+import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonPage, IonPopover, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
+import { menu, home } from 'ionicons/icons'
+import { RouteComponentProps, useHistory } from "react-router";
 import { DashboardRoute } from "./DashboardRoute";
 import { menuConfig } from "../../configs/menuConfig"
-import { AppContext } from "../App/AppContext";
 import { googleSignout } from "../Auth/services/googleSigin";
+import { Logout } from "../Auth/Login";
+import { AppContext } from "../App/AppContext";
 
 type accordProp = {
     menuName: string,
@@ -86,23 +87,19 @@ const List = (prop: listProp) => {
     );
 }
 
-
-
-
 const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
-
-    const { appState } = useContext(AppContext)
-    const history=useHistory();
-
-    const handleLogout=()=>{
-        googleSignout().then(()=>{
-            history.push("/login")
+    const { appState, appDispatch } = useContext(AppContext);
+    const history = useHistory();
+    const handleLogout = () => {
+        googleSignout().then(() => (
+            <Logout></Logout>
+        )).then(() => {
+            history.push('/login');
         });
     }
 
     return (
         <IonSplitPane when="sm" contentId="dashboard-content">
-
             <IonMenu contentId="dashboard-content" side="start">
                 <IonHeader>
                     <IonToolbar>
@@ -120,8 +117,6 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                 </IonContent>
             </IonMenu>
 
-
-
             <IonPage id="dashboard-content">
                 <IonHeader>
                     <IonToolbar>
@@ -134,9 +129,10 @@ const Dashboard: React.FC<RouteComponentProps> = ({ match }) => {
                         </IonButtons>
                         <IonTitle className="ion-text-center">Dashboard</IonTitle>
                         <IonButtons slot="end">
-                            <IonButton id="user-icon">
-                                <IonIcon icon={personCircleOutline} size="large"></IonIcon>
-                            </IonButton>
+                            {console.log(appState.userInfo.photoURL)}
+                            <IonAvatar slot="end" id="user-icon">
+                                <img style={{"padding":"10px"}} src={`${appState.userInfo.photoURL}`} />
+                            </IonAvatar>
                         </IonButtons>
                     </IonToolbar>
                 </IonHeader>
