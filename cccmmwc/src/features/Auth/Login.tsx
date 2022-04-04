@@ -1,6 +1,6 @@
 import { IonButton, IonPage } from "@ionic/react"
 import { MouseEvent, useContext, useEffect } from "react"
-import { Redirect, useHistory } from "react-router"
+import { useHistory } from "react-router"
 import { AppContext } from "../App/AppContext"
 import { AppActionType } from "../App/AppReducer"
 import "./Login.css"

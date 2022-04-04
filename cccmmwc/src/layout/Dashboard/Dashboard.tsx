@@ -136,6 +136,7 @@ const Dashboard: React.FC = (prop) => {
                 </IonHeader>
                 <IonContent className="ion-padding">
                     <DashboardRoute />
+                    erwrs
                     {prop.children}
                 </IonContent>
                 <IonPopover trigger="user-icon" triggerAction="hover">
