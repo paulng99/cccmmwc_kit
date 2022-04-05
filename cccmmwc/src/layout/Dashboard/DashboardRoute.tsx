@@ -11,5 +11,6 @@ export const DashboardRoute = () => (
             return (<>///</>)
         }} />
         <Route exact path="/dashboard/setup" component={Setup} />
+
     </IonRouterOutlet>
 );

@@ -1,0 +1,1 @@
+export const hashpasscode = "GGFJFIYkfRkjqwe776238sugwe652jhgJKjhge";

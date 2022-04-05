@@ -4,17 +4,24 @@ import { useHistory } from "react-router"
 import { AppContext } from "../App/AppContext"
 import { AppActionType } from "../App/AppReducer"
 import "./Login.css"
+import { useGetUserGroups } from "./hooks/getUserGroups"
 import { googleSigin, googleSignout } from "./services/googleSigin"
 
 const Login = () => {
     const history = useHistory();
     const { appState, appDispatch } = useContext(AppContext);
+    
     const handleLogin = (event: MouseEvent<HTMLElement>) => {
         googleSigin().then((r) => {
             appDispatch({
                 "type": AppActionType.USERINFO,
                 "payload": r,
             });
+
+            //get User Groups and store in the localstorage
+            //r.email && useGetUserGroups(r.email);
+            console.log(r?.email);
+            //Redirect to /dashboard
             history.push("/dashboard")
         });
     }
@@ -30,7 +37,7 @@ const Login = () => {
 }
 
 const Logout = () => {
-    const {appDispatch } = useContext(AppContext);
+    const { appDispatch } = useContext(AppContext);
     const handleLogout = () => {
         googleSignout().then(() => {
             appDispatch({
@@ -40,7 +47,7 @@ const Logout = () => {
         });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         handleLogout();
     });
 

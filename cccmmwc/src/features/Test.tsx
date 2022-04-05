@@ -1,9 +1,12 @@
 import { Dashboard } from "../layout/Dashboard/Dashboard";
+import { useGetUserGroups } from "./Auth/hooks/getUserGroups";
 
-const Test = (prop: any) => {
+const Test = () => {
+    const groups=useGetUserGroups();
     return (
         <Dashboard>
-            test
+            {JSON.stringify(groups)}
+            TEST
         </Dashboard>
     );
 }
