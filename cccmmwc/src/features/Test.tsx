@@ -1,4 +1,4 @@
-import { AES } from "crypto-js";
+import { AES, enc } from "crypto-js";
 import { useEffect, useState } from "react";
 import { hashpasscode } from "../configs/hashpasscode";
 import { Dashboard } from "../layout/Dashboard/Dashboard";
@@ -10,7 +10,7 @@ const Test = () => {
     useEffect(() => {
         setEmail("mmw-nty@cccmmwc.edu.hk");
         const hashGroups = localStorage.getItem("groups");
-        setGgroups(AES.decrypt(hashGroups||"",hashpasscode).toString());
+        setGgroups(AES.decrypt(hashGroups||"",hashpasscode).toString(enc.Utf8));
     }, []);
 
 

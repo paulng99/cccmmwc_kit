@@ -8,7 +8,7 @@ import { useGetUserGroups } from "./hooks/getUserGroups"
 import { googleSigin, googleSignout } from "./services/googleSigin"
 import { hashpasscode } from "../../configs/hashpasscode"
 import AES from "crypto-js/aes"
- 
+
 const Login = () => {
     const history = useHistory();
     const { appState, appDispatch } = useContext(AppContext);

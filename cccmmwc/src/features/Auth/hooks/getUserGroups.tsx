@@ -9,7 +9,8 @@ export const useGetUserGroups = () => {
     useEffect(() => {
         email && getDoc(doc(db, "users", email)).then((d) => {
             if (d.exists()) {
-                setGroups(d.data())
+                setGroups(d.data().groups)
+                console.log(groups)
             } else {
                 setGroups({});
             }
