@@ -4,7 +4,7 @@ import { db } from "../../../services/firebase"
 
 export const useGetUserGroups = () => {
     const [email, setEmail] = useState("")
-    const [groups, setGroups] = useState({});
+    const [groups, setGroups] = useState([]);
 
     useEffect(() => {
         email && getDoc(doc(db, "users", email)).then((d) => {
@@ -12,7 +12,7 @@ export const useGetUserGroups = () => {
                 setGroups(d.data().groups)
                 console.log(groups)
             } else {
-                setGroups({});
+                setGroups([]);
             }
         });
     }, [email]);
