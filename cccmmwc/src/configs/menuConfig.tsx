@@ -12,10 +12,10 @@ export const menuConfig: any = [
             "menuLink": "/dashboard/home",
             "menuChildren": [
                 {
-                    "menuName": "submenu111",
+                    "menuName": "test",
                     "menuColor": "",
                     "menuIcon": {personCircleOutline},
-                    "menuLink": "dashboard/",
+                    "menuLink": "/test/",
                 }, {
                     "menuName": "submenu112",
                     "menuColor": "",

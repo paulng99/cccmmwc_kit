@@ -10,6 +10,7 @@ import { googleSigin, googleSignout } from "./services/googleSigin"
 const Login = () => {
     const history = useHistory();
     const { appState, appDispatch } = useContext(AppContext);
+    const groups = useGetUserGroups("");
     
     const handleLogin = (event: MouseEvent<HTMLElement>) => {
         googleSigin().then((r) => {
@@ -20,6 +21,7 @@ const Login = () => {
 
             //get User Groups and store in the localstorage
             //r.email && useGetUserGroups(r.email);
+            localStorage.setItem("groups",JSON.stringify(groups));
             console.log(r?.email);
             //Redirect to /dashboard
             history.push("/dashboard")

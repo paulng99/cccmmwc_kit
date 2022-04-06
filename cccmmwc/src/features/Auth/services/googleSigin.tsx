@@ -15,6 +15,7 @@ const googleSigin = () => {
     let sp = signInWithPopup(auth, googleProvider).then((result) => {
         if (checkDomain(result.user.email || "")) {
             localStorage.setItem("userInfo", JSON.stringify(result.user));
+            
             return result.user;
         } else {
             console.log("domain is incorrect.")
