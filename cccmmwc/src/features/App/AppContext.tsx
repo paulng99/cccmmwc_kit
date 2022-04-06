@@ -4,13 +4,15 @@ import { appReducer } from "./AppReducer";
 //interface of IAppSate
 export interface IAppState {
     "isLoading": boolean,
-    "userInfo": object
+    "userInfo": object,
+    "groups":Array<string>
 }
 
 //Initital State
 const initialState = {
     "isLoading": false,
     "userInfo": JSON.parse(localStorage.getItem("userInfo")||"{}"),
+    "groups":[],
 }
 
 //AppContext

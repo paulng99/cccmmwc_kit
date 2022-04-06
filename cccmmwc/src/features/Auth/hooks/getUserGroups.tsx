@@ -2,7 +2,8 @@ import { doc, getDoc } from "firebase/firestore"
 import { useEffect, useState } from "react";
 import { db } from "../../../services/firebase"
 
-export const useGetUserGroups = (email: string) => {
+export const useGetUserGroups = () => {
+    const [email, setEmail] = useState("")
     const [groups, setGroups] = useState({});
 
     useEffect(() => {
@@ -13,8 +14,6 @@ export const useGetUserGroups = (email: string) => {
                 setGroups({});
             }
         });
-    }, []);
-
-
-    return groups;
+    }, [email]);
+    return { groups, setEmail };
 }
