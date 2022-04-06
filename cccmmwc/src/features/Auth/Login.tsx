@@ -14,6 +14,12 @@ const Login = () => {
     const { appState, appDispatch } = useContext(AppContext);
     const { groups, setEmail } = useGetUserGroups();
 
+    useEffect(()=>{
+        const hashGroups=AES.encrypt(JSON.stringify(groups),hashpasscode)
+        localStorage.setItem("groups", hashGroups.toString());
+        appDispatch({ "type": "GROUPS", "payload": groups });
+    },[groups]);
+
     const handleLogin = (event: MouseEvent<HTMLElement>) => {
         googleSigin().then((r) => {
             appDispatch({
@@ -21,13 +27,8 @@ const Login = () => {
                 "payload": r,
             });
             setEmail(r?.email || "");
-            return r;
-        }).then((r) => {
-            const hashGroups=AES.encrypt(JSON.stringify(groups),hashpasscode)
-            localStorage.setItem("groups", hashGroups.toString());
-            appDispatch({ "type": "GROUPS", "payload": groups });
             history.push("/dashboard")
-        });
+        })
     }
 
     return (
@@ -42,18 +43,14 @@ const Login = () => {
 
 const Logout = () => {
     const { appDispatch } = useContext(AppContext);
-    const handleLogout = () => {
+    useEffect(() => {
         googleSignout().then(() => {
             appDispatch({
-                "type": AppActionType.USERINFO,
+                "type": AppActionType.LOGOUT,
                 "payload": {},
             });
         });
-    }
-
-    useEffect(() => {
-        handleLogout();
-    });
+    },[]);
 
     return (<></>);
 }

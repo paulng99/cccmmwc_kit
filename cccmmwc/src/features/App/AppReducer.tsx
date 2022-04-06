@@ -3,7 +3,8 @@ import { IAppState } from "./AppContext";
 export enum AppActionType {
     LOADING = "LOADING",
     USERINFO = "USERINFO",
-    GROUPS = "GROUPS"
+    GROUPS = "GROUPS",
+    LOGOUT = "LOGOUT"
 }
 
 interface IAppAction {
@@ -32,6 +33,11 @@ export const appReducer: any = (state: IAppState, action: IAppAction) => {
                 ...state,
                 "groups": action.payload
             }
+
+        case AppActionType.LOGOUT:
+            return {
+            }
+
         default:
             return { state };
     }
