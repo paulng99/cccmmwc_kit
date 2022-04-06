@@ -6,7 +6,9 @@ import { AppActionType } from "../App/AppReducer"
 import "./Login.css"
 import { useGetUserGroups } from "./hooks/getUserGroups"
 import { googleSigin, googleSignout } from "./services/googleSigin"
-
+import { hashpasscode } from "../../configs/hashpasscode"
+import AES from "crypto-js/aes"
+ 
 const Login = () => {
     const history = useHistory();
     const { appState, appDispatch } = useContext(AppContext);
@@ -21,8 +23,9 @@ const Login = () => {
             setEmail(r?.email || "");
             return r;
         }).then((r) => {
-            localStorage.setItem("groups", JSON.stringify(groups));
-            appDispatch({ "type": "GROUPS", "payload": groups })
+            const hashGroups=AES.encrypt(JSON.stringify(groups),hashpasscode)
+            localStorage.setItem("groups", hashGroups.toString());
+            appDispatch({ "type": "GROUPS", "payload": groups });
             history.push("/dashboard")
         });
     }

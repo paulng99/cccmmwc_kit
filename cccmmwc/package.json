@@ -21,6 +21,7 @@
     "@types/react-dom": "^16.9.10",
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
+    "crypto-js": "^4.1.1",
     "firebase": "^9.6.9",
     "ionicons": "^5.4.0",
     "react": "^17.0.1",
@@ -68,6 +69,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "3.4.3",
+    "@types/crypto-js": "^4.1.1",
     "react-scripts": "5.0.0"
   },
   "description": "An Ionic project"
