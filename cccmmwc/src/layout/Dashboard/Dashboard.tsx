@@ -138,7 +138,7 @@ const Dashboard: React.FC = (prop) => {
                     <DashboardRoute />
                     {prop.children}
                 </IonContent>
-                <IonPopover trigger="user-icon" triggerAction="hover">
+                <IonPopover trigger="user-icon">
                     <IonContent>
                         <IonButton onClick={handleLogout}>Logout</IonButton>
                     </IonContent>
