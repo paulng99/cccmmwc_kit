@@ -13,7 +13,7 @@ export interface IAppState {
 //Initital State
 const initialState = {
     "isLoading": false,
-    "userInfo": JSON.parse(AES.decrypt(localStorage.getItem("userInfo")||"",hashpasscode).toString(enc.Utf8)),
+    "userInfo": JSON.parse(AES.decrypt(localStorage.getItem("userInfo")||"",hashpasscode).toString(enc.Utf8)||"{}"),
     "groups":[],
 }
 
