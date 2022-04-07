@@ -23,6 +23,8 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const remoteConfig = getRemoteConfig(app);
+
+//remote config setting
 remoteConfig.settings.minimumFetchIntervalMillis = 1;
 remoteConfig.defaultConfig = {
   "hashpasscode": "6204336E7C2D10FE7DD5367DA614CDBC877736DB6CBDA48320A45459BAD8C098"
