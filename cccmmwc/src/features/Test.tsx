@@ -14,14 +14,8 @@ const Test = () => {
     useEffect(() => {
         setEmail(appState.userInfo.email);
         const hashGroups = localStorage.getItem("groups");
-        console.log(AES.decrypt(hashGroups||"", hashpasscode).toString(enc.Utf8))
         setGgroups(JSON.parse(AES.decrypt(hashGroups || "", hashpasscode).toString(enc.Utf8)));
     }, []);
-
-    useEffect(()=>{
-
-    },[groups]);
-
 
     return (
         <Dashboard>

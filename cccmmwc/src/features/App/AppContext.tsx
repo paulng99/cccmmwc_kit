@@ -21,7 +21,7 @@ export const AppContext = createContext<{ appState: any; appDispatch: Dispatch<a
     appDispatch: () => null
 });
 
-//APp Provider
+//App Provider
 export const AppProvider: FC = ({ children }) => {
     const [appState, appDispatch] = useReducer(appReducer, initialState)
     return (
