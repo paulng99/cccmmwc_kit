@@ -1,4 +1,6 @@
+import { AES, enc } from "crypto-js";
 import React, { createContext, Dispatch, FC, useReducer } from "react";
+import { hashpasscode } from "../../configs/hashpasscode";
 import { appReducer } from "./AppReducer";
 
 //interface of IAppSate
@@ -11,7 +13,7 @@ export interface IAppState {
 //Initital State
 const initialState = {
     "isLoading": false,
-    "userInfo": JSON.parse(localStorage.getItem("userInfo")||"{}"),
+    "userInfo": JSON.parse(AES.decrypt(localStorage.getItem("userInfo")||"",hashpasscode).toString(enc.Utf8)),
     "groups":[],
 }
 

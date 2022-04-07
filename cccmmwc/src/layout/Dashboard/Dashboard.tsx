@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonPage, IonPopover, IonSplitPane, IonTitle, IonToolbar } from "@ionic/react";
 import { menu, home } from 'ionicons/icons'
-import { RouteComponentProps, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import { DashboardRoute } from "./DashboardRoute";
 import { menuConfig } from "../../configs/menuConfig"
 import { googleSignout } from "../../features/Auth/services/googleSigin";

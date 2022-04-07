@@ -1,4 +1,6 @@
+import { AES } from "crypto-js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { hashpasscode } from "../../../configs/hashpasscode";
 
 const googleSigin = () => {
     const domains = ["cccmmwc.edu.hk", "365.cccmmwc.edu.hk"];
@@ -14,7 +16,8 @@ const googleSigin = () => {
     }
     let sp = signInWithPopup(auth, googleProvider).then((result) => {
         if (checkDomain(result.user.email || "")) {
-            localStorage.setItem("userInfo", JSON.stringify(result.user));
+            const hashUserInfo=AES.encrypt(JSON.stringify(result.user),hashpasscode);
+            localStorage.setItem("userInfo", hashUserInfo.toString());
             
             return result.user;
         } else {
