@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { DashboardRoute } from "./DashboardRoute";
 import { menuConfig } from "../../configs/menuConfig"
 import { googleSignout } from "../../features/Auth/services/googleSigin";
-import { Logout } from "../../features/Auth/Login";
+import { Logout } from "../../features/Auth/Logout";
 import { AppContext } from "../../features/App/AppContext";
 
 type accordProp = {
