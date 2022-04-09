@@ -41,19 +41,4 @@ const Login = () => {
         </IonPage>
     )
 }
-
-const Logout = () => {
-    const { appDispatch } = useContext(AppContext);
-    useEffect(() => {
-        googleSignout().then(() => {
-            appDispatch({
-                "type": AppActionType.LOGOUT,
-                "payload": {},
-            });
-        });
-    }, []);
-
-    return (<></>);
-}
-
-export { Login, Logout }
+export { Login}
