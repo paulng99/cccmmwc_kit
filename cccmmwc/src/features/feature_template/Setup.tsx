@@ -1,0 +1,1 @@
+import {menusConfig, info, accessRight} from './setupConfig'

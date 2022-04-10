@@ -1,41 +1,32 @@
-import { AES, enc } from "crypto-js";
-import { useContext, useEffect, useState } from "react";
-import { hashpasscode } from "../configs/hashpasscode";
+import { IonContent } from "@ionic/react";
+import { collectionGroup, doc, getDocs, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { Dashboard } from "../layout/Dashboard/Dashboard";
-import { AppContext } from "./App/AppContext";
-import { useGetUserGroups } from "./Auth/hooks/getUserGroups";
+import { db } from "../services/firebase";
 
 const Test = () => {
-    const { groups, setEmail } = useGetUserGroups();
-    const [ggroups, setGgroups] = useState([]);
-    const { appState } = useContext(AppContext);
-    const [userInfo, setUserInfo] = useState({});
-
-    const getUserInfo = () => {
-        let hashU = localStorage.getItem("userInfo");
-        return (JSON.parse(AES.decrypt(hashU || "", hashpasscode).toString(enc.Utf8)))
-    }
+    const [menus, setMenus] = useState<any>([]);
+    const [groups, setGroups] = useState();
 
     useEffect(() => {
-        setEmail(appState.userInfo.email);
-        const hashGroups = localStorage.getItem("groups");
-        setGgroups(JSON.parse(AES.decrypt(hashGroups || "", hashpasscode).toString(enc.Utf8)));
-        setUserInfo(getUserInfo())
+        const menusRef = collectionGroup(db, "menus");
+        onSnapshot(menusRef,menu => {
+            let menusTemp: any[]=[];
+            menu.docs.forEach(m=>{
+                menusTemp.push(m.data());
+            })
+            setMenus(menusTemp);
+        })
     }, []);
 
+
     return (
-        <Dashboard>
-            <div>
-                {JSON.stringify(groups)}
-            </div>
-            <div>
-                {JSON.stringify(ggroups)}
-            </div>
-            <div>TEST</div>
-            <div>
-                {JSON.stringify(userInfo)}
-            </div>
-        </Dashboard>
+        <IonContent>
+            <div>Menu:</div>
+            <div><pre>{JSON.stringify(menus,null,2)}</pre></div>
+            <div>Groups:</div>
+            <div>{groups}</div>
+        </IonContent>
     );
 }
 
