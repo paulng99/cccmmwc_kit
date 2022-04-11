@@ -5,12 +5,13 @@ import { IonRouterOutlet } from "@ionic/react";
 import { Login } from "../Auth/Login";
 import { Test } from "../Test";
 import { Logout } from "../Auth/Logout";
+import { Setup } from "../feature_template/Setup";
 
 export const AppRoute = () => (
   <IonRouterOutlet>
     <Route path='/dashboard' component={Dashboard} />
     <Route exact path='/login' component={Login} />
-    <Route exact path="/test" component={Test} />
+    <Route exact path="/test" component={Setup} />
     <Route exact path='/logout' component ={Logout} />
   </IonRouterOutlet>
 );
