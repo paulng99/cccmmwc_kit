@@ -1,5 +1,5 @@
 import { IonContent, IonItem, IonLabel, IonList, IonListHeader, IonNote, IonPage } from '@ionic/react';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { menusConfig, info, accessRight } from './setupConfig'
 
 
@@ -8,6 +8,10 @@ const Setup = () => {
     const [setupMenu, setSetupMenu] = useState(false);
     const [setupRight, setSetupRight] = useState(false);
     const [setup, setSetup] = useState(false);
+
+    useEffect(()=>{
+        
+    },[]);
 
     return (
         <IonPage>

@@ -11,7 +11,7 @@ export const AppRoute = () => (
   <IonRouterOutlet>
     <Route path='/dashboard' component={Dashboard} />
     <Route exact path='/login' component={Login} />
-    <Route exact path="/test" component={Setup} />
     <Route exact path='/logout' component ={Logout} />
+    <Route exact path="/test" component={Setup} />
   </IonRouterOutlet>
 );
