@@ -1,10 +1,15 @@
 import { Button } from 'antd';
+import { Route, Routes, Link } from "react-router-dom";
+import { Test } from "./modules/Test/Test"
 import './App.css';
 
 function App() {
   return (
     <>
-      <Button size='large' shape='circle' danger ghost loading>Login in </Button>
+      <Link to="/test">Test</Link>
+      <Routes>
+        <Route index={false} path='/test' element={<Test />} />
+      </Routes>
     </>
   );
 }

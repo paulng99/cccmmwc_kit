@@ -13,14 +13,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-
+import { BrowserRouter } from "react-router-dom";
 
 import { createRoot } from 'react-dom/client';
 
 
 const container = document.getElementById('root');
 const root = createRoot(container as Element);
-root.render(<App />);
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
 
 
 
