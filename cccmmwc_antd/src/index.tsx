@@ -1,21 +1,9 @@
-/*import React from 'react';
-import ReactDOM from 'react-dom';
-
-
- ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-); */
-
 import './index.css';
-import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-
 import { createRoot } from 'react-dom/client';
+import App from './App';
 
 
 const container = document.getElementById('root');
