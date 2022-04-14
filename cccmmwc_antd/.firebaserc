@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "cccmmwc-cfeec"
+  },
+  "targets": {
+    "cccmmwc-cfeec": {
+      "hosting": {
+        "mmw-pwa": [
+          "cccmmwc"
+        ]
+      }
+    }
+  }
+}
