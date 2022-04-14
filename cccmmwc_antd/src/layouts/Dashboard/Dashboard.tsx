@@ -8,7 +8,7 @@ const Dashboard: FC = (prop: any) => {
 
     return (
         <Layout>
-            <Sider>Left menu</Sider>
+            <Sider breakpoint="md">Left menu</Sider>
             <Content>
                 <Header>Header</Header>
                 {prop.children}</Content>
