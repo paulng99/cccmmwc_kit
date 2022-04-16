@@ -5,30 +5,31 @@ import { MouseEvent, useState } from "react";
 import { db } from "../../../services/firebase";
 import { setupFeature } from "./SetupData";
 
-export default (prop: any) => {
+
+export default () => {
     const [loading, setLoading] = useState(false);
     const tableData: readonly any[] | undefined = [
         {
-            key:'1',
-            progress:"Add Grouping",
-            setup:<EyeOutlined />
+            key: '1',
+            progress: "Add Grouping",
+            setup: <EyeOutlined />
         },
         {
-            key:'2',
-            progress:"Delete Grouping",
-            setup:<EyeOutlined />
+            key: '2',
+            progress: "Delete Grouping",
+            setup: <EyeOutlined />
         }
     ];
     const colData: TableColumnsType<any> | undefined = [
         {
-            title:"Progress",
-            dataIndex:"progress",
-            key:"progress"
+            title: "Progress",
+            dataIndex: "progress",
+            key: "progress"
         },
         {
-            title:"Setup",
-            dataIndex:"setup",
-            key:"setup"
+            title: "Setup",
+            dataIndex: "setup",
+            key: "setup"
         }
     ];
     const handleClick = (e: MouseEvent) => {
