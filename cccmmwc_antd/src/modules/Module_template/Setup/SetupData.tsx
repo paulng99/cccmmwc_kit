@@ -1,6 +1,6 @@
-export const menus={
+export const setupFeature = {
     "name_en": "",
-    "canReadByUsers": [],
+    "name_zh": "",
     "menus": {
         "sub_menu": [
             {
@@ -15,10 +15,15 @@ export const menus={
         "name_en": "Main Menu 1",
         "name_zh": "主選單 1"
     },
-    "canWriteByUsers": [
-        "mmw-nty@cccmmwc.edu.hk"
-    ],
-    "name_zh": "",
+    "canWriteByUsers": [],
     "canReadByGroups": [],
-    "canWriteByGroups": []
+    "canWriteByGroups": [],
+    "canReadByUsers": [],
+}
+
+export const setupModule = {
+    "name_en": "",
+    "name_zh": "",
+    "description_zh": "",
+    "description_en": "",
 }
