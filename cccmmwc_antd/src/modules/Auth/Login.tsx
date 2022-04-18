@@ -6,16 +6,13 @@ import { AppContext } from "../App/AppContext";
 import './Login.css'
 
 export default () => {
-    const a=useContext(AppContext);
+    const {appState, appDispatch} = useContext(AppContext);
 
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();
-        signInWithPopup(auth, googleProvider).then(result=>{
+        signInWithPopup(auth, googleProvider).then(result => {
             console.log(result.user)
-
-            console.log(a)
-
-        }).catch((e)=>{
+        }).catch((e) => {
             console.log(e);
         });
     }
