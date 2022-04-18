@@ -1,9 +1,9 @@
 import { EyeOutlined } from "@ant-design/icons";
 import { Button, Table, TableColumnsType } from "antd";
-import { doc, setDoc, writeBatch } from "firebase/firestore";
+import { doc, writeBatch } from "firebase/firestore";
 import { MouseEvent, useState } from "react";
 import { db } from "../../../services/firebase";
-import { setupFunctions, setupMenus, setupModule } from "./SetupData";
+import { setupActions, setupFunctions, setupModule } from "./SetupData";
 
 
 export default () => {
@@ -39,11 +39,16 @@ export default () => {
 
         const moduleRef = doc(db, "modules", setupModule.id);
         batch.set(moduleRef, setupModule);
-        batch.set(moduleRef, setupMenus);
 
-        const setupRef = doc(db, "modules", setupModule.id, "features", setupFunctions.id);
-        batch.set(setupRef, setupFunctions);
+        setupFunctions.forEach((f)=>{
+            let functionRef = doc(db, "modules", setupModule.id, "functions", f.id);
+            batch.set(functionRef, f);
+        })
 
+        setupActions.forEach((a)=>{
+            let functionRef = doc(db, "modules", setupModule.id, "functions", a.functionId,"actions",a.id);
+            batch.set(functionRef, a);
+        })
 
         await batch.commit();
 

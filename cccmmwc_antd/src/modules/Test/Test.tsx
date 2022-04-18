@@ -1,4 +1,4 @@
-import { doc, DocumentData, DocumentSnapshot, getDoc } from "firebase/firestore";
+import { collectionGroup, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react"
 import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase";
@@ -8,12 +8,12 @@ export const Test = () => {
 
     useEffect(
         () => {
-            const menuQuery = doc(db, "modules", "Grouping", "rights", "add_grouping");
-            getDoc(menuQuery).then((d:DocumentSnapshot) => {
-                console.log(d.data());
-                setData(d.data());
-             }
-            )
+            const menuQuery = query(collectionGroup(db, "actions"), where("access.add", "array-contains", "mmw-nty@cccmmwc.edu.hk"));
+            getDocs(menuQuery).then(({ docs }) => {
+                docs.forEach(d => {
+                    console.log(d.data())
+                })
+            })
         }, []);
 
     return (
