@@ -1,16 +1,24 @@
-import { createContext, FC } from "react";
+import { createContext, FC, useReducer } from "react";
+import appReducer from "./appReducer";
 
-export const initialAppState ={
-    userInfo:{},
-    loading:false
+
+export interface IInitialAppState {
+    userInfo:any,
+    loading:Boolean,
+}
+
+export const initialAppState = {
+    userInfo: {},
+    loading: false
 }
 
 export const AppContext = createContext(initialAppState);
 
-export const AppProvider:FC =({children})=>{
+export const AppProvider: FC = ({ children }) => {
+    const [appState, appDispatch] = useReducer(appReducer, initialAppState)
     return (
-        <AppContext.Provider value={appState, appDispatch}>
-        {children}
+        <AppContext.Provider value={{appState, appDispatch}}>
+            {children}
         </AppContext.Provider>
     );
 }

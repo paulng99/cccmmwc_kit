@@ -1,0 +1,19 @@
+#login {
+    width: 100%;
+    height: 100vh;
+    background-image: url("https://source.unsplash.com/random/1800×1200/?backgroud");
+    /* Add the blur effect */
+    /*filter: blur(8px);
+    -webkit-filter: blur(8px);*/
+    /* Full height */
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#login button {
+    filter: blur(0px);
+    margin: 20%;
+}
