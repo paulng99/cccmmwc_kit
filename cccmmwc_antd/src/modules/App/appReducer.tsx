@@ -1,8 +1,11 @@
-export default (appState: any, appAction: { type: any; payload: any; })=>{
-    const {type, payload} = appAction;
+export default (appState: any, appAction: { type: any; payload: any; }) => {
+    const { type, payload } = appAction;
 
-    switch (type){
+    switch (type) {
         case "LOADING":
-        return {...appState, "loading":payload};
+            return { ...appState, "loading": payload };
+
+        case "LOGIN":
+            return { ...appState, "userInfo": payload };
     }
 }
