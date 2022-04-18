@@ -1,9 +1,9 @@
 import { EyeOutlined } from "@ant-design/icons";
 import { Button, Table, TableColumnsType } from "antd";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, writeBatch } from "firebase/firestore";
 import { MouseEvent, useState } from "react";
 import { db } from "../../../services/firebase";
-import { setupFeature } from "./SetupData";
+import { setupFunctions, setupMenus, setupModule } from "./SetupData";
 
 
 export default () => {
@@ -32,14 +32,23 @@ export default () => {
             key: "setup"
         }
     ];
-    const handleClick = (e: MouseEvent) => {
+    const handleClick = async (e: MouseEvent) => {
         e.preventDefault();
         setLoading(true);
-        const setupRef = doc(db, "modules", "Grouping", "features", "add_grouping");
-        setDoc(setupRef, setupFeature).then(() => {
-            console.log("set up completed.");
-            setLoading(false);
-        })
+        const batch = writeBatch(db);
+
+        const moduleRef = doc(db, "modules", setupModule.id);
+        batch.set(moduleRef, setupModule);
+        batch.set(moduleRef, setupMenus);
+
+        const setupRef = doc(db, "modules", setupModule.id, "features", setupFunctions.id);
+        batch.set(setupRef, setupFunctions);
+
+
+        await batch.commit();
+
+        console.log("set up completed.");
+        setLoading(false);
     }
 
     return (
