@@ -1,3 +1,4 @@
+
 export interface IAppAction {
     type: any;
     payload: any;
@@ -13,4 +14,9 @@ export default (appState: any, appAction: IAppAction) => {
         case "LOGIN":
             return { ...appState, "userInfo": payload };
     }
+}
+
+
+const saveLocalStorage = (payload:any)=>{
+    
 }
