@@ -8,7 +8,6 @@ import './Login.css'
 
 export default () => {
     const {appState, appDispatch} = useContext(AppContext);
-
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();
         signInWithPopup(auth, googleProvider).then(result => {

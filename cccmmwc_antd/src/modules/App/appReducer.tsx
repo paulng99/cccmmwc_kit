@@ -1,3 +1,4 @@
+import aes from 'crypto-js/aes';
 
 export interface IAppAction {
     type: any;
@@ -12,11 +13,12 @@ export default (appState: any, appAction: IAppAction) => {
             return { ...appState, "loading": payload };
 
         case "LOGIN":
+            saveLocalStorage("123");
             return { ...appState, "userInfo": payload };
     }
 }
 
 
-const saveLocalStorage = (payload:any)=>{
-    
+const saveLocalStorage = (payload: any) => {
+    console.log(aes.encrypt(payload, "112233").toString());
 }
