@@ -15,11 +15,11 @@ export const AppContext = createContext<{
     appDispatch: ()=>{},
 });
 
-/* export const AppProvider: FC = ({ children }) => {
+export const AppProvider: FC = ({ children }) => {
     const [appState, appDispatch] = useReducer(appReducer, initialAppState)
     return (
         <AppContext.Provider value={{ appState, appDispatch }}>
             {children}
         </AppContext.Provider>
     );
-} */
+} 

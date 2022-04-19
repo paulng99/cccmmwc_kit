@@ -5,22 +5,21 @@ import Logout from '../Auth/Logout';
 import Setup from '../Module_template/Setup/Setup';
 import { Test } from '../Test/Test';
 import './App.css';
-import { AppContext, initialAppState } from './AppContext';
+import { AppContext, AppProvider, initialAppState } from './AppContext';
 import appReducer from './appReducer';
 
 function App() {
 
-  const [appState, appDispatch] = useReducer(appReducer, initialAppState);
 
   return (
-    <AppContext.Provider value={{appState,appDispatch}}>
+    <AppProvider>
       <Routes>
         <Route path='/testsetup' element={<Setup />} />
-        <Route path='/test' element={<Test />} />
+        <Route path='/test' element={<Test />} key="/test/test" />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
       </Routes>
-    </AppContext.Provider>
+    </AppProvider>
   );
 }
 
