@@ -13,12 +13,9 @@ export default (appState: any, appAction: IAppAction) => {
             return { ...appState, "loading": payload };
 
         case "LOGIN":
-            saveLocalStorage("123");
-            return { ...appState, "userInfo": payload };
+           return { ...appState, "userInfo": payload };
+
+        case "LOGOUT":
+            return {};
     }
-}
-
-
-const saveLocalStorage = (payload: any) => {
-    console.log(aes.encrypt(payload, "112233").toString());
 }

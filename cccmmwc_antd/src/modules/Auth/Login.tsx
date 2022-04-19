@@ -22,6 +22,7 @@ export default () => {
 
     return (
         <div id="login">
+            {console.log(appState)}
             <Button onClick={handleLogin}>Login</Button>
         </div>
     );
