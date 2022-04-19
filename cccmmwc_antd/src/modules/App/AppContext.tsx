@@ -1,5 +1,4 @@
 import { createContext, FC, useReducer } from "react";
-import { any } from "underscore";
 import appReducer, { IAppAction } from "./appReducer";
 
 export const initialAppState = {
