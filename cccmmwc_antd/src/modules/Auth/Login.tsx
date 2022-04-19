@@ -11,7 +11,10 @@ export default () => {
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();
         signInWithPopup(auth, googleProvider).then(result => {
-            console.log(result.user)
+            appDispatch({
+                "type":"LOGIN",
+                "payload":result.user,
+            })
         }).catch((e) => {
             console.log(e);
         });
