@@ -1,4 +1,9 @@
-export default (appState: any, appAction: { type: any; payload: any; }) => {
+export interface IAppAction {
+    type: any;
+    payload: any;
+}
+
+export default (appState: any, appAction: IAppAction) => {
     const { type, payload } = appAction;
 
     switch (type) {
