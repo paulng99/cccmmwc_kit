@@ -1,0 +1,1 @@
+export const hashpasscode="ALKjlkqwe08098oewk8ij3edjkvkjnKNHUikHuik";

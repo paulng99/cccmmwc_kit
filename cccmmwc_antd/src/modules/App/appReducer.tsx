@@ -2,7 +2,7 @@ import aes from 'crypto-js/aes';
 
 export interface IAppAction {
     type: any;
-    payload: any;
+    payload?: any;
 }
 
 export default (appState: any, appAction: IAppAction) => {
