@@ -9,19 +9,16 @@ export const setupModule = {
         "name_zh": "主選單 1",
         "link": "/",
     },
-    "access": {
-        "view": [],
-        "edit": [],
-        "add": [],
-        "delete": []
-    }
 }
 
 
 export const setupFunctions = [
     {
         "id": "function_1",
-        "module_id": "testing_module_1",
+        "module_id": setupModule.id,
+        "p_function_id":"",
+        "isGuest":false,
+        "isMenu":true,
         "name_en": "function 1",
         "name_zh": "功能一",
         "menus": {
@@ -37,7 +34,10 @@ export const setupFunctions = [
         }
     }, {
         "id": "function_2",
-        "module_id": "testing_module_1",
+        "module_id": setupModule.id,
+        "p_function_id":"",
+        "isGuest":false,
+        "isMenu":true,
         "name_en": "function 2",
         "name_zh": "功能二",
         "menus": {
@@ -54,38 +54,3 @@ export const setupFunctions = [
     }
 ]
 
-export const setupActions = [
-    {
-        "id": "action 1",
-        "name_en": "Action 1",
-        "functionId": "function_1",
-        "module_id": "testing_module_1",
-        "menus": {
-            "name_en": "Action 1 Menu 1",
-            "name_zh": "行動 1 選單 1",
-            "link": "/",
-        },
-        "access": {
-            "view": [],
-            "edit": [],
-            "add": [],
-            "delete": []
-        }
-    }, {
-        "id": "action 2",
-        "name_en": "Action 2",
-        "functionId": "function_1",
-        "module_id": "testing_module_1",
-        "menus": {
-            "name_en": "Action 2 Menu",
-            "name_zh": "行動 2 選單",
-            "link": "/",
-        },
-        "access": {
-            "view": [],
-            "edit": [],
-            "add": [],
-            "delete": []
-        }
-    }
-];

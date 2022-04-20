@@ -9,12 +9,6 @@ export const setupModule = {
         "name_zh": "用戶",
         "link": "/auth",
     },
-    "access": {
-        "view": [],
-        "edit": [],
-        "add": [],
-        "delete": []
-    }
 }
 
 
@@ -22,6 +16,8 @@ export const setupFunctions = [
     {
         "id": "login",
         "module_id": setupModule.id,
+        "isGuest":false,
+        "isMenu":true,
         "name_en": "Login",
         "name_zh": "登入",
         "menus": {
@@ -38,6 +34,8 @@ export const setupFunctions = [
     }, {
         "id": "logout",
         "module_id": setupModule.id,
+        "isGuest":false,
+        "isMenu":true,
         "name_en": "Logout",
         "name_zh": "登出",
         "menus": {
