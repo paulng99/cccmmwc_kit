@@ -12,8 +12,11 @@ export default (appState: any, appAction: IAppAction) => {
         case "LOADING":
             return { ...appState, "loading": payload };
 
+        case "INITIAL_APP":
+            return  payload ;
+
         case "LOGIN":
-           return { ...appState, "userInfo": payload };
+            return { ...appState, "userInfo": payload };
 
         case "LOGOUT":
             return {};

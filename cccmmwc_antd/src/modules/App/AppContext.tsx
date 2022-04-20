@@ -1,4 +1,6 @@
-import { createContext, FC, useReducer } from "react";
+import { AES, enc } from "crypto-js";
+import { createContext, FC, useEffect, useReducer } from "react";
+import { getHashPasscode } from "../../config/hashpasswcode";
 import appReducer, { IAppAction } from "./appReducer";
 
 export const initialAppState = {
@@ -11,11 +13,25 @@ export const AppContext = createContext<{
     appDispatch: (action: IAppAction) => void;
 }>({
     appState: initialAppState,
-    appDispatch: ()=>{},
+    appDispatch: () => { },
 });
 
 export const AppProvider: FC = ({ children }) => {
     const [appState, appDispatch] = useReducer(appReducer, initialAppState)
+
+    useEffect(() => {
+        let appLocalEncrypt = localStorage.getItem("appState");
+        let appLocalDecrypt = enc.Utf8.stringify(AES.decrypt(appLocalEncrypt!, getHashPasscode()));
+        console.log(appLocalDecrypt);
+        // let state=JSON.parse(enc.Utf8.stringify(AES.decrypt(localStorage.getItem("appState")||"",getHashPasscode())));
+        appLocalDecrypt && console.log(JSON.parse(appLocalDecrypt))
+        appDispatch({
+            "type": "INITIAL_APP",
+            //"payload": JSON.parse(appLocalDecrypt!),
+        })
+    }, []);
+
+
     return (
         <AppContext.Provider value={{ appState, appDispatch }}>
             {children}
