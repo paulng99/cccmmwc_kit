@@ -1,6 +1,4 @@
-import { AES, enc } from "crypto-js";
 import { createContext, FC, useEffect, useReducer } from "react";
-import { getHashPasscode } from "../../config/hashpasswcode";
 import appReducer, { IAppAction } from "./appReducer";
 import useAppState from "./hooks/useAppState";
 

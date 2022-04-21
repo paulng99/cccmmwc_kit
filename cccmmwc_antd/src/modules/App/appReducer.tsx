@@ -1,4 +1,3 @@
-import aes from 'crypto-js/aes';
 
 export interface IAppAction {
     type: any;
