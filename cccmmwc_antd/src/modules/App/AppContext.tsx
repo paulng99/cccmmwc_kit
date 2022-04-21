@@ -2,6 +2,7 @@ import { AES, enc } from "crypto-js";
 import { createContext, FC, useEffect, useReducer } from "react";
 import { getHashPasscode } from "../../config/hashpasswcode";
 import appReducer, { IAppAction } from "./appReducer";
+import useAppState from "./hooks/useAppState";
 
 export const initialAppState = {
     userInfo: {},
@@ -17,19 +18,13 @@ export const AppContext = createContext<{
 });
 
 export const AppProvider: FC = ({ children }) => {
+
+    const aState=useAppState();
     const [appState, appDispatch] = useReducer(appReducer, initialAppState)
-
-    const getAppState=async ()=>{
-        let appLocalEncrypt = localStorage.getItem("appState");
-        let appLocalDecrypt = enc.Utf8.stringify(AES.decrypt(appLocalEncrypt!, getHashPasscode()));
-        appLocalDecrypt && console.log(JSON.parse(appLocalDecrypt))
-        return JSON.parse(appLocalDecrypt);
-    }
-
     useEffect(() => {
         appDispatch({
             "type": "INITIAL_APP",
-            "payload": getAppState(),
+            "payload": aState,
         })
     }, []);
 
