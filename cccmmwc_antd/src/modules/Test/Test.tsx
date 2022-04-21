@@ -2,7 +2,7 @@ import { collectionGroup, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, 
 import { SetStateAction, useEffect, useState } from "react"
 import { matchPath, resolvePath, useLocation } from "react-router";
 import Dashboard from "../../layouts/Dashboard/Dashboard"
-import { db } from "../../services/firebase";
+import { auth, db } from "../../services/firebase";
 
 export const Test = () => {
     const [data, setData] = useState<DocumentData>([]);
@@ -22,7 +22,9 @@ export const Test = () => {
 
     return (
         <Dashboard>
+            <pre>{auth.currentUser?.email}</pre>
             <pre style={{"height":"80vh","width":"80%"}}>{JSON.stringify(data, undefined, 2)}</pre>
+            
         </Dashboard>
     )
 }
