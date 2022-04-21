@@ -19,13 +19,17 @@ export const AppContext = createContext<{
 export const AppProvider: FC = ({ children }) => {
     const [appState, appDispatch] = useReducer(appReducer, initialAppState)
 
-    useEffect(() => {
+    const getAppState=async ()=>{
         let appLocalEncrypt = localStorage.getItem("appState");
         let appLocalDecrypt = enc.Utf8.stringify(AES.decrypt(appLocalEncrypt!, getHashPasscode()));
         appLocalDecrypt && console.log(JSON.parse(appLocalDecrypt))
+        return JSON.parse(appLocalDecrypt);
+    }
+
+    useEffect(() => {
         appDispatch({
             "type": "INITIAL_APP",
-            //"payload": JSON.parse(appLocalDecrypt!),
+            "payload": getAppState(),
         })
     }, []);
 
