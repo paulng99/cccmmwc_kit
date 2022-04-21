@@ -14,15 +14,15 @@ export default () => {
     const {appState, appDispatch} = useContext(AppContext);
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();
-        signInWithPopup(auth, googleProvider).then(result => {
-            appDispatch({
+        signInWithPopup(auth, googleProvider).then(async result => {
+            await appDispatch({
                 "type":"LOGIN",
                 "payload":result.user,
             })
             localStorage.setItem("appState",AES.encrypt(JSON.stringify(appState),getHashPasscode()).toString());
             navigate('/test')
         }).catch((e) => {
-            console.log(e);
+            console.log("error",e);
         });
     }
 

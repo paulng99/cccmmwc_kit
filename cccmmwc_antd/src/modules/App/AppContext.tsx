@@ -22,8 +22,6 @@ export const AppProvider: FC = ({ children }) => {
     useEffect(() => {
         let appLocalEncrypt = localStorage.getItem("appState");
         let appLocalDecrypt = enc.Utf8.stringify(AES.decrypt(appLocalEncrypt!, getHashPasscode()));
-        console.log(appLocalDecrypt);
-        // let state=JSON.parse(enc.Utf8.stringify(AES.decrypt(localStorage.getItem("appState")||"",getHashPasscode())));
         appLocalDecrypt && console.log(JSON.parse(appLocalDecrypt))
         appDispatch({
             "type": "INITIAL_APP",
