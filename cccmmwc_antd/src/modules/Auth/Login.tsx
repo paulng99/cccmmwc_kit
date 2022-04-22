@@ -1,9 +1,7 @@
 import { Button } from "antd";
-import { AES, enc } from "crypto-js";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { getHashPasscode } from "../../config/hashpasswcode";
 import { auth } from "../../services/firebase";
 import { AppContext } from "../App/AppContext";
 import './Login.css'
@@ -27,7 +25,6 @@ export default () => {
 
     return (
         <div id="login">
-            {/* {console.log(JSON.parse(enc.Utf8.stringify(AES.decrypt(localStorage.getItem("appState")||"",hashpasscode))))} */}
             <Button onClick={handleLogin}>Login</Button>
         </div>
     );

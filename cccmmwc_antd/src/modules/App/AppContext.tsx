@@ -3,7 +3,8 @@ import appReducer, { IAppAction } from "./appReducer";
 
 export const initialAppState = {
     userInfo: {},
-    loading: false
+    loading: false,
+    menu:{}
 }
 
 export const AppContext = createContext<{
