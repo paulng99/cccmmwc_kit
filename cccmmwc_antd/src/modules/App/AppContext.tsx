@@ -1,6 +1,5 @@
 import { createContext, FC, useEffect, useReducer } from "react";
 import appReducer, { IAppAction } from "./appReducer";
-import useAppState from "./hooks/useAppState";
 
 export const initialAppState = {
     userInfo: {},
@@ -17,13 +16,11 @@ export const AppContext = createContext<{
 
 export const AppProvider: FC = ({ children }) => {
 
-    const aState=useAppState();
-    
+   
     const [appState, appDispatch] = useReducer(appReducer, initialAppState)
     useEffect(() => {
         appDispatch({
             "type": "INITIAL_APP",
-            "payload": aState,
         })
     }, []);
 
