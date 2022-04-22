@@ -1,13 +1,22 @@
 import { AES, enc } from "crypto-js";
+import { useNavigate } from "react-router";
 import { getHashPasscode } from "../../../config/hashpasswcode";
 
 
 export default () => {
-    if (localStorage.getItem("appState")==null){
+
+    const navigate = useNavigate();
+
+    if (localStorage.getItem("appState") == null) {
         return null;
     }
     let appLocalEncrypt = localStorage.getItem("appState");
     let appLocalDecrypt = enc.Utf8.stringify(AES.decrypt(appLocalEncrypt!, getHashPasscode()));
-    appLocalDecrypt && console.log(JSON.parse(appLocalDecrypt))
-    return JSON.parse(appLocalDecrypt);
+    console.log(appLocalDecrypt);
+    if (appLocalDecrypt != "") {
+        return JSON.parse(appLocalDecrypt);
+    }
+    else {
+        navigate('/auth/logout');
+    }
 }

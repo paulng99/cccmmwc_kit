@@ -15,12 +15,13 @@ export default () => {
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();
         signInWithPopup(auth, googleProvider).then(async result => {
-            await appDispatch({
-                "type":"LOGIN",
-                "payload":result.user,
+            appDispatch({
+                "type": "LOGIN",
+                "payload": result.user,
             })
             localStorage.setItem("appState",AES.encrypt(JSON.stringify(appState),getHashPasscode()).toString());
-            navigate('/test')
+            console.log(AES.decrypt(localStorage.getItem("appState")||"",getHashPasscode(),enc.Utf8).toString())
+            //navigate('/test')
         }).catch((e) => {
             console.log("error",e);
         });
