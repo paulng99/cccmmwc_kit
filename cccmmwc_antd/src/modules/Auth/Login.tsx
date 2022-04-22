@@ -19,9 +19,7 @@ export default () => {
                 "type": "LOGIN",
                 "payload": result.user,
             })
-            localStorage.setItem("appState",AES.encrypt(JSON.stringify(appState),getHashPasscode()).toString());
-            console.log(AES.decrypt(localStorage.getItem("appState")||"",getHashPasscode(),enc.Utf8).toString())
-            //navigate('/test')
+            navigate('/test')
         }).catch((e) => {
             console.log("error",e);
         });
