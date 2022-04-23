@@ -2,7 +2,9 @@ import { createContext, FC, useEffect, useReducer } from "react";
 import appReducer, { IAppAction } from "./appReducer";
 
 export const initialAppState = {
-    userInfo: null,
+    userInfo: {
+        email:""
+    },
     loading: false,
     menu:{},
     groups:{}
