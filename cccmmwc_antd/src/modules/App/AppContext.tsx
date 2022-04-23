@@ -4,7 +4,8 @@ import appReducer, { IAppAction } from "./appReducer";
 export const initialAppState = {
     userInfo: null,
     loading: false,
-    menu:{}
+    menu:{},
+    groups:{}
 }
 
 export const AppContext = createContext<{

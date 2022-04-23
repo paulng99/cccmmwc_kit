@@ -16,7 +16,7 @@ export default ()=>{
                 "type":"LOGOUT",
             });
             console.log("logout.")
-            navigate("/login")
+            navigate("/auth/login")
         });
     },[]);
 

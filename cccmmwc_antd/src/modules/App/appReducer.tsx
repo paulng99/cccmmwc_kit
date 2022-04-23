@@ -14,15 +14,16 @@ export default (appState: any, appAction: IAppAction) => {
             return { ...appState, "loading": payload };
 
         case "INITIAL_APP":
+            //return getAppState(); 
+            console.log(getAppState())
             return getAppState();
-            //return {appState}
 
         case "LOGIN":
             encryptoStateToLocalStorage({ ...appState, "userInfo": payload });
             console.log({ ...appState, "userInfo": payload })
             return { ...appState, "userInfo": payload };
 
-        case "LOGOUT":
+        case "LOGOUT": 
             return null;
     }
 }
@@ -36,7 +37,7 @@ const getAppState = () => {
     if (localStorage.getItem("appState") != null) {
         let decryptoState = AES.decrypt(localStorage.getItem("appState")!, getHashPasscode()).toString(enc.Utf8);
         console.log(JSON.parse(decryptoState))
-        return JSON.parse(decryptoState).appState;
+        return JSON.parse(decryptoState);
     }else{
         return null;
     }
