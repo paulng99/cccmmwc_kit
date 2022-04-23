@@ -1,5 +1,6 @@
 import { AES, enc } from "crypto-js";
 import { getHashPasscode } from "../../config/hashpasswcode";
+import { initialAppState } from "./AppContext";
 
 export interface IAppAction {
     type: any;
@@ -15,7 +16,10 @@ export default (appState: any, appAction: IAppAction) => {
 
         case "INITIAL_APP":
             //return getAppState(); 
-            console.log(getAppState())
+            if (!getAppState()) {
+                encryptoStateToLocalStorage(initialAppState);
+                return (initialAppState);
+            }
             return getAppState();
 
         case "LOGIN":
@@ -23,12 +27,13 @@ export default (appState: any, appAction: IAppAction) => {
             console.log({ ...appState, "userInfo": payload })
             return { ...appState, "userInfo": payload };
 
-        case "LOGOUT": 
+        case "LOGOUT":
             return null;
     }
 }
 
 const encryptoStateToLocalStorage = async (state: any) => {
+    console.log(state)
     let encryptoState = AES.encrypt(JSON.stringify(state), getHashPasscode()).toString();
     localStorage.setItem("appState", encryptoState);
 }
@@ -38,7 +43,7 @@ const getAppState = () => {
         let decryptoState = AES.decrypt(localStorage.getItem("appState")!, getHashPasscode()).toString(enc.Utf8);
         console.log(JSON.parse(decryptoState))
         return JSON.parse(decryptoState);
-    }else{
+    } else {
         return null;
     }
 }
