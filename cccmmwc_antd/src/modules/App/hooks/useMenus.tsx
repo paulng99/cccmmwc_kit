@@ -20,8 +20,7 @@ export default () => {
 
 
     useEffect(() => {
-        //const email = appState.userInfo.email;
-        let email="";
+        const email = appState.userInfo.email;
         const menusAddQuery = query(collectionGroup(db, "functions"), where("access-add", "array-contains", email));
         getMenus(menusAddQuery);
 
