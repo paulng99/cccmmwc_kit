@@ -24,7 +24,6 @@ export default (appState: any, appAction: IAppAction) => {
 
         case "LOGIN":
             encryptoStateToLocalStorage({ ...appState, "userInfo": payload });
-            console.log({ ...appState, "userInfo": payload })
             return { ...appState, "userInfo": payload };
 
         case "LOGOUT":
