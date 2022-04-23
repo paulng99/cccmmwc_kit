@@ -9,7 +9,6 @@ export const Test = () => {
     const menus = useMenus();
 
     useEffect(() => {
-        console.log(appState.userInfo.email)
         setData(menus);
     }, [appState]);
 
