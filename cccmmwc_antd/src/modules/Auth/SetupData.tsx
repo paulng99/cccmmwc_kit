@@ -20,7 +20,7 @@ export const setupFunctions = [
         "isMenu":true,
         "name_en": "Login",
         "name_zh": "登入",
-        "menus": {
+        "menu": {
             "name_en": "User Login",
             "name_zh": "用戶登入",
             "link": "/auth/login",
@@ -38,7 +38,7 @@ export const setupFunctions = [
         "isMenu":true,
         "name_en": "Logout",
         "name_zh": "登出",
-        "menus": {
+        "menu": {
             "name_en": "User Logout",
             "name_zh": "用戶登出",
             "link": "/auth/logout",

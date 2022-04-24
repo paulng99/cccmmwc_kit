@@ -5,7 +5,7 @@ import { db } from "../../../services/firebase";
 import { AppContext } from "../AppContext";
 
 export default () => {
-    const [menus, setMenus] = useState<any>();
+    const [menus, setMenus] = useState<any>([]);
     const { appState, appDispatch } = useContext(AppContext)
     let m: any = []
     const getMenus = async (query: any) => {
@@ -14,13 +14,13 @@ export default () => {
                 m.push(q.data())
             })
         }).then(() => {
-            m=_.uniq(m, x => x.id)
-            setMenus(m) 
+            m = _.uniq(m, x => x.id)
+            setMenus(m)
         })
     };
 
     useEffect(() => {
-        const email = appState.userInfo.email||"";
+        const email = appState.userInfo.email || "";
         if (email) {
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains", email));
             getMenus(menusAddQuery);
@@ -36,6 +36,6 @@ export default () => {
         }
 
     }, [appState]);
-
+    localStorage.setItem("menus", JSON.stringify(menus))
     return menus;
 }

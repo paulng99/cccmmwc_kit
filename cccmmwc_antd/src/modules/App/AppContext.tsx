@@ -1,5 +1,6 @@
 import { createContext, FC, useEffect, useReducer } from "react";
 import appReducer, { IAppAction } from "./appReducer";
+import useMenus from "./hooks/useMenus";
 
 export const initialAppState = {
     userInfo: {
@@ -19,7 +20,7 @@ export const AppContext = createContext<{
 });
 
 export const AppProvider: FC = ({ children }) => {
-
+    const menus=useMenus();
    
     const [appState, appDispatch] = useReducer(appReducer, initialAppState)
     useEffect(() => {

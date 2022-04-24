@@ -1,55 +1,37 @@
-import { collectionGroup, DocumentData, getDocs, waitForPendingWrites } from "firebase/firestore";
-import { useEffect, useState } from "react"
-import { db } from "../../services/firebase";
-import { ApiOutlined, IeOutlined, MailOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from "react"
 import { Menu } from "antd";
+import useMenus from "../../modules/App/hooks/useMenus";
+import { ItemType } from "antd/lib/menu/hooks/useItems";
+import {UserOutlined} from "@ant-design/icons"
 
 
 export default () => {
-    const [menuData, setMenuData] = useState<DocumentData[]>();
+    const menus: [] = useMenus();
+    const [menuData, setMenuData] = useState<ItemType[]>();
+    let m:any[]= [];
 
-    useEffect(
-        () => {
-            const dataArray: DocumentData[] = [];
-            const menuQuery = collectionGroup(db, "menus");
-            getDocs(menuQuery).then(d => {
-                d.forEach(dd => {
-                    dataArray.push(dd.data());
-                })
-                setMenuData(dataArray);
+    useEffect(() => {
+        let menuLocal=JSON.parse(localStorage.getItem("menus")!)
+        menuLocal.forEach((ml:any) => {
+            m.push({
+                "key":Math.random()*100,
+                "label":ml.name_en,
+                "link":ml.menu.link,
+                "icon":React.createElement(ml.icon||UserOutlined),
+                "children":[{
+                    "label":ml.menu.name_en,
+                    "key":Math.random()*100,
+                }],
             })
-        }, []);
+        });
+        setMenuData(m)
+    }, [menus]);
+
+    
 
     return (
-        <>  
-            <Menu>
-                {menuData?.map(menu =>
-                    <>
-                        <Menu.Item icon={null} key={menu.menu_id} itemIcon={<ApiOutlined />}>{menu.menu_id}</Menu.Item>
-                    </>
-                )}
-
-                {/* <Menu mode="inline">
-            <Menu.SubMenu title="Navigation 1" icon={<MailOutlined />}>
-                <Menu.Item icon={null}>Item 1</Menu.Item>
-                <Menu.Item>Item 1</Menu.Item>
-                <Menu.Item>Item 1</Menu.Item>
-                <Menu.Item>Item 1</Menu.Item>
-            </Menu.SubMenu>
-            <Menu.SubMenu title="Navigation 2" icon={<IeOutlined />}>
-                <Menu.Item>Item 2</Menu.Item>
-                <Menu.Item>Item 2</Menu.Item>
-                <Menu.Item>Item 2</Menu.Item>
-                <Menu.Item>Item 2</Menu.Item>
-            </Menu.SubMenu>
-            <Menu.SubMenu title="Navigation 3" icon={<ApiOutlined />}>
-                <Menu.Item>Item 3</Menu.Item>
-                <Menu.Item>Item 3</Menu.Item>
-                <Menu.Item>Item 3</Menu.Item>
-                <Menu.Item>Item 3</Menu.Item>
-            </Menu.SubMenu>
-        </Menu> */}
-            </Menu>
+        <>
+            <Menu items={menuData} mode="inline" />
         </>
     )
 }

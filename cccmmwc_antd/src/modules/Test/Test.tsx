@@ -9,8 +9,8 @@ export const Test = () => {
     const menus = useMenus();
 
     useEffect(() => {
-        setData(menus);
-    }, [appState]);
+        setData(appState);
+    }, [appState, menus]);
 
     return (
         <Dashboard>
