@@ -11,25 +11,16 @@ export default () => {
     const getMenus = async (query: any) => {
         await getDocs(query).then(d => {
             d.docs.forEach((q) => {
-                let qd: any = q.data();
-                for (let i = 0; i < m.length; i++) {
-                    if (m[i].id != qd.id) {
-                        m.push(q.data())
-                    }
-                }
-
-                if (m.length==0){
-                    m.push(q.data());
-                }
+                m.push(q.data())
             })
         }).then(() => {
-            console.log("m: ", m);
-            setMenus(m)
+            m=_.uniq(m, x => x.id)
+            setMenus(m) 
         })
     };
 
     useEffect(() => {
-        const email = appState.userInfo.email;
+        const email = appState.userInfo.email||"";
         if (email) {
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains", email));
             getMenus(menusAddQuery);
@@ -45,6 +36,6 @@ export default () => {
         }
 
     }, [appState]);
-    console.log("menu: ", menus)
+
     return menus;
 }
