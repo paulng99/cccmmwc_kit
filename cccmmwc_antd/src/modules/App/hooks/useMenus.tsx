@@ -5,27 +5,31 @@ import { db } from "../../../services/firebase";
 import { AppContext } from "../AppContext";
 
 export default () => {
-    const [menus, setMenus] = useState({});
+    const [menus, setMenus] = useState<any>();
     const { appState, appDispatch } = useContext(AppContext)
-
-    const getMenus = (query: any) => {
-        console.log(query)
-        let m: _.List<any> = [];
-        getDocs(query).then(d => {
-            console.log(d.docs)
+    let m: any = []
+    const getMenus = async (query: any) => {
+        await getDocs(query).then(d => {
             d.docs.forEach((q) => {
-                console.log(q.data())
-                m = _.union(m, [q.data()]);
-            })
-            console.log(m)
-            setMenus(m)
-        });
-    };
+                let qd: any = q.data();
+                for (let i = 0; i < m.length; i++) {
+                    if (m[i].id != qd.id) {
+                        m.push(q.data())
+                    }
+                }
 
+                if (m.length==0){
+                    m.push(q.data());
+                }
+            })
+        }).then(() => {
+            console.log("m: ", m);
+            setMenus(m)
+        })
+    };
 
     useEffect(() => {
         const email = appState.userInfo.email;
-        console.log(email)
         if (email) {
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains", email));
             getMenus(menusAddQuery);
@@ -41,7 +45,6 @@ export default () => {
         }
 
     }, [appState]);
-
-    console.log(menus)
+    console.log("menu: ", menus)
     return menus;
 }

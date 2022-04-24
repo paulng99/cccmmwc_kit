@@ -32,7 +32,6 @@ export default (appState: any, appAction: IAppAction) => {
 }
 
 const encryptoStateToLocalStorage = async (state: any) => {
-    console.log(state)
     let encryptoState = AES.encrypt(JSON.stringify(state), getHashPasscode()).toString();
     localStorage.setItem("appState", encryptoState);
 }
@@ -40,7 +39,6 @@ const encryptoStateToLocalStorage = async (state: any) => {
 const getAppState = () => {
     if (localStorage.getItem("appState") != null) {
         let decryptoState = AES.decrypt(localStorage.getItem("appState")!, getHashPasscode()).toString(enc.Utf8);
-        console.log(JSON.parse(decryptoState))
         return JSON.parse(decryptoState);
     } else {
         return null;
