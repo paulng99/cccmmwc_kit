@@ -15,6 +15,7 @@ export default () => {
             })
         }).then(() => {
             m = _.uniq(m, x => x.id)
+            console.log(m)
             setMenus(m)
         })
     };
@@ -36,6 +37,8 @@ export default () => {
         }
 
     }, [appState]);
+    
+    console.log(_.groupBy(menus, x=>x.module_id))
     localStorage.setItem("menus", JSON.stringify(menus))
     return menus;
 }
