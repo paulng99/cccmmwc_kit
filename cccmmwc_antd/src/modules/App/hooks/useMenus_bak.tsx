@@ -8,7 +8,6 @@ export default () => {
     const [menus, setMenus] = useState<any>([]);
     const { appState, appDispatch } = useContext(AppContext)
     let m: any = []
-    let om={};
     const getMenus = async (query: any) => {
         await getDocs(query).then(d => {
             d.docs.forEach((q) => {
@@ -16,8 +15,7 @@ export default () => {
             })
         }).then(() => {
             m = _.uniq(m, x => x.id)
-            om=_.groupBy(m,x=>x.module_id)
-            console.log(om)
+            console.log(m)
             setMenus(m)
         })
     };
@@ -40,6 +38,7 @@ export default () => {
 
     }, [appState]);
     
-        localStorage.setItem("menus", JSON.stringify(menus))
+    console.log(_.groupBy(menus, x=>x.module_id))
+    localStorage.setItem("menus", JSON.stringify(menus))
     return menus;
 }
