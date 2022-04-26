@@ -1,4 +1,4 @@
-import { collectionGroup, getDocs, query, where } from "firebase/firestore";
+import { collectionGroup, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
@@ -8,7 +8,8 @@ export default () => {
     const [menus, setMenus] = useState<any>([]);
     const { appState, appDispatch } = useContext(AppContext)
     let m: any = []
-    let om={};
+    let om = {};
+    let arrMenuWithChildren: { id: string; label: any, children: unknown; }[] = [];
     const getMenus = async (query: any) => {
         await getDocs(query).then(d => {
             d.docs.forEach((q) => {
@@ -16,8 +17,18 @@ export default () => {
             })
         }).then(() => {
             m = _.uniq(m, x => x.id)
-            om=_.groupBy(m,x=>x.module_id)
-            console.log(om)
+            om = _.groupBy(m, x => x.module_id)
+            for (const [key, value] of Object.entries(om)) {
+                getDoc(doc(db, "module", key)).then(d => {
+                    let dd = d.data();
+                    arrMenuWithChildren.push({
+                        "id": key,
+                        "label": dd,
+                        "children": value
+                    })
+                })
+                console.log(arrMenuWithChildren)
+            }
             setMenus(m)
         })
     };
@@ -37,9 +48,8 @@ export default () => {
             const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains", email));
             getMenus(menusViewQuery);
         }
-
     }, [appState]);
-    
-        localStorage.setItem("menus", JSON.stringify(menus))
+
+    localStorage.setItem("menus", JSON.stringify(menus))
     return menus;
 }

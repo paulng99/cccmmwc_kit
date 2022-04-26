@@ -1,4 +1,4 @@
-import { doc, FieldValue } from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import { db } from "../../services/firebase";
 
 export const setupModule = {
