@@ -4,13 +4,15 @@ import _ from "underscore";
 import { db } from "../../../services/firebase";
 
 const useCheckAccess = (email: any = "") => {
-
+    if (!localStorage.getItem("menu")){
+        return false;
+    }
 }
 
 const useGetAccess = (email: any = "") => {
-    const [menus, setMenus] = useState<any>([]);
+    const [access, setAccess] = useState<any>([]);
     let m: any = []
-    const getMenus = async (query: any) => {
+    const getAccess = async (query: any) => {
         await getDocs(query).then(d => {
             d.docs.forEach((q) => {
                 m.push(q.data())
@@ -18,26 +20,26 @@ const useGetAccess = (email: any = "") => {
         }).then(() => {
             m = _.uniq(m, x => x.id)
             console.log(m)
-            setMenus(m)
+            setAccess(m)
         })
     };
     useEffect(() => {
         if (email) {
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains", email));
-            getMenus(menusAddQuery);
+            getAccess(menusAddQuery);
 
             const menusEditQuery = query(collectionGroup(db, "functions"), where("access.edit", "array-contains", email));
-            getMenus(menusEditQuery);
+            getAccess(menusEditQuery);
 
             const menusDeleteQuery = query(collectionGroup(db, "functions"), where("access.delete", "array-contains", email));
-            getMenus(menusDeleteQuery);
+            getAccess(menusDeleteQuery);
 
             const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains", email));
-            getMenus(menusViewQuery);
+            getAccess(menusViewQuery);
         }
     }, [email]);
-    localStorage.setItem("menus", JSON.stringify(menus))
-    return menus;
+    localStorage.setItem("access", JSON.stringify(access))
+    return access;
 }
 
 export { useCheckAccess, useGetAccess }
