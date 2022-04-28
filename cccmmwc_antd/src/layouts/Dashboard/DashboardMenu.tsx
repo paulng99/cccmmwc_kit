@@ -8,21 +8,21 @@ import { Link } from "react-router-dom";
 
 export default () => {
     const menus: [] = useMenus();
-    const [menuData, setMenuData] = useState<ItemType[]>();
+    const [menuData, setMenuData] = useState<ItemType[]>(menus);
     let m: any[] = [];
-
+console.log(menus)
     useEffect(() => {
         //let menuLocal = JSON.parse(localStorage.getItem("menus")!)||[]
-        let menuLocal = menus||[]
-/*         menuLocal.forEach((ml: any) => {
-            m.push({
-                "key": Math.random() * 100,
-                //"label":<Link to="">{ml.name_zh}</Link>,
-                "label": React.createElement(Link,{"to":ml.link},ml.label),
-                "icon": React.createElement(ml.icon || UserOutlined),
-                "children": ml.children,
-            })
-        }); */
+        let menuLocal = menus || []
+        /*         menuLocal.forEach((ml: any) => {
+                    m.push({
+                        "key": Math.random() * 100,
+                        //"label":<Link to="">{ml.name_zh}</Link>,
+                        "label": React.createElement(Link,{"to":ml.link},ml.label),
+                        "icon": React.createElement(ml.icon || UserOutlined),
+                        "children": ml.children,
+                    })
+                }); */
         setMenuData(menus)
     }, [menus]);
 
