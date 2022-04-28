@@ -7,15 +7,13 @@ import { useGetAccess } from "./useAccess";
 
 export default () => {
     const { appState, appDispatch } = useContext(AppContext);
-    const [menus, setMenus] = useState<any>([]);
-    const [tempMenus, setTempMenus] = useState({});
+    const [menus, setMenus] = useState<any>();
     const access = useGetAccess(appState.userInfo.email);
+    let m: { label: any; link: any; children: unknown; }[] = [];
+    let tempMenus = _.groupBy(access, x => x.module_id);
 
-
-    const convertToMenus = () => {
-        let m: { label: any; link: any; children: unknown; }[] = [];
+    useEffect(() => {
         for (const [key, values] of Object.entries(tempMenus)) {
-            console.log(tempMenus)
             getDoc(doc(db, 'modules', key)).then(o => {
                 let d: any = o.data();
                 m.push({
@@ -23,16 +21,15 @@ export default () => {
                     "link": d.menus.link,
                     "children": values
                 })
-                console.log(m)
-            }) 
+            }).then(()=>{
+                setMenus(m)
+            })
         }
-        setMenus(m)
-    }
+    }, [access])
 
     useEffect(() => {
-        setTempMenus(_.groupBy(access, x => x.module_id))
-        convertToMenus();
-    }, [access])
-    console.log(menus)
+        localStorage.setItem("menus", JSON.stringify(menus))
+    }, [menus]) 
+
     return menus;
 }
