@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import _q from "underscore";
+import _ from "underscore";
 import { db } from "../../../services/firebase";
 import { AppContext } from "../AppContext";
 import { useGetAccess } from "./useAccess";
@@ -24,7 +24,7 @@ export default () => {
                     "children": values
                 })
                 console.log(m)
-            })
+            }) 
         }
         setMenus(m)
     }

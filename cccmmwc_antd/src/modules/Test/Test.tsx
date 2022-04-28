@@ -7,6 +7,7 @@ export const Test = () => {
     const [data, setData] = useState({});
 
     useEffect(() => {
+        setData(appState)
     }, [appState]);
 
     return (

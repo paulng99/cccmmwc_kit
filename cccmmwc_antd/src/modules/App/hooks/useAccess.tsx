@@ -19,7 +19,6 @@ const useGetAccess = (email: any = "") => {
             })
         }).then(() => {
             m = _.uniq(m, x => x.id)
-            console.log(m)
             setAccess(m)
         })
     };

@@ -12,17 +12,15 @@ export default () => {
     let m: any[] = [];
 
     useEffect(() => {
-        let menuLocal = JSON.parse(localStorage.getItem("menus")!)
+        //let menuLocal = JSON.parse(localStorage.getItem("menus")!)||[]
+        let menuLocal = menus||[]
         menuLocal.forEach((ml: any) => {
             m.push({
                 "key": Math.random() * 100,
                 //"label":<Link to="">{ml.name_zh}</Link>,
-                "label": React.createElement(Link,{"to":ml.menu.link},ml.name_en),
+                "label": React.createElement(Link,{"to":ml.link},ml.label),
                 "icon": React.createElement(ml.icon || UserOutlined),
-                "children": [{
-                    "label": ml.menu.name_en,
-                    "key": Math.random() * 100,
-                }],
+                "children": ml.children,
             })
         });
         setMenuData(m)
