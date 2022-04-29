@@ -3,6 +3,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { auth } from "../../services/firebase";
+import { encryptData } from "../../utils/encrypto";
 import { AppContext } from "../App/AppContext";
 import './Login.css'
 
@@ -13,10 +14,7 @@ export default () => {
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();
         signInWithPopup(auth, googleProvider).then(async result => {
-            appDispatch({
-                "type": "LOGIN",
-                "payload": result.user,
-            })
+            localStorage.setItem("userInfo", encryptData(result.user))
             navigate('/test')
         }).catch((e) => {
             console.log("error",e);

@@ -21,13 +21,6 @@ export default (appState: any, appAction: IAppAction) => {
                 return (initialAppState);
             }
             return getAppState();
-
-        case "LOGIN":
-            encryptoStateToLocalStorage({ ...appState, "userInfo": payload });
-            return { ...appState, "userInfo": payload };
-
-        case "LOGOUT":
-            return null;
     }
 }
 

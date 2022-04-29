@@ -2,6 +2,7 @@ import { collectionGroup, getDocs, query, where } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
+import { decryptDataToString } from "../../../utils/encrypto";
 import { AppContext } from "../AppContext";
 
 export default () => {
@@ -21,7 +22,8 @@ export default () => {
     };
 
     useEffect(() => {
-        const email = appState.userInfo.email || "";
+        //const email = appState.userInfo.email || "";
+        const email = JSON.parse(decryptDataToString(localStorage.getItem("userInfo")))||""
         if (email) {
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains", email));
             getMenus(menusAddQuery);

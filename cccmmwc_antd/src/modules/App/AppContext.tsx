@@ -3,12 +3,7 @@ import appReducer, { IAppAction } from "./appReducer";
 import useMenus from "./hooks/useMenus";
 
 export const initialAppState = {
-    userInfo: {
-        email:""
-    },
     loading: false,
-    menu:{},
-    groups:{}
 }
 
 export const AppContext = createContext<{
@@ -20,8 +15,6 @@ export const AppContext = createContext<{
 });
 
 export const AppProvider: FC = ({ children }) => {
-    const menus=useMenus();
-   
     const [appState, appDispatch] = useReducer(appReducer, initialAppState)
     useEffect(() => {
         appDispatch({

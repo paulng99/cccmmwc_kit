@@ -25,13 +25,6 @@ export default () => {
                         "children": ml.children,
                     })
                 }); */
-
-                menus.forEach(m=>{
-                    
-                })
-
-
-
         setMenuData(menus)
     }, [menus]);
 

@@ -4,21 +4,17 @@ import { useNavigate } from "react-router";
 import { auth } from "../../services/firebase";
 import { AppContext } from "../App/AppContext";
 
-export default ()=>{
+export default () => {
 
     const navigate = useNavigate();
-    const {appState, appDispatch}=useContext(AppContext);
 
-    useEffect(()=>{
-        signOut(auth).then(()=>{
+    useEffect(() => {
+        signOut(auth).then(() => {
             localStorage.clear();
-            appDispatch({
-                "type":"LOGOUT",
-            });
             console.log("logout.")
             navigate("/auth/login")
         });
-    },[]);
+    }, []);
 
 
     return (

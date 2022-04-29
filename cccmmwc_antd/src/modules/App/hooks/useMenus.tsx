@@ -2,13 +2,15 @@ import { doc, getDoc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
+import { decryptDataToString } from "../../../utils/encrypto";
 import { AppContext } from "../AppContext";
 import { useGetAccess } from "./useAccess";
 
 export default () => {
     const { appState, appDispatch } = useContext(AppContext);
     const [menus, setMenus] = useState<any>();
-    const access = useGetAccess(appState.userInfo.email);
+    const email = JSON.parse(decryptDataToString(localStorage.getItem("userInfo")))||""
+    const access = useGetAccess(email);
     let m: { label: any; link: any; children: unknown; }[] = [];
     let tempMenus = _.groupBy(access, x => x.module_id);
 

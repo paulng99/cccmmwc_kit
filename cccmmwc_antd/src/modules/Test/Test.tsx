@@ -5,7 +5,7 @@ import { AppContext } from "../App/AppContext";
 export const Test = () => {
     const { appState, appDispatch } = useContext(AppContext)
     const [data, setData] = useState({});
-
+console.log(appState)
     useEffect(() => {
         setData(appState)
     }, [appState]);

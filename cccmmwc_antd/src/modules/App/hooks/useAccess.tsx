@@ -12,6 +12,7 @@ const useCheckAccess = (email: any = "") => {
 const useGetAccess = (email: any = "") => {
     const [access, setAccess] = useState<any>([]);
     let m: any = []
+    
     const getAccess = async (query: any) => {
         await getDocs(query).then(d => {
             d.docs.forEach((q) => {
@@ -22,6 +23,7 @@ const useGetAccess = (email: any = "") => {
             setAccess(m)
         })
     };
+
     useEffect(() => {
         if (email) {
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains", email));
@@ -37,7 +39,10 @@ const useGetAccess = (email: any = "") => {
             getAccess(menusViewQuery);
         }
     }, [email]);
-    localStorage.setItem("access", JSON.stringify(access))
+
+    useEffect(()=>{
+        localStorage.setItem("access", JSON.stringify(access))
+    },[access]);
     return access;
 }
 
