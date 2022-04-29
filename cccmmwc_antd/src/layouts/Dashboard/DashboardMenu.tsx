@@ -32,7 +32,7 @@ export default () => {
         let item: Iitem = {
             "key": Math.random() * 100,
             "label": React.createElement(Link, { "to": data.menu.link }, data.menu.name_en),
-            "icon": React.createElement(data.menu.icon2 || UserOutlined, ""),
+            "icon": React.createElement(data.menu.icon || UserOutlined),
             "children": subItem
         };
         return item;
