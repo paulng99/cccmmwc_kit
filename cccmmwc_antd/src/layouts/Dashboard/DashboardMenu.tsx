@@ -32,14 +32,13 @@ export default () => {
         let item: Iitem = {
             "key": Math.random() * 100,
             "label": React.createElement(Link, { "to": data.menu.link }, data.menu.name_en),
-            "icon": React.createElement(data.menu.icon || UserOutlined,""),
+            "icon": React.createElement(data.menu.icon2 || UserOutlined, ""),
             "children": subItem
         };
         return item;
     }
 
     useEffect(() => {
-        //let menuLocal = JSON.parse(localStorage.getItem("menus")!)||[]
         let menuLocal = menus || []
         menuLocal.forEach((ml: any) => {
             m.push(
