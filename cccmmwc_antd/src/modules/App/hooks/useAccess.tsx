@@ -26,7 +26,8 @@ const useGetAccess = (email: any = "") => {
     };
 
     useEffect(() => {
-        if (email) {
+        const lsAccess = localStorage.getItem("access")||null;
+        if (email && !lsAccess) {
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains", email));
             getAccess(menusAddQuery);
 
@@ -38,13 +39,14 @@ const useGetAccess = (email: any = "") => {
 
             const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains", email));
             getAccess(menusViewQuery);
-
+        }
+        if (lsAccess){
+            setAccess(JSON.parse(decryptDataToString(lsAccess)));
         }
     }, [email]);
 
     useEffect(() => {
         let enAccess=encryptData(access)
-        //localStorage.setItem("access", JSON.stringify(access))
         localStorage.setItem("access", enAccess)
     }, [access]);
     return access;

@@ -1,14 +1,13 @@
 import { doc, getDoc } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
 import { decryptDataToString } from "../../../utils/encrypto";
-import { AppContext } from "../AppContext";
 import { useGetAccess } from "./useAccess";
 
 export default () => {
     const [menus, setMenus] = useState<any>();
-    const userInfo = JSON.parse(decryptDataToString(localStorage.getItem("userInfo")))||""
+    const userInfo = JSON.parse(decryptDataToString(localStorage.getItem("userInfo"))) || ""
     const email = userInfo.email
     const access = useGetAccess(email);
     let m: { label: any; link: any; children: unknown; }[] = [];
@@ -22,7 +21,7 @@ export default () => {
                     ...d,
                     "children": values
                 })
-            }).then(()=>{
+            }).then(() => {
                 setMenus(m)
             })
         }
@@ -30,7 +29,7 @@ export default () => {
 
     useEffect(() => {
         localStorage.setItem("menus", JSON.stringify(menus))
-    }, [menus]) 
+    }, [menus])
 
     return menus;
 }
