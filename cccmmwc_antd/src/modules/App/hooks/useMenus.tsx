@@ -17,8 +17,7 @@ export default () => {
             getDoc(doc(db, 'modules', key)).then(o => {
                 let d: any = o.data();
                 m.push({
-                    "label": d.menus.name_en,
-                    "link": d.menus.link,
+                    ...d,
                     "children": values
                 })
             }).then(()=>{

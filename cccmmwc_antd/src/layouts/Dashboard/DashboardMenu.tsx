@@ -7,14 +7,16 @@ import { Link } from "react-router-dom";
 
 
 export default () => {
-    const menus: [] = useMenus();
+    //const menus: [] = useMenus();
+    const menus: [] = JSON.parse(localStorage.getItem("menus")!) || [];
     const [menuData, setMenuData] = useState<ItemType[]>(menus);
     let m: any[] = [];
-console.log(menus)
+    console.log(menus)
+
     useEffect(() => {
-        //let menuLocal = JSON.parse(localStorage.getItem("menus")!)||[]
-        let menuLocal = menus || []
-        /*         menuLocal.forEach((ml: any) => {
+        /*let menuLocal = JSON.parse(localStorage.getItem("menus")!)||[]
+         let menuLocal = menus || []
+                menuLocal.forEach((ml: any) => {
                     m.push({
                         "key": Math.random() * 100,
                         //"label":<Link to="">{ml.name_zh}</Link>,
@@ -23,6 +25,13 @@ console.log(menus)
                         "children": ml.children,
                     })
                 }); */
+
+                menus.forEach(m=>{
+                    
+                })
+
+
+
         setMenuData(menus)
     }, [menus]);
 
