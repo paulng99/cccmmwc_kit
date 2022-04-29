@@ -3,7 +3,7 @@ import { Button, Table, TableColumnsType } from "antd";
 import { doc, writeBatch } from "firebase/firestore";
 import { MouseEvent, useState } from "react";
 import { db } from "../../services/firebase";
-import { setupActions, setupFunctions, setupModule } from "./SetupData";
+import { setupFunctions, setupModule } from "./SetupData";
 
 
 export const AuthSetup = () => {
@@ -40,16 +40,10 @@ export const AuthSetup = () => {
         const moduleRef = doc(db, "modules", setupModule.id);
         batch.set(moduleRef, setupModule);
 
-        setupFunctions.forEach((f)=>{
+        setupFunctions.forEach((f) => {
             let functionRef = doc(db, "modules", setupModule.id, "functions", f.id);
             batch.set(functionRef, f);
         })
-
-        
-/*         setupActions.forEach((a)=>{
-            let functionRef = doc(db, "modules", setupModule.id, "functions", a.functionId ,"actions",a.id);
-            batch.set(functionRef, a);
-        }) */
 
         await batch.commit();
 

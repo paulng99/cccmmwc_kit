@@ -1,7 +1,3 @@
-import { AES, enc } from "crypto-js";
-import { getHashPasscode } from "../../config/hashpasswcode";
-import { initialAppState } from "./AppContext";
-
 export interface IAppAction {
     type: any;
     payload?: any;
