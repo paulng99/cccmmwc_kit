@@ -1,8 +1,7 @@
 import { signOut } from "firebase/auth";
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 import { useNavigate } from "react-router";
 import { auth } from "../../services/firebase";
-import { AppContext } from "../App/AppContext";
 
 export default () => {
 

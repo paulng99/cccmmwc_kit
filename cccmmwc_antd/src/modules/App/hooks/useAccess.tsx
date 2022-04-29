@@ -4,9 +4,11 @@ import _ from "underscore";
 import { db } from "../../../services/firebase";
 import { encryptData, decryptDataToString} from '../../../utils/encrypto'
 
-const useCheckAccess = (email: any = "") => {
-    if (!localStorage.getItem("menu")) {
+const useCheckAccess = (action:any) => {
+    if (!localStorage.getItem("access")) {
         return false;
+    }else{
+        let lsAccess=JSON.parse(decryptDataToString(localStorage.getItem("access")))
     }
 }
 
