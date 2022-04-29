@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useState } from "react"
 import { Menu } from "antd";
 import useMenus from "../../modules/App/hooks/useMenus";
 import { ItemType } from "antd/lib/menu/hooks/useItems";
-import { UserOutlined } from "@ant-design/icons"
+import { UserOutlined, CopyOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom";
 
 
@@ -19,11 +19,11 @@ export default () => {
     }
 
     const createItem = (data: any) => {
-        let subItem:Iitem[] = [];
+        let subItem: Iitem[] = [];
         if (data.children.length > 0) {
             data.children.forEach((d: any) => {
                 subItem.push({
-                    "key": Math.random()*100,
+                    "key": Math.random() * 100,
                     "label": React.createElement(Link, { "to": d.menu.link }, d.menu.name_en),
                 })
             });
@@ -32,7 +32,7 @@ export default () => {
         let item: Iitem = {
             "key": Math.random() * 100,
             "label": React.createElement(Link, { "to": data.menu.link }, data.menu.name_en),
-            "icon": React.createElement(data.menu.icon || UserOutlined),
+            "icon": React.createElement(data.menu.icon || UserOutlined,""),
             "children": subItem
         };
         return item;

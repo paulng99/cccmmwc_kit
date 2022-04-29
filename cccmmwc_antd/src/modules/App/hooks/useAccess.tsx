@@ -2,9 +2,10 @@ import { collectionGroup, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
+import { encryptData, decryptDataToString} from '../../../utils/encrypto'
 
 const useCheckAccess = (email: any = "") => {
-    if (!localStorage.getItem("menu")){
+    if (!localStorage.getItem("menu")) {
         return false;
     }
 }
@@ -12,7 +13,7 @@ const useCheckAccess = (email: any = "") => {
 const useGetAccess = (email: any = "") => {
     const [access, setAccess] = useState<any>([]);
     let m: any = []
-    
+
     const getAccess = async (query: any) => {
         await getDocs(query).then(d => {
             d.docs.forEach((q) => {
@@ -37,13 +38,15 @@ const useGetAccess = (email: any = "") => {
 
             const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains", email));
             getAccess(menusViewQuery);
-            
+
         }
     }, [email]);
 
-    useEffect(()=>{
-        localStorage.setItem("access", JSON.stringify(access))
-    },[access]);
+    useEffect(() => {
+        let enAccess=encryptData(access)
+        //localStorage.setItem("access", JSON.stringify(access))
+        localStorage.setItem("access", enAccess)
+    }, [access]);
     return access;
 }
 
