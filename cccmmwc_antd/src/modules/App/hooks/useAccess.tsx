@@ -37,6 +37,7 @@ const useGetAccess = (email: any = "") => {
 
             const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains", email));
             getAccess(menusViewQuery);
+            
         }
     }, [email]);
 

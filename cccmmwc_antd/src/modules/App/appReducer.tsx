@@ -13,28 +13,7 @@ export default (appState: any, appAction: IAppAction) => {
     switch (type) {
         case "LOADING":
             return { ...appState, "loading": payload };
-
-        case "INITIAL_APP":
-            //return getAppState(); 
-            if (!getAppState()) {
-                encryptoStateToLocalStorage(initialAppState);
-                return (initialAppState);
-            }
-            return getAppState();
     }
 }
 
-const encryptoStateToLocalStorage = async (state: any) => {
-    let encryptoState = AES.encrypt(JSON.stringify(state), getHashPasscode()).toString();
-    localStorage.setItem("appState", encryptoState);
-}
-
-const getAppState = () => {
-    if (localStorage.getItem("appState") != null) {
-        let decryptoState = AES.decrypt(localStorage.getItem("appState")!, getHashPasscode()).toString(enc.Utf8);
-        return JSON.parse(decryptoState);
-    } else {
-        return null;
-    }
-}
 

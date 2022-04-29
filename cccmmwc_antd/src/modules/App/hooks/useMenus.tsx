@@ -7,9 +7,9 @@ import { AppContext } from "../AppContext";
 import { useGetAccess } from "./useAccess";
 
 export default () => {
-    const { appState, appDispatch } = useContext(AppContext);
     const [menus, setMenus] = useState<any>();
-    const email = JSON.parse(decryptDataToString(localStorage.getItem("userInfo")))||""
+    const userInfo = JSON.parse(decryptDataToString(localStorage.getItem("userInfo")))||""
+    const email = userInfo.email
     const access = useGetAccess(email);
     let m: { label: any; link: any; children: unknown; }[] = [];
     let tempMenus = _.groupBy(access, x => x.module_id);

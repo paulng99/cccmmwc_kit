@@ -7,7 +7,7 @@ export const setupModule = {
     "name_zh": "用戶模組",
     "description_zh": "與用戶有關的系統",
     "description_en": "User setting functions",
-    "menus": {
+    "menu": {
         "name_en": "User",
         "name_zh": "用戶",
         "link": "/auth",
