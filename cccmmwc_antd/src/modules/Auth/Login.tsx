@@ -9,15 +9,27 @@ import './Login.css'
 
 
 export default () => {
-    const navigate=useNavigate();
-    const {appState, appDispatch} = useContext(AppContext);
+    const navigate = useNavigate();
+    const { appState, appDispatch } = useContext(AppContext);
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();
+        appDispatch({
+            "type": "LOADING",
+            "payload": true,
+        })
         signInWithPopup(auth, googleProvider).then(async result => {
             localStorage.setItem("userInfo", encryptData(result.user))
+            appDispatch({
+                "type": "LOADING",
+                "payload": false,
+            })
             navigate('/test')
         }).catch((e) => {
-            console.log("error",e);
+            appDispatch({
+                "type":"LOADING",
+                "payload":false
+            })
+            console.log("error", e);
         });
     }
 

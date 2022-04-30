@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import { createContext, FC, useEffect, useReducer } from "react";
 import appReducer, { IAppAction } from "./appReducer";
 import useMenus from "./hooks/useMenus";
@@ -18,7 +19,9 @@ export const AppProvider: FC = ({ children }) => {
     const [appState, appDispatch] = useReducer(appReducer, initialAppState)
     return (
         <AppContext.Provider value={{ appState, appDispatch }}>
-            {children}
+            <Spin spinning={appState.loading}>
+                {children}
+            </Spin>
         </AppContext.Provider>
     );
 } 
