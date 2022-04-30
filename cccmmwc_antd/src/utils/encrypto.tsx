@@ -10,6 +10,8 @@ export const encryptData = ((data: any) => {
         case "string":
             result = AES.encrypt(data, getHashPasscode()).toString();
             break;
+        case null:
+            result = null
     }
     return result;
 

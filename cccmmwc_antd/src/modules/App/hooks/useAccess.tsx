@@ -5,13 +5,13 @@ import { db } from "../../../services/firebase";
 import { encryptData, decryptDataToString } from '../../../utils/encrypto'
 import useGroups from "./useGroups";
 
-const useCheckAccess = (action: any) => {
+/* const useCheckAccess = (action: any) => {
     if (!localStorage.getItem("access")) {
         return false;
     } else {
         let lsAccess = JSON.parse(decryptDataToString(localStorage.getItem("access")))
     }
-}
+} */
 
 const useGetAccess = () => {
     const [access, setAccess] = useState<any>([]);
@@ -58,4 +58,4 @@ const useGetAccess = () => {
     return access;
 }
 
-export { useCheckAccess, useGetAccess }
+export { useGetAccess }
