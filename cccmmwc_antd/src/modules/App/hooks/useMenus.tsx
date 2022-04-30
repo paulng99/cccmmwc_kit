@@ -8,8 +8,7 @@ import { useGetAccess } from "./useAccess";
 export default () => {
     const [menus, setMenus] = useState<any>();
     const userInfo = JSON.parse(decryptDataToString(localStorage.getItem("userInfo"))) || ""
-    const email = userInfo.email
-    const access = useGetAccess(email);
+    const access = useGetAccess();
     let m: { label: any; link: any; children: unknown; }[] = [];
     let tempMenus = _.groupBy(access, x => x.module_id);
 

@@ -2,18 +2,20 @@ import { collectionGroup, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
-import { encryptData, decryptDataToString} from '../../../utils/encrypto'
+import { encryptData, decryptDataToString } from '../../../utils/encrypto'
+import useGroups from "./useGroups";
 
-const useCheckAccess = (action:any) => {
+const useCheckAccess = (action: any) => {
     if (!localStorage.getItem("access")) {
         return false;
-    }else{
-        let lsAccess=JSON.parse(decryptDataToString(localStorage.getItem("access")))
+    } else {
+        let lsAccess = JSON.parse(decryptDataToString(localStorage.getItem("access")))
     }
 }
 
-const useGetAccess = (email: any = "") => {
+const useGetAccess = () => {
     const [access, setAccess] = useState<any>([]);
+    const groups = useGroups();
     let m: any = []
 
     const getAccess = async (query: any) => {
@@ -28,29 +30,31 @@ const useGetAccess = (email: any = "") => {
     };
 
     useEffect(() => {
-        const lsAccess = localStorage.getItem("access")||null;
-        if (email && !lsAccess) {
-            const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains", email));
+        const lsAccess = localStorage.getItem("access") || null;
+        if (groups) {
+            console.log(groups)
+            const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains-any", groups));
             getAccess(menusAddQuery);
 
-            const menusEditQuery = query(collectionGroup(db, "functions"), where("access.edit", "array-contains", email));
+            const menusEditQuery = query(collectionGroup(db, "functions"), where("access.edit", "array-contains-any", groups));
             getAccess(menusEditQuery);
 
-            const menusDeleteQuery = query(collectionGroup(db, "functions"), where("access.delete", "array-contains", email));
+            const menusDeleteQuery = query(collectionGroup(db, "functions"), where("access.delete", "array-contains-any", groups));
             getAccess(menusDeleteQuery);
 
-            const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains", email));
+            const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains-any", groups));
             getAccess(menusViewQuery);
         }
-        if (lsAccess){
+        if (lsAccess) {
             setAccess(JSON.parse(decryptDataToString(lsAccess)));
         }
-    }, [email]);
+    }, [groups]);
 
     useEffect(() => {
-        let enAccess=encryptData(access)
+        let enAccess = encryptData(access)
         localStorage.setItem("access", enAccess)
     }, [access]);
+    console.log(access)
     return access;
 }
 
