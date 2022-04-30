@@ -6,8 +6,10 @@ import Setup from '../Module_template/Setup/Setup';
 import { Test } from '../Test/Test';
 import './App.css';
 import { AppProvider } from './AppContext';
+import useGroups from './hooks/useGroups';
 
 function App() {
+  const groups=useGroups()
   return (
     <AppProvider>
       <Routes>
