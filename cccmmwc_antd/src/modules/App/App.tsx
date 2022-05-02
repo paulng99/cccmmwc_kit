@@ -6,11 +6,12 @@ import Setup from '../Module_template/Setup/Setup';
 import { Test } from '../Test/Test';
 import './App.css';
 import { AppProvider } from './AppContext';
-import { useGetAccess } from './hooks/useAccess';
-import useGroups from './hooks/useGroups';
+import { useCheckAccessLink, useGetAccess } from './hooks/useAccess';
 
 function App() {
-  const access=useGetAccess();
+  const getAccess=useGetAccess();
+  const {isAccessLink, setLocation}=useCheckAccessLink();
+  console.log(isAccessLink)
   return (
     <AppProvider>
       <Routes>

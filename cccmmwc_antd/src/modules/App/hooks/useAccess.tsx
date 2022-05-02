@@ -16,15 +16,17 @@ import useGroups from "./useGroups";
 
 //Check Access Link
 const useCheckAccessLink = () => {
-    const location = useLocation();
-    const [result, setResult] = useState(false)
+    const [location, setLocation]=useState("")
+    const href=useLocation();
+    const [isAccessLink, setIsAccessLink] = useState(false)
     useEffect(() => {
-        let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => { return y.menu.link == location.pathname })
+        setLocation(href.pathname)
+        let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => { return y.menu.link == location })
         console.log(location)
-        x.length > 0 ? setResult(true) : setResult(false)
-        console.log(result)
+        x.length > 0 ? setIsAccessLink(true) : setIsAccessLink(false)
+        console.log(isAccessLink)
     },[location])
-    return result
+    return {isAccessLink, setLocation}
 }
 
 //Check Access Action
