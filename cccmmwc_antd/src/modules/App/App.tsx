@@ -11,7 +11,6 @@ import useGroups from './hooks/useGroups';
 
 function App() {
   const access=useGetAccess();
-  const {groups}=useGroups();
   return (
     <AppProvider>
       <Routes>

@@ -14,8 +14,6 @@ import './Login.css'
 export default () => {
     const { setEmail } = useGroups();
     const navigate = useNavigate();
-    const cal=useCheckAccessLink();
-    console.log(cal)
     const { appState, appDispatch } = useContext(AppContext);
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();

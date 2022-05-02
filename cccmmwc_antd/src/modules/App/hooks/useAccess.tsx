@@ -22,6 +22,7 @@ const useCheckAccessLink = () => {
         let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => { return y.menu.link == location.pathname })
         console.log(location)
         x.length > 0 ? setResult(true) : setResult(false)
+        console.log(result)
     },[location])
     return result
 }
