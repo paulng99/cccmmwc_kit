@@ -6,7 +6,7 @@ import useGroups from "../App/hooks/useGroups";
 export const Test = () => {
     const { appState, appDispatch } = useContext(AppContext)
     const [data, setData] = useState({});
-    const groups=useGroups()
+    const {groups}=useGroups()
 console.log(groups)
     useEffect(() => {
         setData(appState)

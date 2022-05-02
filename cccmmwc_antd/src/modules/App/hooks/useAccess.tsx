@@ -15,7 +15,7 @@ import useGroups from "./useGroups";
 
 const useGetAccess = () => {
     const [access, setAccess] = useState<any>([]);
-    const groups = useGroups();
+    const {groups} = useGroups();
     let m: any = []
 
     const getAccess = async (query: any) => {
@@ -30,7 +30,8 @@ const useGetAccess = () => {
     };
 
     useEffect(() => {
-        const lsAccess = localStorage.getItem("access") || null;
+        console.log(groups)
+
         if (groups) {
             console.log(groups)
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains-any", groups));
@@ -45,15 +46,14 @@ const useGetAccess = () => {
             const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains-any", groups));
             getAccess(menusViewQuery);
         }
-        if (lsAccess) {
-            setAccess(JSON.parse(decryptDataToString(lsAccess)));
-        }
     }, [groups]);
 
     useEffect(() => {
         let enAccess = encryptData(access)
         localStorage.setItem("access", enAccess)
     }, [access]);
+    let enAccess = encryptData(access)
+    localStorage.setItem("access", enAccess)
     console.log(access)
     return access;
 }
