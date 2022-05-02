@@ -13,6 +13,7 @@ export default (e: any | null = null) => {
             setEmail(JSON.parse(decryptDataToString(localStorage.getItem("userInfo"))).email)
         }
         email && getDoc(doc(db, "users", email)).then(d => {
+            console.log("using firestore in groups: ",d.data())
             let user = d.data();
             setGroups(user?.groups)
         })

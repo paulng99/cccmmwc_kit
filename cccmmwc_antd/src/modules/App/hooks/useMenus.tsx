@@ -7,7 +7,6 @@ import { useGetAccess } from "./useAccess";
 
 export default () => {
     const [menus, setMenus] = useState<any>();
-    const userInfo = JSON.parse(decryptDataToString(localStorage.getItem("userInfo"))) || null
     const access = useGetAccess();
     let m: { label: any; link: any; children: unknown; }[] = [];
     let tempMenus = _.groupBy(access, x => x.module_id);
@@ -15,6 +14,8 @@ export default () => {
     useEffect(() => {
         for (const [key, values] of Object.entries(tempMenus)) {
             getDoc(doc(db, 'modules', key)).then(o => {
+                console.log("using firestore in menus: ",o.data())
+
                 let d: any = o.data();
                 m.push({
                     ...d,

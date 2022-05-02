@@ -41,6 +41,7 @@ const useGetAccess = () => {
     const getAccess = async (query: any) => {
         await getDocs(query).then(d => {
             d.docs.forEach((q) => {
+                console.log("using firestore in access: ",q.data())
                 m.push(q.data())
             })
         }).then(() => {
