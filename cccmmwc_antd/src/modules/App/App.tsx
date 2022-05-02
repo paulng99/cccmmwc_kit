@@ -1,6 +1,6 @@
 import { Spin } from 'antd';
 import { useContext, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useLocation } from 'react-router';
 import { AuthHome } from '../Auth/Home';
 import Setup from '../Module_template/Setup/Setup';
 import { Test } from '../Test/Test';
@@ -10,8 +10,6 @@ import { useCheckAccessLink, useGetAccess } from './hooks/useAccess';
 
 function App() {
   const getAccess=useGetAccess();
-  const {isAccessLink, setLocation}=useCheckAccessLink();
-  console.log(isAccessLink)
   return (
     <AppProvider>
       <Routes>
