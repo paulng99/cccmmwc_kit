@@ -1,5 +1,6 @@
 import { collectionGroup, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
 import { encryptData, decryptDataToString } from '../../../utils/encrypto'
@@ -13,9 +14,27 @@ import useGroups from "./useGroups";
     }
 } */
 
+//Check Access Link
+const useCheckAccessLink = () => {
+    const location = useLocation();
+    const [result, setResult] = useState(false)
+    useEffect(() => {
+        let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => { return y.menu.link == location.pathname })
+        console.log(location)
+        x.length > 0 ? setResult(true) : setResult(false)
+    },[location])
+    return result
+}
+
+//Check Access Action
+const useCheckAccessAction = () => {
+
+}
+
+//Get Access 
 const useGetAccess = () => {
     const [access, setAccess] = useState<any>([]);
-    const {groups} = useGroups();
+    const { groups } = useGroups();
     let m: any = []
 
     const getAccess = async (query: any) => {
@@ -48,8 +67,9 @@ const useGetAccess = () => {
     useEffect(() => {
         let enAccess = encryptData(access)
         localStorage.setItem("access", enAccess)
+        console.log(access)
     }, [access]);
     return access;
 }
 
-export { useGetAccess }
+export { useGetAccess, useCheckAccessAction, useCheckAccessLink }
