@@ -15,7 +15,6 @@ export default (e: any | null = null) => {
         email && getDoc(doc(db, "users", email)).then(d => {
             let user = d.data();
             setGroups(user?.groups)
-            console.log(groups)
         })
     }, [email])
     localStorage.setItem("groups", JSON.stringify(groups))

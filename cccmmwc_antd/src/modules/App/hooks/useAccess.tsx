@@ -30,10 +30,7 @@ const useGetAccess = () => {
     };
 
     useEffect(() => {
-        console.log(groups)
-
         if (groups) {
-            console.log(groups)
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains-any", groups));
             getAccess(menusAddQuery);
 
@@ -52,9 +49,6 @@ const useGetAccess = () => {
         let enAccess = encryptData(access)
         localStorage.setItem("access", enAccess)
     }, [access]);
-    let enAccess = encryptData(access)
-    localStorage.setItem("access", enAccess)
-    console.log(access)
     return access;
 }
 
