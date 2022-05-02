@@ -2,7 +2,6 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
-import { decryptDataToString } from "../../../utils/encrypto";
 import { useGetAccess } from "./useAccess";
 
 export default () => {
