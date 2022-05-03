@@ -1,6 +1,7 @@
 import { Spin } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router';
+import { decryptDataToString } from '../../utils/encrypto';
 import { AuthHome } from '../Auth/Home';
 import Setup from '../Module_template/Setup/Setup';
 import { Test } from '../Test/Test';
@@ -14,10 +15,17 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    setLocation(pathname)
-    console.log("pathname:", pathname)
+    console.log(pathname)
+    console.log(getAccess)
+    getAccess.length && setLocation(pathname)
     console.log("isAccessLink: ", isAccessLink)
-  }, [pathname])
+  }, [getAccess])
+
+  // useEffect(() => {
+  //   setLocation(pathname)
+  //   console.log("pathname:", pathname)
+  //   console.log("isAccessLink: ", isAccessLink)
+  // }, [pathname])
 
   return (
     <AppProvider>

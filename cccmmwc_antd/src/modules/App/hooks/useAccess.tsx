@@ -1,6 +1,5 @@
 import { collectionGroup, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
 import _ from "underscore";
 import { db } from "../../../services/firebase";
 import { encryptData, decryptDataToString } from '../../../utils/encrypto'
@@ -9,9 +8,8 @@ import useGroups from "./useGroups";
 //Check Access Link
 const useCheckAccessLink = () => {
     const [location, setLocation] = useState<string | null>(null)
-    const [isAccessLink, setIsAccessLink] = useState(false)
+    const [isAccessLink, setIsAccessLink] = useState<any>()
     useEffect(() => {
-        console.log("location: ", location)
         if (location!==null) {
             console.log("access: ",JSON.parse(decryptDataToString(localStorage.getItem("access"))))
             let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => {
@@ -20,15 +18,16 @@ const useCheckAccessLink = () => {
             })
             console.log("x:", x)
             x.length > 0 ? setIsAccessLink(true) : setIsAccessLink(false)
+            console.log(isAccessLink)
         }
-    }, [location])
+    })
     return { isAccessLink, setLocation }
 }
 
 //Check Access Action
 const useCheckAccessAction = () => {
 }
-
+ 
 //Get Access 
 const useGetAccess = () => {
     const [access, setAccess] = useState<any>([]);
