@@ -10,16 +10,18 @@ import { AppProvider } from './AppContext';
 import { useCheckAccessLink, useGetAccess } from './hooks/useAccess';
 
 function App() {
-  const getAccess = useGetAccess();
-  const { isAccessLink, setLocation } = useCheckAccessLink();
-  const { pathname } = useLocation();
+  // const getAccess = useGetAccess();
+  // const { isAccessLink, setLocation } = useCheckAccessLink();
+  // const { pathname } = useLocation();
+  // const [access, setAccess] = useState();
 
-  useEffect(() => {
-    console.log(pathname)
-    console.log(getAccess)
-    getAccess.length && setLocation(pathname)
-    console.log("isAccessLink: ", isAccessLink)
-  }, [getAccess])
+  // useEffect(() => {
+  //   setAccess(getAccess)
+  //   console.log(pathname)
+  //   console.log(access)
+  //   getAccess.length && setLocation(pathname)
+  //   console.log("isAccessLink: ", isAccessLink)
+  // }, [getAccess])
 
   // useEffect(() => {
   //   setLocation(pathname)
