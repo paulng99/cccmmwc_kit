@@ -9,7 +9,16 @@ import { AppProvider } from './AppContext';
 import { useCheckAccessLink, useGetAccess } from './hooks/useAccess';
 
 function App() {
-  const getAccess=useGetAccess();
+  const getAccess = useGetAccess();
+  const { isAccessLink, setLocation } = useCheckAccessLink();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setLocation(pathname)
+    console.log("pathname:", pathname)
+    console.log("isAccessLink: ", isAccessLink)
+  }, [pathname])
+
   return (
     <AppProvider>
       <Routes>

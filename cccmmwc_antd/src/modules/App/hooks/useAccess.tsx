@@ -6,32 +6,27 @@ import { db } from "../../../services/firebase";
 import { encryptData, decryptDataToString } from '../../../utils/encrypto'
 import useGroups from "./useGroups";
 
-/* const useCheckAccess = (action: any) => {
-    if (!localStorage.getItem("access")) {
-        return false;
-    } else {
-        let lsAccess = JSON.parse(decryptDataToString(localStorage.getItem("access")))
-    }
-} */
-
 //Check Access Link
 const useCheckAccessLink = () => {
-    const [location, setLocation] = useState("")
-    const href = useLocation();
+    const [location, setLocation] = useState<string | null>(null)
     const [isAccessLink, setIsAccessLink] = useState(false)
     useEffect(() => {
-        setLocation(href.pathname)
-        let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => { return y.menu.link == location })
-        console.log(location)
-        x.length > 0 ? setIsAccessLink(true) : setIsAccessLink(false)
-        console.log(x)
+        console.log("location: ", location)
+        if (location!==null) {
+            console.log("access: ",JSON.parse(decryptDataToString(localStorage.getItem("access"))))
+            let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => {
+                console.log("y:", y.menu.link)
+                return y.menu.link == location
+            })
+            console.log("x:", x)
+            x.length > 0 ? setIsAccessLink(true) : setIsAccessLink(false)
+        }
     }, [location])
     return { isAccessLink, setLocation }
 }
 
 //Check Access Action
 const useCheckAccessAction = () => {
-
 }
 
 //Get Access 
@@ -71,7 +66,6 @@ const useGetAccess = () => {
     useEffect(() => {
         let enAccess = encryptData(access)
         localStorage.setItem("access", enAccess)
-        console.log(access)
     }, [access]);
     return access;
 }
