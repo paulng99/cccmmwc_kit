@@ -9,12 +9,23 @@ import useGroups from "./useGroups";
 const useCheckAccessLink = () => {
     const [location, setLocation] = useState<string | null>()
     const [isAccessLink, setIsAccessLink] = useState<boolean>()
+    const getAccess = useGetAccess();
     console.log(location)
-    let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => {
-        console.log("y:", y.menu.link)
-        return y.menu.link == location
-    })
-    console.log(x.length)
+    useEffect(() => {
+        if (location && getAccess.length > 0) {
+            let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => {
+                console.log("y:", y.menu.link)
+                return y.menu.link == location
+            })
+            console.log(x.length)
+            if (x.length == 0) {
+                setIsAccessLink(false);
+            } else if (x.length > 0) {
+                setIsAccessLink(true)
+            }
+        }
+    }, [location, getAccess])
+
     //setIsAccessLink(x.length>0)
     return { isAccessLink, setLocation }
 }
