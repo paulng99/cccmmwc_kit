@@ -13,6 +13,7 @@ const useCheckAccessLink = () => {
     console.log(location)
     useEffect(() => {
         if (location && getAccess.length > 0) {
+            console.log("getAccess: ",getAccess)
             let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => {
                 console.log("y:", y.menu.link)
                 return y.menu.link == location
@@ -53,7 +54,7 @@ const useGetAccess = () => {
     };
 
     useEffect(() => {
-        if (groups) {
+        if (groups.length>0) {
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains-any", groups));
             getAccess(menusAddQuery);
 

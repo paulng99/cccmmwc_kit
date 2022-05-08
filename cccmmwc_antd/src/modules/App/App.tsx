@@ -22,7 +22,7 @@ function App() {
     console.log("isAccessLink: ", isAccessLink)
     switch (isAccessLink) {
       case false:
-       nagivation("/auth/login")
+       //nagivation("/auth/login")
         console.log("redirected");
         break;
       case true:
@@ -31,7 +31,7 @@ function App() {
       case undefined:
         console.log("waiting....")
     }
-  }, [isAccessLink])
+  }, [isAccessLink,pathname])
 
   return (
     <AppProvider>
