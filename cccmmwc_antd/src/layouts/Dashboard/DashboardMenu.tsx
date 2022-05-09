@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react"
+/* import React, { ReactElement, useEffect, useState } from "react"
 import { Menu } from "antd";
 import useMenus from "../../modules/App/hooks/useMenus";
 import { ItemType } from "antd/lib/menu/hooks/useItems";
@@ -55,4 +55,8 @@ export default () => {
             <Menu items={menuData} mode="inline" />
         </>
     )
+} */
+
+export default () => {
+    return (<></>)
 }
