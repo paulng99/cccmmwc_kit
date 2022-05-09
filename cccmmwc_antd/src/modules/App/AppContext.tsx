@@ -1,7 +1,6 @@
 import { Spin } from "antd";
-import { createContext, FC, useEffect, useReducer } from "react";
+import { createContext, FC, useReducer } from "react";
 import appReducer, { IAppAction } from "./appReducer";
-import useMenus from "./hooks/useMenus";
 
 export const initialAppState = {
     loading: false,

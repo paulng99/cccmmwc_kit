@@ -22,7 +22,7 @@ const useCheckAccessLink = () => {
             if (x.length == 0) {
                 setIsAccessLink(false);
             } else if (x.length > 0) {
-                setIsAccessLink(true)
+                setIsAccessLink(true) 
             }
         }
     }, [location, getAccess])
