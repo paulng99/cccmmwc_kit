@@ -4,20 +4,20 @@ import { db } from "../../../services/firebase";
 import { decryptDataToString } from "../../../utils/encrypto";
 
 export default (e: any | null = null) => {
-    const [email, setEmail] = useState<string|null>()
-    const [groups, setGroups] = useState(["guest"])
+    const [email, setEmail] = useState<string | null>()
+    const [groups, setGroups] = useState(JSON.parse(localStorage.getItem("groups")!)||["guest"])
 
 
     useEffect(() => {
-        if (localStorage.getItem("userInfo")){
+        if (localStorage.getItem("userInfo")) {
             setEmail(JSON.parse(decryptDataToString(localStorage.getItem("userInfo"))).email)
         }
         email && getDoc(doc(db, "users", email)).then(d => {
-            console.log("using firestore in groups: ",d.data())
+            console.log("using firestore in groups: ", d.data())
             let user = d.data();
             setGroups(user?.groups)
         })
     }, [email])
     localStorage.setItem("groups", JSON.stringify(groups))
-    return {groups, setEmail}
+    return { groups, setEmail }
 }

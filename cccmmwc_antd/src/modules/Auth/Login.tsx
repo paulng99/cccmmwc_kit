@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import _ from "underscore";
 import { auth } from "../../services/firebase";
@@ -14,6 +14,7 @@ export default () => {
     const { setEmail } = useGroups();
     const navigate = useNavigate();
     const { appState, appDispatch } = useContext(AppContext);
+
     const handleLogin = () => {
         const googleProvider = new GoogleAuthProvider();
         appDispatch({

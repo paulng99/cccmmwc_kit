@@ -49,12 +49,14 @@ const useGetAccess = () => {
             })
         }).then(() => {
             m = _.uniq(m, x => x.id)
+            localStorage.setItem("access", encryptData(m))
             setAccess(m)
         })
     };
 
     useEffect(() => {
         if (groups.length>0) {
+            console.log("groups: ",groups)
             const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains-any", groups));
             getAccess(menusAddQuery);
 
@@ -69,10 +71,6 @@ const useGetAccess = () => {
         }
     }, [groups]);
 
-    useEffect(() => {
-        let enAccess = encryptData(access)
-        localStorage.setItem("access", enAccess)
-    }, [access]);
     return access;
 }
 
