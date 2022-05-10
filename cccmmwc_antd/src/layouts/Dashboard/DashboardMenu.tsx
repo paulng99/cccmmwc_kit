@@ -1,13 +1,12 @@
-/* import React, { ReactElement, useEffect, useState } from "react"
+import React, { ReactElement, useEffect, useState } from "react"
 import { Menu } from "antd";
-import useMenus from "../../modules/App/hooks/useMenus";
 import { ItemType } from "antd/lib/menu/hooks/useItems";
 import { UserOutlined, CopyOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom";
 
 
 export default () => {
-    const menus: [] = useMenus();
+/*     const menus: [] = JSON.parse(localStorage.getItem("menus") || "");
     const [menuData, setMenuData] = useState<ItemType[]>(menus);
     let m: any[] = [];
 
@@ -41,9 +40,7 @@ export default () => {
     useEffect(() => {
         let menuLocal = menus || []
         menuLocal.forEach((ml: any) => {
-            m.push(
-                createItem(ml)
-            )
+            m.push(createItem(ml))
         });
         setMenuData(m)
     }, [menus]);
@@ -54,9 +51,6 @@ export default () => {
         <>
             <Menu items={menuData} mode="inline" />
         </>
-    )
-} */
-
-export default () => {
+    ) */
     return (<></>)
-}
+} 
