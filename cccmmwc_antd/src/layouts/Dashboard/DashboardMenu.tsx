@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 export default () => {
-/*     const menus: [] = JSON.parse(localStorage.getItem("menus") || "");
+    const menus: [] = JSON.parse(localStorage.getItem("menus") || "");
     const [menuData, setMenuData] = useState<ItemType[]>(menus);
     let m: any[] = [];
 
@@ -51,6 +51,6 @@ export default () => {
         <>
             <Menu items={menuData} mode="inline" />
         </>
-    ) */
-    return (<></>)
+    ) 
+    
 } 

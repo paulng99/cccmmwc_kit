@@ -30,7 +30,7 @@ export default () => {
                 g = d.data()?.groups;
                 getAccess(g);
             }).then(() => {
-               // getMenus();
+                setTimeout(() => { getMenus(); }, 500)
             }).then(() => {
                 navigate('/test')
             })
@@ -38,14 +38,13 @@ export default () => {
                 "type": "LOADING",
                 "payload": false,
             })
-
         }).catch((e) => {
             appDispatch({
                 "type": "LOADING",
                 "payload": false
             })
             console.log("error", e);
-        });
+        }); 
     }
     return (
         <div id="login">
