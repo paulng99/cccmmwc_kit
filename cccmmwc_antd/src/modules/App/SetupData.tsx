@@ -1,6 +1,3 @@
-import { doc } from "firebase/firestore";
-import { db } from "../../services/firebase";
-
 export const setupModule = {
     "id": "app",
     "name_en": "Appication Module",
