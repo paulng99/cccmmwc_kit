@@ -30,7 +30,7 @@ export default () => {
                 g = d.data()?.groups;
                 getAccess(g);
             }).then(() => {
-                setTimeout(() => { getMenus(); }, 500)
+                setTimeout(() => { getMenus(); }, 1000)
             }).then(() => {
                 navigate('/test')
             })

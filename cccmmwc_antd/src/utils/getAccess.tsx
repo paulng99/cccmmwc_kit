@@ -6,7 +6,7 @@ import { encryptData } from "./encrypto"
 export const getAccess = (g: any[]) => {
     let m: any = []
     console.log(g)
-    const getAccess = async (query: any) => {
+    const gAccess = async (query: any) => {
         await getDocs(query).then(d => {
             d.docs.forEach((q) => {
                 console.log("using firestore in access: ", q.data())
@@ -19,14 +19,14 @@ export const getAccess = (g: any[]) => {
         })
     }
     const menusAddQuery = query(collectionGroup(db, "functions"), where("access.add", "array-contains-any", g));
-    getAccess(menusAddQuery);
+    gAccess(menusAddQuery);
 
     const menusEditQuery = query(collectionGroup(db, "functions"), where("access.edit", "array-contains-any", g));
-    getAccess(menusEditQuery);
+    gAccess(menusEditQuery);
 
     const menusDeleteQuery = query(collectionGroup(db, "functions"), where("access.delete", "array-contains-any", g));
-    getAccess(menusDeleteQuery);
+    gAccess(menusDeleteQuery);
 
     const menusViewQuery = query(collectionGroup(db, "functions"), where("access.view", "array-contains-any", g));
-    getAccess(menusViewQuery);
+    gAccess(menusViewQuery);
 }
