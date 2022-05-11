@@ -10,6 +10,7 @@ import { decryptDataToString } from '../../utils/encrypto';
 import { useEffect } from 'react';
 import { getAccess } from '../../utils/getAccess';
 import getMenus from '../../utils/getMenus';
+import { GroupingHome } from '../Grouping/Home';
 
 function App() {
   const { pathname } = useLocation();
@@ -42,6 +43,7 @@ function App() {
         <Route path='/testsetup' element={<Setup />} />
         <Route path='/test' element={<Test />} />
         <Route path='/auth/*' element={<AuthHome />} />
+        <Route path='/grouping/*' element={<GroupingHome />} />
         <Route path='/app/setup' element={<AppSetup />} />
       </Routes>
     </AppProvider>
