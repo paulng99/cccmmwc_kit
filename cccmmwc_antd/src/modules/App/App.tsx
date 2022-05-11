@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useLocation, useNavigate } from 'react-router';
 import _ from 'underscore';
 import { AuthHome } from '../Auth/Home';
 import Setup from '../Module_template/Setup/Setup';
@@ -12,6 +12,8 @@ import { getAccess } from '../../utils/getAccess';
 import getMenus from '../../utils/getMenus';
 
 function App() {
+  const { pathname } = useLocation();
+  const navigator=useNavigate()
   useEffect(() => {
     if (!localStorage.getItem("userInfo")) {
       localStorage.setItem("groups", "[guest]")
@@ -19,6 +21,21 @@ function App() {
       setTimeout(() => { getMenus(); }, 1000)
     }
   }, [])
+  useEffect(() => {
+    if (pathname) {
+      let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => {
+        //console.log("y:", y.menu.link)
+        return y.menu.link == pathname
+      })
+     // console.log(x.length)
+      if (x.length == 0) {
+        console.log("isAccess: ", false)
+        navigator("/auth/login")
+      } else if (x.length > 0) {
+        console.log("isAccess: ", true)
+      }
+    }
+  }, [pathname])
   return (
     <AppProvider>
       <Routes>
