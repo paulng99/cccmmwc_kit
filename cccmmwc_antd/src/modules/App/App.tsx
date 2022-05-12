@@ -23,7 +23,7 @@ function App() {
     }
   }, [])
   useEffect(() => {
-    if (pathname) {
+    if (pathname && localStorage.getItem("access")) {
       let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => {
         //console.log("y:", y.menu.link)
         return y.menu.link == pathname
