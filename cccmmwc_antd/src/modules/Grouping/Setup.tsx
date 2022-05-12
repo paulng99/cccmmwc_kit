@@ -2,7 +2,7 @@ import { EyeOutlined } from "@ant-design/icons";
 import { Button, Table, TableColumnsType } from "antd";
 import { doc, writeBatch } from "firebase/firestore";
 import { MouseEvent, useState } from "react";
-import { db } from "../../../services/firebase";
+import { db } from "../../services/firebase";
 import { setupFunctions, setupModule } from "./SetupData";
 
 
