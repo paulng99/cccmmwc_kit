@@ -4,7 +4,7 @@ import Grouping from "./Grouping";
 export const GroupingHome=()=>{
     return (
         <Routes>
-            <Route path="/setup" element={<Grouping />} /> 
+            <Route path="/" element={<Grouping />} /> 
         </Routes>
     );
 }
