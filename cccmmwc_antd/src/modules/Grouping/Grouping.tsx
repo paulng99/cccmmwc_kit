@@ -1,4 +1,5 @@
-import { Space, Table, TableColumnGroupType } from "antd";
+import { UserAddOutlined } from "@ant-design/icons";
+import { Affix, Button, Table } from "antd";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react"
 import Dashboard from "../../layouts/Dashboard/Dashboard"
@@ -34,7 +35,10 @@ export default () => {
 
     return (
         <Dashboard>
-            <Table dataSource={groups} columns={columns} style={{padding:"20px"}} />
+            <Table dataSource={groups} columns={columns} style={{ padding: "10px" }} pagination={false} />
+            <Affix style={{position:'fixed',bottom:30,right:30}}>
+                <Button size="large" shape="circle" type="primary" icon={<UserAddOutlined/>} />
+            </Affix>
         </Dashboard>
     )
 }
