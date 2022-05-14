@@ -1,5 +1,5 @@
-import { collection, doc, DocumentData, getDoc, getDocs } from "firebase/firestore";
-import { SetStateAction, useEffect, useState } from "react"
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react"
 import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase";
 
