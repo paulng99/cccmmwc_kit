@@ -1,3 +1,4 @@
+import { Space, Table, TableColumnGroupType } from "antd";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react"
 import Dashboard from "../../layouts/Dashboard/Dashboard"
@@ -10,17 +11,30 @@ export default () => {
     useEffect(() => {
         getDocs(collection(db, "groups")).then(g1 => {
             g1.forEach(group => {
-                let g2=group.data()
-                g2["id"]=group.id;
+                let g2 = group.data()
+                g2["id"] = group.id;
                 g.push(g2)
             })
             setGroups(g)
         })
     }, [])
 
+    const columns = [
+        {
+            title: 'Name',
+            dataIndex: 'name_en',
+            key: 'name',
+        },
+        {
+            title: '名稱 ',
+            dataIndex: 'name_zh',
+            key: 'name_zh',
+        },
+    ];
+
     return (
         <Dashboard>
-            {JSON.stringify(groups)}
+            <Table dataSource={groups} columns={columns} style={{padding:"20px"}} />
         </Dashboard>
     )
 }
