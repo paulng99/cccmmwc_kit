@@ -11,7 +11,7 @@ export default () => {
     let m: any[] = [];
 
     interface Iitem {
-       // "key": number,
+        "key": string,
         "label": ReactElement | string,
         "icon"?: ReactElement,
         "children"?: Iitem[] | null
@@ -22,14 +22,14 @@ export default () => {
         if (data.children.length > 0) {
             data.children.forEach((d: any) => {
                 subItem.push({
-                    //"key": Math.random() * 100,
+                    "key": d.menu.id,
                     "label": React.createElement(Link, { "to": d.menu.link }, d.menu.name_en),
                 })
             });
         }
 
         let item: Iitem = {
-           // "key": Math.random() * 100,
+            "key": data.menu.id,
             "label": React.createElement(Link, { "to": data.menu.link }, data.menu.name_en),
             "icon": React.createElement(data.menu.icon || UserOutlined),
             "children": subItem
