@@ -1,5 +1,5 @@
 import { DeleteOutlined, UsergroupAddOutlined } from "@ant-design/icons";
-import { Affix, Button, Form, Input, Modal, Table } from "antd";
+import { Affix, AutoComplete, Button, Form, Input, Modal, Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react"
@@ -8,12 +8,13 @@ import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase";
 
 export default () => {
-    const [groups, setGroups] = useState<any>([]);
+    const [groups, setGroups] = useState<any[]>([]);
     const [visibleModal, setVisibleModal] = useState(false)
     const [loadingOK, setLoadingOK] = useState(false)
     const [update, setUpdate] = useState(0)
     const [form] = Form.useForm();
-    const [type, setType] = useState([]);
+    const [type, setType] = useState<any[]>();
+    const [typeFormatted, setTypeFormatted] = useState<any[]>();
 
     const g: any = [];
     useEffect(() => {
@@ -24,8 +25,24 @@ export default () => {
                 g.push(g2)
             })
             setGroups(g)
+            console.log(_.keys(_.groupBy(g, "type")))
+            setType(_.keys(_.groupBy(g, "type")))
         })
     }, [update])
+
+    useEffect(() => {
+        let t: any[] = [];
+        type?.forEach((x) => {
+            t.push({
+                key: x,
+                value: x,
+                label: x,
+                text: x
+            })
+        })
+        setTypeFormatted(t)
+    }, [type])
+
 
     //Table Configuation   
     const columns: ColumnsType<object> = [
@@ -33,7 +50,7 @@ export default () => {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            width: "10%"
+            width: "10"
         },
         {
             title: 'Name',
@@ -49,10 +66,7 @@ export default () => {
             title: 'Type ',
             dataIndex: 'type',
             key: 'type',
-            filters: [
-                { text: "Committee", value: "Committee" },
-                { text: "Subject", value: "Subject" },
-            ],
+            filters: typeFormatted,
             onFilter: (value: any, record: any) => record.type && record.type.startsWith(value),
             filterSearch: true,
         }, {
@@ -105,7 +119,7 @@ export default () => {
             <Affix style={{ position: 'fixed', bottom: 30, right: 30 }}>
                 <Button size="large" shape="circle" type="primary" icon={<UsergroupAddOutlined />} onClick={handleClick} />
             </Affix>
-            <Modal visible={visibleModal} onOk={handleOK} destroyOnClose={false} okText="Create" onCancel={handleOKCancel} closable={false} okButtonProps={{ loading: loadingOK, htmlType: "submit" }}>
+            <Modal visible={visibleModal} onOk={handleOK} destroyOnClose={false} okText="Create" onCancel={handleOKCancel} title="Create Group" closable={false} okButtonProps={{ loading: loadingOK, htmlType: "submit" }}>
                 <Form
                     form={form}
                     labelCol={{ span: 8 }}
@@ -125,7 +139,7 @@ export default () => {
                     <Form.Item label="Type" name="type" required={true} rules={[{
                         required: true,
                     }]}>
-                        <Input />
+                        <AutoComplete options={typeFormatted} />
                     </Form.Item>
                 </Form>
             </Modal>
