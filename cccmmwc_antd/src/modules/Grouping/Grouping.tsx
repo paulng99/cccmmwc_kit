@@ -14,7 +14,6 @@ export default () => {
     const [update, setUpdate] = useState(0)
     const [form] = Form.useForm();
     const [type, setType] = useState([]);
-    const [loadingDel, setLoadingDel] = useState(false)
 
     const g: any = [];
     useEffect(() => {
@@ -62,7 +61,7 @@ export default () => {
             render: (value, record, index) => {
                 return (
                     <>
-                        <Button loading={loadingDel} onClick={() => { handleDelRow(value.id) }} danger size="small" icon={<DeleteOutlined />}></Button>
+                        <Button onClick={() => { handleDelRow(value.id) }} danger size="small" icon={<DeleteOutlined />}></Button>
                     </>
                 )
             }
