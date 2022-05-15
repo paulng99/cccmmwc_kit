@@ -14,7 +14,7 @@ import { GroupingHome } from '../Grouping/Home';
 
 function App() {
   const { pathname } = useLocation();
-  const navigator=useNavigate()
+  const navigator = useNavigate()
   useEffect(() => {
     if (!localStorage.getItem("userInfo")) {
       localStorage.setItem("groups", "[guest]")
@@ -24,11 +24,12 @@ function App() {
   }, [])
   useEffect(() => {
     if (pathname && localStorage.getItem("access")) {
+      console.log(JSON.parse(decryptDataToString(localStorage.getItem("access"))));
       let x = _.filter(JSON.parse(decryptDataToString(localStorage.getItem("access"))), y => {
         //console.log("y:", y.menu.link)
         return y.menu.link == pathname
       })
-     // console.log(x.length)
+      // console.log(x.length)
       if (x.length == 0) {
         console.log("isAccess: ", false)
         navigator("/auth/login")

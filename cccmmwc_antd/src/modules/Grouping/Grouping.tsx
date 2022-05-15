@@ -3,9 +3,11 @@ import { Affix, AutoComplete, Button, Form, Input, Modal, Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router";
 import _ from "underscore";
 import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase";
+import canAction from "../../utils/canAction";
 
 export default () => {
     const [groups, setGroups] = useState<any[]>([]);
@@ -15,6 +17,7 @@ export default () => {
     const [form] = Form.useForm();
     const [type, setType] = useState<any[]>();
     const [typeFormatted, setTypeFormatted] = useState<any[]>();
+    const { pathname } = useLocation()
 
     const g: any = [];
     useEffect(() => {
@@ -74,7 +77,7 @@ export default () => {
             dataIndex: '',
             render: (value, record, index) => {
                 return (
-                    <>
+                    canAction("delete", pathname) && <>
                         <Button onClick={() => { handleDelRow(value.id) }} danger size="small" icon={<DeleteOutlined />}></Button>
                     </>
                 )
@@ -116,33 +119,33 @@ export default () => {
     return (
         <Dashboard>
             <Table dataSource={groups} columns={columns} style={{ padding: "10px" }} />
-            <Affix style={{ position: 'fixed', bottom: 30, right: 30 }}>
-                <Button size="large" shape="circle" type="primary" icon={<UsergroupAddOutlined />} onClick={handleClick} />
-            </Affix>
-            <Modal visible={visibleModal} onOk={handleOK} destroyOnClose={false} okText="Create" onCancel={handleOKCancel} title="Create Group" closable={false} okButtonProps={{ loading: loadingOK, htmlType: "submit" }}>
-                <Form
-                    form={form}
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 16 }}
-                    onFinish={handleFinish}
-                    onFinishFailed={() => { setLoadingOK(false) }}>
-                    <Form.Item label="Name" name='name_en' rules={[{
-                        required: true,
-                    }]}>
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="名稱" name="name_zh" required={true} rules={[{
-                        required: true,
-                    }]}>
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="Type" name="type" required={true} rules={[{
-                        required: true,
-                    }]}>
-                        <AutoComplete options={typeFormatted} />
-                    </Form.Item>
-                </Form>
-            </Modal>
+            {canAction("add", pathname) &&
+                <><Affix style={{ position: 'fixed', bottom: 30, right: 30 }}>
+                    <Button size="large" shape="circle" type="primary" icon={<UsergroupAddOutlined />} onClick={handleClick} />
+                </Affix><Modal visible={visibleModal} onOk={handleOK} destroyOnClose={false} okText="Create" onCancel={handleOKCancel} title="Create Group" closable={false} okButtonProps={{ loading: loadingOK, htmlType: "submit" }}>
+                        <Form
+                            form={form}
+                            labelCol={{ span: 8 }}
+                            wrapperCol={{ span: 16 }}
+                            onFinish={handleFinish}
+                            onFinishFailed={() => { setLoadingOK(false); }}>
+                            <Form.Item label="Name" name='name_en' rules={[{
+                                required: true,
+                            }]}>
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="名稱" name="name_zh" required={true} rules={[{
+                                required: true,
+                            }]}>
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Type" name="type" required={true} rules={[{
+                                required: true,
+                            }]}>
+                                <AutoComplete options={typeFormatted} />
+                            </Form.Item>
+                        </Form>
+                    </Modal></>}
         </Dashboard>
     )
 }
