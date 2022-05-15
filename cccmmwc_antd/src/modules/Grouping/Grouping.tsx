@@ -1,7 +1,9 @@
-import { UserAddOutlined } from "@ant-design/icons";
-import { Affix, Button, Form, Input, Modal, Table, TableColumnProps, TableColumnType } from "antd";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { DeleteOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import { Affix, Button, Form, Input, Modal, Table } from "antd";
+import { ColumnsType } from "antd/lib/table";
+import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react"
+import _ from "underscore";
 import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase";
 
@@ -11,6 +13,7 @@ export default () => {
     const [loadingOK, setLoadingOK] = useState(false)
     const [update, setUpdate] = useState(0)
     const [form] = Form.useForm();
+    const [type, setType] = useState([]);
 
     const g: any = [];
     useEffect(() => {
@@ -25,12 +28,12 @@ export default () => {
     }, [update])
 
     //Table Configuation   
-    const columns = [
+    const columns: ColumnsType<object> = [
         {
             title: 'ID',
             dataIndex: 'id',
             key: 'id',
-            width:"10%"
+            width: "10%"
         },
         {
             title: 'Name',
@@ -46,10 +49,22 @@ export default () => {
             title: 'Type ',
             dataIndex: 'type',
             key: 'type',
-            filters:[
-                {text:"Committee", value:"Committee"},
-                {text:"Subject", value:"Subject"},
-            ]
+            filters: [
+                { text: "Committee", value: "Committee" },
+                { text: "Subject", value: "Subject" },
+            ],
+            onFilter: (value: any, record: any) => record.type && record.type.startsWith(value),
+            filterSearch: true,
+        }, {
+            title: 'Action ',
+            dataIndex: '',
+            render: (value, record, index) => {
+                return (
+                    <>
+                        <Button onClick={() => { handleDelRow(value.id) }} danger size="small" icon={<DeleteOutlined />}></Button>
+                    </>
+                )
+            }
         },
     ];
 
@@ -76,13 +91,19 @@ export default () => {
         setLoadingOK(false)
     }
 
+    const handleDelRow = (id: any) => {
+        console.log(id)
+        deleteDoc(doc(db, "groups", id)).then(() => {
+            setUpdate(update + 1);
+        })
+    }
 
 
     return (
         <Dashboard>
-            <Table dataSource={groups} columns={columns} style={{ padding: "10px" }}  />
+            <Table dataSource={groups} columns={columns} style={{ padding: "10px" }} />
             <Affix style={{ position: 'fixed', bottom: 30, right: 30 }}>
-                <Button size="large" shape="circle" type="primary" icon={<UserAddOutlined />} onClick={handleClick} />
+                <Button size="large" shape="circle" type="primary" icon={<UsergroupAddOutlined />} onClick={handleClick} />
             </Affix>
             <Modal visible={visibleModal} onOk={handleOK} destroyOnClose={false} okText="Create" onCancel={handleOKCancel} closable={false} okButtonProps={{ loading: loadingOK, htmlType: "submit" }}>
                 <Form
