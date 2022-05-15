@@ -1,6 +1,6 @@
 import { UserAddOutlined } from "@ant-design/icons";
 import { Affix, Button, Form, Input, Modal, Table } from "antd";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react"
 import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase";
@@ -8,6 +8,9 @@ import { db } from "../../services/firebase";
 export default () => {
     const [groups, setGroups] = useState<any>([]);
     const [visibleModal, setVisibleModal] = useState(false)
+    const [loadingOK, setLoadingOK] = useState(false)
+    const [update, setUpdate] = useState(0)
+    const [form] = Form.useForm();
 
     const g: any = [];
     useEffect(() => {
@@ -19,9 +22,15 @@ export default () => {
             })
             setGroups(g)
         })
-    }, [])
+    }, [update])
 
+    //Table Configuation   
     const columns = [
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+        },
         {
             title: 'Name',
             dataIndex: 'name_en',
@@ -32,15 +41,37 @@ export default () => {
             dataIndex: 'name_zh',
             key: 'name_zh',
         },
+        {
+            title: 'Type ',
+            dataIndex: 'type',
+            key: 'type',
+        },
     ];
 
+    //Handle Function
     const handleClick = () => {
         setVisibleModal(!visibleModal)
     }
 
     const handleOK = () => {
-        setVisibleModal(false)
+        setLoadingOK(true)
+        form.submit();
     }
+
+    const handleFinish = (values: any) => {
+        addDoc(collection(db, "groups"), values).then(() => {
+            handleOKCancel();
+            setUpdate(update + 1);
+        })
+    }
+
+    const handleOKCancel = () => {
+        form.resetFields();
+        setVisibleModal(false);
+        setLoadingOK(false)
+    }
+
+
 
     return (
         <Dashboard>
@@ -48,14 +79,26 @@ export default () => {
             <Affix style={{ position: 'fixed', bottom: 30, right: 30 }}>
                 <Button size="large" shape="circle" type="primary" icon={<UserAddOutlined />} onClick={handleClick} />
             </Affix>
-            <Modal visible={visibleModal} onOk={handleOK} destroyOnClose={false} okText="Create" onCancel={() => { setVisibleModal(false) }} closable={false}>
+            <Modal visible={visibleModal} onOk={handleOK} destroyOnClose={false} okText="Create" onCancel={handleOKCancel} closable={false} okButtonProps={{ loading: loadingOK, htmlType: "submit" }}>
                 <Form
+                    form={form}
                     labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 16 }}>
-                    <Form.Item label="Name">
+                    wrapperCol={{ span: 16 }}
+                    onFinish={handleFinish}
+                    onFinishFailed={() => { setLoadingOK(false) }}>
+                    <Form.Item label="Name" name='name_en' rules={[{
+                        required: true,
+                    }]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item label="名稱">
+                    <Form.Item label="名稱" name="name_zh" required={true} rules={[{
+                        required: true,
+                    }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Type" name="type" required={true} rules={[{
+                        required: true,
+                    }]}>
                         <Input />
                     </Form.Item>
                 </Form>
