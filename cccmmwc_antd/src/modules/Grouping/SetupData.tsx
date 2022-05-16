@@ -29,6 +29,22 @@ export const setupFunctions = [
             "add": ["vp"],
             "delete": ["vp"]
         }
+    }, {
+        "id": "user_grouping",
+        "module_id": setupModule.id,
+        "name_en": "User Grouping",
+        "name_zh": "用戶組別設定",
+        "menu": {
+            "name_en": "User Grouping",
+            "name_zh": "用戶組別設定",
+            "link": "/grouping/user-grouping",
+        },
+        "access": {
+            "view": ["vp"],
+            "edit": ["vp"],
+            "add": ["vp"],
+            "delete": ["vp"]
+        }
     },
 ]
 
