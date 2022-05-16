@@ -1,12 +1,12 @@
 export const setupModule = {
-    "id": "testing_module_1",
-    "name_en": "測驗系統一",
-    "name_zh": "Testing Module 1",
-    "description_zh": "測驗系統功能",
-    "description_en": "Testing Module and functions.",
+    "id": "grouping",
+    "name_en": "Grouping",
+    "name_zh": "組別",
+    "description_zh": "用戶組別模組",
+    "description_en": "Grouping Module",
     "menus": {
-        "name_en": "Main Menu 1",
-        "name_zh": "主選單 1",
+        "name_en": "Grouping",
+        "name_zh": "組別",
         "link": "/",
     },
 }
@@ -14,43 +14,21 @@ export const setupModule = {
 
 export const setupFunctions = [
     {
-        "id": "function_1",
+        "id": "groups",
         "module_id": setupModule.id,
-        "p_function_id":"",
-        "isGuest":false,
-        "isMenu":true,
-        "name_en": "function 1",
-        "name_zh": "功能一",
+        "name_en": "groups",
+        "name_zh": "組別",
         "menus": {
-            "name_en": "Function 1 Menu 1",
-            "name_zh": "功能 1 選單 1",
+            "name_en": "Groups",
+            "name_zh": "組別",
             "link": "/",
         },
         "access": {
-            "view": [],
-            "edit": [],
-            "add": [],
-            "delete": []
+            "view": ["vp"],
+            "edit": ["vp"],
+            "add": ["vp"],
+            "delete": ["vp"]
         }
-    }, {
-        "id": "function_2",
-        "module_id": setupModule.id,
-        "p_function_id":"",
-        "isGuest":false,
-        "isMenu":true,
-        "name_en": "function 2",
-        "name_zh": "功能二",
-        "menus": {
-            "name_en": "Function 2 Menu",
-            "name_zh": "功能 2 選單",
-            "link": "/",
-        },
-        "access": {
-            "view": [],
-            "edit": [],
-            "add": [],
-            "delete": []
-        }
-    }
+    },
 ]
 

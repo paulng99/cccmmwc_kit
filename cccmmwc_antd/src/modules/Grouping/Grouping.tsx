@@ -1,5 +1,6 @@
-import { DeleteOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { Affix, AutoComplete, Button, Form, Input, Modal, Table } from "antd";
+import ButtonGroup from "antd/lib/button/button-group";
 import { ColumnsType } from "antd/lib/table";
 import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react"
@@ -28,7 +29,6 @@ export default () => {
                 g.push(g2)
             })
             setGroups(g)
-            console.log(_.keys(_.groupBy(g, "type")))
             setType(_.keys(_.groupBy(g, "type")))
         })
     }, [update])
@@ -77,9 +77,10 @@ export default () => {
             dataIndex: '',
             render: (value, record, index) => {
                 return (
-                    canAction("delete", pathname) && <>
+                    canAction("delete", pathname) && <ButtonGroup>
                         <Button onClick={() => { handleDelRow(value.id) }} danger size="small" icon={<DeleteOutlined />}></Button>
-                    </>
+                        <Button onClick={() => { }} danger size="small" icon={<EditOutlined />}></Button>
+                    </ButtonGroup>
                 )
             }
         },
@@ -109,7 +110,6 @@ export default () => {
     }
 
     const handleDelRow = (id: any) => {
-        console.log(id)
         deleteDoc(doc(db, "groups", id)).then(() => {
             setUpdate(update + 1);
         })

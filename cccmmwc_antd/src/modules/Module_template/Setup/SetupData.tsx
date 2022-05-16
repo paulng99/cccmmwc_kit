@@ -16,9 +16,6 @@ export const setupFunctions = [
     {
         "id": "function_1",
         "module_id": setupModule.id,
-        "p_function_id":"",
-        "isGuest":false,
-        "isMenu":true,
         "name_en": "function 1",
         "name_zh": "功能一",
         "menus": {
@@ -35,9 +32,6 @@ export const setupFunctions = [
     }, {
         "id": "function_2",
         "module_id": setupModule.id,
-        "p_function_id":"",
-        "isGuest":false,
-        "isMenu":true,
         "name_en": "function 2",
         "name_zh": "功能二",
         "menus": {
