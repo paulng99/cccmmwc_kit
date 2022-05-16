@@ -4,7 +4,7 @@ export const setupModule = {
     "name_zh": "組別",
     "description_zh": "用戶組別模組",
     "description_en": "Grouping Module",
-    "menus": {
+    "menu": {
         "name_en": "Grouping",
         "name_zh": "組別",
         "link": "/",
@@ -18,7 +18,7 @@ export const setupFunctions = [
         "module_id": setupModule.id,
         "name_en": "groups",
         "name_zh": "組別",
-        "menus": {
+        "menu": {
             "name_en": "Groups",
             "name_zh": "組別",
             "link": "/",

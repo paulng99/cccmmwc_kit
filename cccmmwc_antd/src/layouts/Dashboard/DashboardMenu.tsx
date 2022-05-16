@@ -22,14 +22,14 @@ export default () => {
         if (data.children.length > 0) {
             data.children.forEach((d: any) => {
                 subItem.push({
-                    "key": d.menu.id,
+                    "key": d.id,
                     "label": React.createElement(Link, { "to": d.menu.link }, d.menu.name_en),
                 })
             });
         }
 
         let item: Iitem = {
-            "key": data.menu.id,
+            "key": data.id,
             "label": React.createElement(Link, { "to": data.menu.link }, data.menu.name_en),
             "icon": React.createElement(data.menu.icon || UserOutlined),
             "children": subItem

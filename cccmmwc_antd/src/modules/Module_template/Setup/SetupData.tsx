@@ -4,7 +4,7 @@ export const setupModule = {
     "name_zh": "Testing Module 1",
     "description_zh": "測驗系統功能",
     "description_en": "Testing Module and functions.",
-    "menus": {
+    "menu": {
         "name_en": "Main Menu 1",
         "name_zh": "主選單 1",
         "link": "/",
@@ -18,7 +18,7 @@ export const setupFunctions = [
         "module_id": setupModule.id,
         "name_en": "function 1",
         "name_zh": "功能一",
-        "menus": {
+        "menu": {
             "name_en": "Function 1 Menu 1",
             "name_zh": "功能 1 選單 1",
             "link": "/",
@@ -34,7 +34,7 @@ export const setupFunctions = [
         "module_id": setupModule.id,
         "name_en": "function 2",
         "name_zh": "功能二",
-        "menus": {
+        "menu": {
             "name_en": "Function 2 Menu",
             "name_zh": "功能 2 選單",
             "link": "/",
