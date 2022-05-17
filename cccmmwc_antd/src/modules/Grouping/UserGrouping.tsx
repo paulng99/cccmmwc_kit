@@ -23,7 +23,7 @@ export default () => {
     }, [])
 
     const FunctionsRender = () => {
-        return (<Select mode="tags">
+        return (<Select mode="multiple" showSearch={true} style={{width:"100%"}}> 
         {functions?.map(f=>{
             return (
                 <Option value={f.id}>{f.name_zh}({f.name_en})</Option>
