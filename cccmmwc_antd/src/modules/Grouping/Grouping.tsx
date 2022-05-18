@@ -21,7 +21,7 @@ export default () => {
     const { pathname } = useLocation()
 
     const g: any = [];
-    useEffect(() => {
+    useEffect(() => { 
         getDocs(collection(db, "groups")).then(g1 => {
             g1.forEach(group => {
                 let g2 = group.data()
