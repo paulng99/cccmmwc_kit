@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { addDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import _ from "underscore";
@@ -25,6 +25,8 @@ export default () => {
         })
         signInWithPopup(auth, googleProvider).then(async result => {
             localStorage.setItem("userInfo", encryptData(result.user));
+            console.log(auth.currentUser)
+            //setDoc(doc(db, "users", result.user.email || ""), {"userInfo":result.user})
             getDoc(doc(db, "users", result.user.email || "")).then(d => {
                 localStorage.setItem("groups", JSON.stringify(d.data()?.groups))
                 g = d.data()?.groups;
@@ -44,7 +46,7 @@ export default () => {
                 "payload": false
             })
             console.log("error", e);
-        }); 
+        });
     }
     return (
         <div id="login">
