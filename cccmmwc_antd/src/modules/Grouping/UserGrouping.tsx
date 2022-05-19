@@ -7,12 +7,14 @@ import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase"
 import { decryptDataToString } from "../../utils/encrypto"
 import useGroups from "./hooks/useGroups"
+import useUserGroups from "./hooks/useUserGroups"
 
 export default () => {
     const { Option } = Select;
     const [userInfo, setUserInfo] = useState<UserInfo>()
     const [functions, setFunctions] = useState<any[]>();
     const { groups, types, updateGroups, setUpdateGroups } = useGroups();
+    const {userGroups}=useUserGroups();
 
     useEffect(() => {
         let f: any[] = [];
@@ -32,7 +34,7 @@ export default () => {
     }
 
     const FunctionsRender = () => {
-        return (<Select mode="multiple" showSearch={true} style={{ width: "100%" }} onChange={handleGroupChange}>
+        return (<Select mode="multiple" showSearch={true} style={{ width: "100%" }} onChange={handleGroupChange} defaultValue={userGroups}>
             {groups?.map(g => {
                 return (
                     // <Option value={f.id}>{f.name_zh}({f.name_en})</Option>
@@ -48,11 +50,6 @@ export default () => {
             subTitle={userInfo?.email}
             avatar={{ src: userInfo?.photoURL, size: "large" }}
             footer={<FunctionsRender />}
-            tags={groups.map((g) => {
-                return (
-                    <Tag>{g.name_zh}</Tag>
-                )
-            })}
         />
     </Dashboard>)
 }
