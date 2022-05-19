@@ -19,5 +19,5 @@ export default () => {
         }
         console.log(email)
     }, [email])
-    return { userGroups }
+    return { userGroups, setEmail }
 }

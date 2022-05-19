@@ -30,12 +30,15 @@ function App() {
         return y.menu.link == pathname
       })
       // console.log(x.length)
-      if (x.length == 0) {
-        console.log("isAccess: ", false)
-        navigator("/auth/login")
-      } else if (x.length > 0) {
-        console.log("isAccess: ", true)
-      }
+      setTimeout(()=>{
+        if (x.length == 0) {
+          console.log("isAccess: ", false)
+          navigator("/auth/login")
+        } else if (x.length > 0) {
+          console.log("isAccess: ", true)
+        }
+      },1000)
+
     }
   }, [pathname])
   return (
