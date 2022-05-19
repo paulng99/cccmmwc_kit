@@ -10,7 +10,7 @@ import useUserGroups from "./hooks/useUserGroups"
 export default () => {
     const { Option } = Select;
     const [userInfo, setUserInfo] = useState<any>()
-    const { groups, types, updateGroups, setUpdateGroups } = useGroups();
+    const { groups, types } = useGroups();
     const { userGroups, setEmail } = useUserGroups();
     const [form] = Form.useForm()
 
