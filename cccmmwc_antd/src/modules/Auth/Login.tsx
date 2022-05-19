@@ -25,11 +25,22 @@ export default () => {
         })
         signInWithPopup(auth, googleProvider).then(async result => {
             localStorage.setItem("userInfo", encryptData(result.user));
-            console.log(auth.currentUser)
-            //setDoc(doc(db, "users", result.user.email || ""), {"userInfo":result.user})
+            console.log(result.user.toJSON())
+            setDoc(doc(db, "users", result.user.email || ""), {
+                // "userInfo":result.user.toJSON(),
+                "name": result.user.displayName,
+                "email": result.user.email,
+                "photoURL": result.user.photoURL,
+            }, { merge: true })
             getDoc(doc(db, "users", result.user.email || "")).then(d => {
                 localStorage.setItem("groups", JSON.stringify(d.data()?.groups))
                 g = d.data()?.groups;
+                if (g == undefined) {
+                    setDoc(doc(db, "users", result.user.email || ""), {
+                        "groups": ["guest"]
+                    }, { merge: true })
+                    g = ["guest"]
+                }
                 getAccess(g);
             }).then(() => {
                 setTimeout(() => { getMenus(); }, 1000)
