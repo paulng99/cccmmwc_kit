@@ -9,33 +9,34 @@ import _ from "underscore";
 import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase";
 import canAction from "../../utils/canAction";
+import useGroups from "./hooks/useGroups";
 
 export default () => {
-    const [groups, setGroups] = useState<any[]>([]);
+    //const [groups, setGroups] = useState<any[]>([]);
     const [visibleModal, setVisibleModal] = useState(false)
     const [loadingOK, setLoadingOK] = useState(false)
-    const [update, setUpdate] = useState(0)
+    //const [update, setUpdate] = useState(0)
     const [form] = Form.useForm();
-    const [type, setType] = useState<any[]>();
+    //const [type, setType] = useState<any[]>();
     const [typeFormatted, setTypeFormatted] = useState<any[]>();
     const { pathname } = useLocation()
-
+    const { groups, types, updateGroups, setUpdateGroups } = useGroups();
     const g: any = [];
-    useEffect(() => {
-        getDocs(collection(db, "groups")).then(g1 => {
-            g1.forEach(group => {
-                let g2 = group.data()
-                g2["id"] = group.id;
-                g.push(g2)
+    /*     useEffect(() => {
+            getDocs(collection(db, "groups")).then(g1 => {
+                g1.forEach(group => {
+                    let g2 = group.data()
+                    g2["id"] = group.id;
+                    g.push(g2)
+                })
+                setGroups(g)
+                setType(_.keys(_.groupBy(g, "type")))
             })
-            setGroups(g)
-            setType(_.keys(_.groupBy(g, "type")))
-        })
-    }, [update])
+        }, [update]) */
 
     useEffect(() => {
         let t: any[] = [];
-        type?.forEach((x) => {
+        types?.forEach((x) => {
             t.push({
                 key: x,
                 value: x,
@@ -44,7 +45,7 @@ export default () => {
             })
         })
         setTypeFormatted(t)
-    }, [type])
+    }, [types])
 
 
     //Table Configuation   
@@ -99,7 +100,7 @@ export default () => {
     const handleFinish = (values: any) => {
         addDoc(collection(db, "groups"), values).then(() => {
             handleOKCancel();
-            setUpdate(update + 1);
+            setUpdateGroups(updateGroups + 1);
         })
     }
 
@@ -111,7 +112,7 @@ export default () => {
 
     const handleDelRow = (id: any) => {
         deleteDoc(doc(db, "groups", id)).then(() => {
-            setUpdate(update + 1);
+            setUpdateGroups(updateGroups + 1);
         })
     }
 

@@ -1,15 +1,19 @@
-import { Button, PageHeader, Select } from "antd"
+import { Button, PageHeader, Select, Tag } from "antd"
 import { UserInfo } from "firebase/auth"
-import { collectionGroup, getDocs } from "firebase/firestore"
-import { useEffect, useState } from "react"
+import { collectionGroup, doc, getDocs, setDoc } from "firebase/firestore"
+import { ChangeEventHandler, EventHandler, useEffect, useState } from "react"
+import _ from "underscore"
 import Dashboard from "../../layouts/Dashboard/Dashboard"
 import { db } from "../../services/firebase"
 import { decryptDataToString } from "../../utils/encrypto"
+import useGroups from "./hooks/useGroups"
 
 export default () => {
-    const {Option}=Select;
+    const { Option } = Select;
     const [userInfo, setUserInfo] = useState<UserInfo>()
     const [functions, setFunctions] = useState<any[]>();
+    const { groups, types, updateGroups, setUpdateGroups } = useGroups();
+
     useEffect(() => {
         let f: any[] = [];
         setUserInfo(localStorage.getItem("userInfo") && JSON.parse(decryptDataToString(localStorage.getItem("userInfo"))));
@@ -22,13 +26,19 @@ export default () => {
         })
     }, [])
 
+    const handleGroupChange = (e: any) => {
+        console.log(e)
+        setDoc(doc(db, "users", "mmw-nty@cccmmwc.edu.hk"), { "groups": e },{merge:true})
+    }
+
     const FunctionsRender = () => {
-        return (<Select mode="multiple" showSearch={true} style={{width:"100%"}}> 
-        {functions?.map(f=>{
-            return (
-                <Option value={f.id}>{f.name_zh}({f.name_en})</Option>
-            )
-        })}
+        return (<Select mode="multiple" showSearch={true} style={{ width: "100%" }} onChange={handleGroupChange}>
+            {groups?.map(g => {
+                return (
+                    // <Option value={f.id}>{f.name_zh}({f.name_en})</Option>
+                    <Option value={g.id}>{g.name_zh}</Option>
+                )
+            })}
         </Select>)
     }
 
@@ -38,6 +48,11 @@ export default () => {
             subTitle={userInfo?.email}
             avatar={{ src: userInfo?.photoURL, size: "large" }}
             footer={<FunctionsRender />}
+            tags={groups.map((g) => {
+                return (
+                    <Tag>{g.name_zh}</Tag>
+                )
+            })}
         />
     </Dashboard>)
 }
