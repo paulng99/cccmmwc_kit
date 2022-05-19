@@ -22,7 +22,6 @@ export default () => {
     const { pathname } = useLocation()
     const { groups, types, updateGroups, setUpdateGroups } = useGroups();
     const g: any = [];
-<<<<<<< HEAD
     /*     useEffect(() => {
             getDocs(collection(db, "groups")).then(g1 => {
                 g1.forEach(group => {
@@ -32,14 +31,6 @@ export default () => {
                 })
                 setGroups(g)
                 setType(_.keys(_.groupBy(g, "type")))
-=======
-    useEffect(() => { 
-        getDocs(collection(db, "groups")).then(g1 => {
-            g1.forEach(group => {
-                let g2 = group.data()
-                g2["id"] = group.id;
-                g.push(g2)
->>>>>>> fa9bd45e249fca77ddbae5f4cf56b1d5ca32af7c
             })
         }, [update]) */
 
