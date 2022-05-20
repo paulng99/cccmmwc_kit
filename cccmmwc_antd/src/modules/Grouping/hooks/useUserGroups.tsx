@@ -7,7 +7,7 @@ export default () => {
     const [email, setEmail] = useState("")
     const [userGroups, setUserGroups] = useState([])
     useEffect(() => {
-        if (email == "") {
+        if (email == "" || email==undefined || email==null) {
 /*             let userInfo = JSON.parse(decryptDataToString(localStorage.getItem("userInfo")))
             console.log(userInfo.email)
             setEmail(userInfo.email) */
