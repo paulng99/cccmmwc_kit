@@ -8,9 +8,10 @@ export default () => {
     const [userGroups, setUserGroups] = useState([])
     useEffect(() => {
         if (email == "") {
-            let userInfo = JSON.parse(decryptDataToString(localStorage.getItem("userInfo")))
+/*             let userInfo = JSON.parse(decryptDataToString(localStorage.getItem("userInfo")))
             console.log(userInfo.email)
-            setEmail(userInfo.email)
+            setEmail(userInfo.email) */
+            console.log("no user email")
         } else {
             getDoc(doc(db, "users", email)).then((g) => {
                 console.log(g.data())
