@@ -21,5 +21,4 @@ export default () => {
             localStorage.setItem("menus", JSON.stringify(m))
         })
     }
-
 }
