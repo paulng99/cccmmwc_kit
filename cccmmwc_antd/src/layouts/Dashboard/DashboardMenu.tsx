@@ -23,15 +23,12 @@ export default () => {
             type,
         } as MenuItem;
     }
+
+    const items: MenuProps['items'] = []
+
     return (
         <>
-            <Menu mode="inline">
-                {menus.map((m: any) => (
-                    <Menu.Item key={m.id} ty>
-                        {m.menu.name_en}
-                    </Menu.Item>
-                ))}
-            </Menu>
+            <Menu mode="inline" items={items} />
         </>
     )
 } 
