@@ -43,25 +43,25 @@ export default () => {
                 }
                 getAccess(g);
             }).then(() => {
-                setTimeout(() => { getMenus(); }, 1000)
+                setTimeout(() => { getMenus(); }, 500)
             }).then(() => {
-                navigate('/test')
-            })
-            appDispatch({
-                "type": "LOADING",
-                "payload": false,
-            })
-        }).catch((e) => {
-            appDispatch({
-                "type": "LOADING",
-                "payload": false
-            })
-            console.log("error", e);
-        });
+                setTimeout(()=> { navigate('/test') }, 1000)
+})
+appDispatch({
+    "type": "LOADING",
+    "payload": false,
+})
+        }).catch ((e) => {
+    appDispatch({
+        "type": "LOADING",
+        "payload": false
+    })
+    console.log("error", e);
+});
     }
-    return (
-        <div id="login">
-            <Button onClick={handleLogin}>Login</Button>
-        </div>
-    );
+return (
+    <div id="login">
+        <Button onClick={handleLogin}>Login</Button>
+    </div>
+);
 }

@@ -15,6 +15,7 @@ export const setupModule = {
 export const setupFunctions = [
     {
         "id": "groups",
+        "isMenu":true,
         "module_id": setupModule.id,
         "name_en": "groups",
         "name_zh": "組別",
@@ -31,6 +32,7 @@ export const setupFunctions = [
         }
     }, {
         "id": "user_grouping",
+        "isMenu":true,
         "module_id": setupModule.id,
         "name_en": "User Grouping",
         "name_zh": "用戶組別設定",

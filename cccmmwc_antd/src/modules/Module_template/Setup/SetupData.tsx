@@ -15,6 +15,7 @@ export const setupModule = {
 export const setupFunctions = [
     {
         "id": "function_1",
+        "isMenu":true,
         "module_id": setupModule.id,
         "name_en": "function 1",
         "name_zh": "功能一",
@@ -31,6 +32,7 @@ export const setupFunctions = [
         }
     }, {
         "id": "function_2",
+        "isMenu":true,
         "module_id": setupModule.id,
         "name_en": "function 2",
         "name_zh": "功能二",
