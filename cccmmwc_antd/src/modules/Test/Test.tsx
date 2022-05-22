@@ -3,21 +3,20 @@ import { useLocation } from "react-router";
 import Dashboard from "../../layouts/Dashboard/Dashboard";
 import canAction from "../../utils/canAction";
 import { AppContext } from "../App/AppContext";
-import useUserGroups from "../Grouping/hooks/useUserGroups";
 
 export const Test = () => {
     const { appState, appDispatch } = useContext(AppContext)
     const {pathname}=useLocation()
-    const [data, setData] = useState({});
-    const {userGroups}=useUserGroups()
+    const [data, setData] = useState<any>();
+
     useEffect(() => {
-        setData(appState)
+        setData(JSON.parse(localStorage.getItem("menus")||""))
         console.log(canAction("add", pathname));
     }, [appState]);
 
     return (
         <Dashboard>
-            <pre>{JSON.stringify(userGroups, undefined, 2)}</pre>
+            <pre>{JSON.stringify(data, undefined, 2)}</pre>
         </Dashboard>
     )
 }
