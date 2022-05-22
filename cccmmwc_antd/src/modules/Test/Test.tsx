@@ -6,11 +6,11 @@ import { AppContext } from "../App/AppContext";
 
 export const Test = () => {
     const { appState, appDispatch } = useContext(AppContext)
-    const {pathname}=useLocation()
+    const { pathname } = useLocation()
     const [data, setData] = useState<any>();
 
     useEffect(() => {
-        setData(JSON.parse(localStorage.getItem("menus")||""))
+        setData(JSON.parse(localStorage.getItem("menus") || ""))
         console.log(canAction("add", pathname));
     }, [appState]);
 

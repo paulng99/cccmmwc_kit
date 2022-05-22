@@ -47,6 +47,23 @@ export const setupFunctions = [
             "add": ["vp"],
             "delete": ["vp"]
         }
+    },{
+        "id": "groups_actions",
+        "isMenu":true,
+        "module_id": setupModule.id,
+        "name_en": "Groups Actions",
+        "name_zh": "組別功能設定",
+        "menu": {
+            "name_en": "Group Actions",
+            "name_zh": "組別功能設定",
+            "link": "/grouping/group-action",
+        },
+        "access": {
+            "view": ["vp"],
+            "edit": ["vp"],
+            "add": ["vp"],
+            "delete": ["vp"]
+        }
     },
 ]
 
