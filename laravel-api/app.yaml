@@ -1,11 +1,27 @@
 runtime: php81
+
+runtime_config:
+  document_root: public
+  composer_flags: --no-dev
+
+
+
 env_variables:
-  APP_NAME: Laravel
-  APP_ENV: local
-  APP_KEY: base64:z4vCpupP+lUFBPZcAtROAn2Gbyf7WDZ+G+f+E7jmXHI=
-  APP_DEBUG: true
-  APP_URL: http://laravel-api.test
+  # Put production environment variables here.
+  APP_URL: /
+  APP_ENV: production
   APP_LOG: errorlog
-  APP_LOG_LEVEL: debug
-  APP_STORAGE: /tmp
+  APP_DEBUG: true
+  APP_KEY: base64:lfitAzqBB0Ki7sUdATmCKv3VhuMaj4/XGbCb8uwXUPU=
+  STORAGE_DIR: /tmp
   VIEW_COMPILED_PATH: /tmp
+  SESSION_DRIVER: cookie
+
+  ## Set these environment variables according to your CloudSQL configuration.
+  DB_DATABASE: YOUR_DB_DATABASE
+  DB_USERNAME: YOUR_DB_USERNAME
+  DB_PASSWORD: YOUR_DB_PASSWORD
+  ## for MYSQL, use DB_SOCKET:
+  DB_SOCKET: "/cloudsql/YOUR_CONNECTION_NAME"
+  ## for PostgreSQL, use DB_HOST:
+  # DB_HOST: "/cloudsql/YOUR_CONNECTION_NAME"
